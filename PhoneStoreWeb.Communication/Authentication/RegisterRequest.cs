@@ -25,7 +25,7 @@ namespace PhoneStoreWeb.Communication.Authentication
         public string Email { set; get; }
 
         [DataType(DataType.PhoneNumber)]
-        public string Phone { set; get; }
+        public string PhoneNumber { set; get; }
         
         public string Address { set; get; }
         public DateTime Dob { set; get; }
