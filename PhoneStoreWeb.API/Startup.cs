@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using PhoneStoreWeb.API.Services.Base;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Services.Authentication;
@@ -65,8 +66,7 @@ namespace PhoneStoreWeb.API
                     Configuration.GetValue<string>("JWTSecretKey"),
                     Configuration.GetValue<int>("JWTLifespan")
                 )
-            );
-            
+            );            
             services.AddControllers();
 
             services.AddSwaggerGen();
@@ -86,7 +86,7 @@ namespace PhoneStoreWeb.API
             app.UseSwaggerUI(endpoints =>
             {
                 endpoints.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                endpoints.RoutePrefix = string.Empty;
+                endpoints.RoutePrefix = "api";
             });
 
             app.UseHttpsRedirection();
