@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using PhoneStoreWeb.API.Services.Base;
 using PhoneStoreWeb.Communication;
 using PhoneStoreWeb.Data.Models;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace PhoneStoreWeb.Services.Authentication
 {
-    public class AuthService : IAuthService
+    public class AuthService : ServiceBase, IAuthService
     {
         string jwtSecret;
         int jwtLifespan;
