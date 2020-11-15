@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Communication.Mapping
 {
-    class RequestToModel : Profile
+    public class RequestToModel : Profile
     {
         public RequestToModel()
         {
