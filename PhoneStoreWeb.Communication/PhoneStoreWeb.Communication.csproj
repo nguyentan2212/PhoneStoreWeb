@@ -15,4 +15,8 @@
     <ProjectReference Include="..\PhoneStoreWeb.Data\PhoneStoreWeb.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Product\" />
+  </ItemGroup>
+
 </Project>
