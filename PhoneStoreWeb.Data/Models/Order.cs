@@ -32,6 +32,7 @@ namespace PhoneStoreWeb.Data.Models
 
         public string OrderNotes { set; get; }
         public string TransactionId { set; get; }
+        [Column(TypeName = "Money")]
         public decimal Total { set; get; }
 
         [Required]

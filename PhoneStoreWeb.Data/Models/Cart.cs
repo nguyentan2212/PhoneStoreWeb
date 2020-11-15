@@ -9,6 +9,7 @@ namespace PhoneStoreWeb.Data.Models
     {
         public int Id { set; get; }
         [Required]
+        [Column(TypeName = "Money")]
         public decimal Price { set; get; }
         [Required]
         [Column(TypeName = "Date")]

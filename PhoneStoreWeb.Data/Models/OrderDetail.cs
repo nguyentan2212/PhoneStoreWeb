@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace PhoneStoreWeb.Data.Models
@@ -11,6 +12,8 @@ namespace PhoneStoreWeb.Data.Models
 
         public int ProductId { set; get; }
         public Product Product { set; get; }
+
+        [Column(TypeName = "Money")]
         public decimal Price { set; get; }
         public int Quantity { set; get; }
         
