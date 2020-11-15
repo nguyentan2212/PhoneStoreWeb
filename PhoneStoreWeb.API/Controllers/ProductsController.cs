@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 
@@ -15,17 +17,21 @@ namespace PhoneStoreWeb.API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly PhoneStoreDbContext _context;
+        private readonly IMapper mapper;
 
-        public ProductsController(PhoneStoreDbContext context)
+        public ProductsController(PhoneStoreDbContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
-        // GET: api/Products
+        // GET: api/Products 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<ResponseResult<IEnumerable<ProductResponse>>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            var products = await _context.Products.ToListAsync();
+            IEnumerable<ProductResponse> response = mapper.Map< IEnumerable<Product>, IEnumerable<ProductResponse>>(products);
+            return Ok(response);
         }
 
         // GET: api/Products/5
