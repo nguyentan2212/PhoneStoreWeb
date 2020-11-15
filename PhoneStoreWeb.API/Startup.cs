@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Services.Authentication;
 using System.Text;
+using PhoneStoreWeb.Communication.Mapping;
 
 namespace PhoneStoreWeb.API
 {
@@ -66,7 +68,9 @@ namespace PhoneStoreWeb.API
                     Configuration.GetValue<string>("JWTSecretKey"),
                     Configuration.GetValue<int>("JWTLifespan")
                 )
-            );            
+            );
+            services.AddAutoMapper(typeof(ModelToResponse));
+            services.AddAutoMapper(typeof(RequestToModel));
             services.AddControllers();
 
             services.AddSwaggerGen();
