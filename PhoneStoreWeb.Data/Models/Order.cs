@@ -12,8 +12,8 @@ namespace PhoneStoreWeb.Data.Models
         public int Id { set; get; }
         public Guid? UserId { set; get; }
         public AppUser AppUser { set; get; }
-        public int? PromotionId { set; get; }
-        public Promotion Promotion { set; get; }
+        public int? DiscountId { set; get; }
+        public Discount Discount { set; get; }
 
         [Required]
         public string ShipName { set; get; }

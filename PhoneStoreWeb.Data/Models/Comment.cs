@@ -16,8 +16,6 @@ namespace PhoneStoreWeb.Data.Models
         [Required]
         public DateTime Created_At { set; get; }
         [Required]
-        public string Content{ set; get; }
-        
-       
+        public string Content{ set; get; }   
     }
 }

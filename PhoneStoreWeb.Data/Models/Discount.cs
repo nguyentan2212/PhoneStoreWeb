@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PhoneStoreWeb.Data.Models
 {
-    public class Promotion
+    public class Discount
     {
         public int Id { set; get; }
 

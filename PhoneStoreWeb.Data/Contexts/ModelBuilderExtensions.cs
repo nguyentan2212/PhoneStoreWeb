@@ -21,10 +21,10 @@ namespace PhoneStoreWeb.Data.Contexts
                 new Language() { Id = "vn", Name = "VIETNAM" },
                 new Language() { Id = "en", Name = "ENGLISH" }
             );
-            //Promotions
-            modelBuilder.Entity<Promotion>().HasData(
-                new Promotion() { Id = 1, Code = "123", DiscountAmount = 10000 },
-                new Promotion() { Id = 2, Code = "1234", DiscountAmount = 20000 }
+            //Discounts
+            modelBuilder.Entity<Discount>().HasData(
+                new Discount() { Id = 1, Code = "123", DiscountAmount = 10000 },
+                new Discount() { Id = 2, Code = "1234", DiscountAmount = 20000 }
             );
             //Categories
             modelBuilder.Entity<Category>().HasData(

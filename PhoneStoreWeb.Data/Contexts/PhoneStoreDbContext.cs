@@ -50,7 +50,7 @@ namespace PhoneStoreWeb.Data.Contexts
         public DbSet<Language> Languages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Review> ReViews { get; set; }
