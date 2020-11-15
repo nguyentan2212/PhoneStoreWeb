@@ -11,7 +11,7 @@ namespace PhoneStoreWeb.Data.Contexts
     {
         public PhoneStoreDbContext(DbContextOptions options) : base(options)
         {
-
+            
         }
         public PhoneStoreDbContext() : base()
         {
