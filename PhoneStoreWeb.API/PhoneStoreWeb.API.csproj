@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Services\AuthenticationServices\" />
+    <Folder Include="wwwroot\user-content\" />
   </ItemGroup>
 
 

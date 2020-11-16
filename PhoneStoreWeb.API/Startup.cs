@@ -91,6 +91,7 @@ namespace PhoneStoreWeb.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseSwagger();
 
