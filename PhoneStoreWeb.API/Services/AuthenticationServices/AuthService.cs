@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using PhoneStoreWeb.API.Services.Base;
 using PhoneStoreWeb.Communication;
@@ -8,16 +9,16 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PhoneStoreWeb.Services.Authentication
+namespace PhoneStoreWeb.Services.AuthenticationServices
 {
     public class AuthService : ServiceBase, IAuthService
     {
         string jwtSecret;
         int jwtLifespan;
-        public AuthService(string jwtSecret, int jwtLifespan)
+        public AuthService(string jwtSecret, int jwtLifespan):base(null)
         {
             this.jwtSecret = jwtSecret;
-            this.jwtLifespan = jwtLifespan;         
+            this.jwtLifespan = jwtLifespan;            
         }
 
 

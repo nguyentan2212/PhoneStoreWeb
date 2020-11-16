@@ -3,6 +3,7 @@ using System;
 using PhoneStoreWeb.Data.Repositories.ProductRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
 using PhoneStoreWeb.Data.Repositories.BlogRepo;
+using PhoneStoreWeb.Data.Repositories.ProductLanguageRepo;
 
 namespace PhoneStoreWeb.Data.UnitOfWork
 {
@@ -12,6 +13,7 @@ namespace PhoneStoreWeb.Data.UnitOfWork
         private ProductRepository products;
         private BlogRepository blogs;
         private OrderRepository orders;
+        private ProductLanguageRepository productLanguages;
 
         public UnitOfWork()
         {
@@ -51,6 +53,18 @@ namespace PhoneStoreWeb.Data.UnitOfWork
                     orders = new OrderRepository(context);
                 }
                 return orders;
+            }
+        }
+
+        public ProductLanguageRepository ProductLanguages
+        {
+            get
+            {
+                if (productLanguages is null)
+                {
+                    productLanguages = new ProductLanguageRepository(context);
+                }
+                return productLanguages;
             }
         }
         #endregion

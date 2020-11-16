@@ -37,8 +37,8 @@ namespace PhoneStoreWeb.Data.Contexts
            );
             //CategoryLanguages
             modelBuilder.Entity<CategoryLanguage>().HasData(
-                  new CategoryLanguage() { Name = "Bánh ngọt", LanguageId = "vn", CategoryUrl = "banh-ngot", CategoryId = 1 },
-                  new CategoryLanguage() { Name = "Cake", LanguageId = "en", CategoryUrl = "cake", CategoryId = 1 }
+                  new CategoryLanguage() { Name = "Bánh ngọt", LanguageId = "vn", CategoryId = 1 },
+                  new CategoryLanguage() { Name = "Cake", LanguageId = "en", CategoryId = 1 }
              );
             //Products
             modelBuilder.Entity<Product>().HasData(
@@ -52,8 +52,8 @@ namespace PhoneStoreWeb.Data.Contexts
             );
             //ProductLanguages
             modelBuilder.Entity<ProductLanguage>().HasData(
-                new ProductLanguage() { ProductId = 1, Name = "Bánh ngọt1", LanguageId = "vn", ProductUrl = "banh-ngot1", Description = "This is banh ngot 1" },
-                new ProductLanguage() { ProductId = 1, Name = "Cake1", LanguageId = "en", ProductUrl = "cake1", Description = "This is cake1" }
+                new ProductLanguage() { ProductId = 1, Name = "Bánh ngọt1", LanguageId = "vn", Description = "This is banh ngot 1" },
+                new ProductLanguage() { ProductId = 1, Name = "Cake1", LanguageId = "en", Description = "This is cake1" }
             );
             //ProductImages
             modelBuilder.Entity<ProductImage>().HasData(

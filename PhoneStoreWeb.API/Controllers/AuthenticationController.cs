@@ -5,7 +5,7 @@ using PhoneStoreWeb.Communication;
 using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
-using PhoneStoreWeb.Services.Authentication;
+using PhoneStoreWeb.Services.AuthenticationServices;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.API.Controllers

@@ -7,12 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using PhoneStoreWeb.API.Services.Base;
+using PhoneStoreWeb.Communication.Mapping;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
-using PhoneStoreWeb.Services.Authentication;
+using PhoneStoreWeb.Services.AuthenticationServices;
+using PhoneStoreWeb.Data.Repositories.BlogRepo;
+using PhoneStoreWeb.Data.Repositories.OrderRepo;
+using PhoneStoreWeb.Data.Repositories.ProductRepo;
 using System.Text;
-using PhoneStoreWeb.Communication.Mapping;
+using PhoneStoreWeb.API.Services.ProductServices;
 
 namespace PhoneStoreWeb.API
 {
@@ -63,12 +66,16 @@ namespace PhoneStoreWeb.API
                         )
                     };
                 });
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddSingleton<IAuthService>(
                 new AuthService(
                     Configuration.GetValue<string>("JWTSecretKey"),
                     Configuration.GetValue<int>("JWTLifespan")
                 )
             );
+            services.AddScoped<IProductService, ProductService>();
             services.AddAutoMapper(typeof(ModelToResponse));
             services.AddAutoMapper(typeof(RequestToModel));
             services.AddControllers();

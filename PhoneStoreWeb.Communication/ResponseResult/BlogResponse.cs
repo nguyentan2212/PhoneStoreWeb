@@ -18,7 +18,7 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public IEnumerable<string> UserLikes { set; get; }
         public string UserLikeId { set; get; }
         public string CategoryName { set; get; }
-        public string CategoryUrl { set; get; }
+        public int CategoryId { set; get; }
         public int CountComment { set; get; }
         public int Id { set; get; }
     }

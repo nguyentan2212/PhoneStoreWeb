@@ -11,6 +11,5 @@ namespace PhoneStoreWeb.Data.Models
         public Language Language { set; get; }
         public string LanguageId { set; get; }
         public string Name { set; get; }
-        public string CategoryUrl { set; get; }
     }
 }
