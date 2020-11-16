@@ -31,23 +31,18 @@ namespace PhoneStoreWeb.Data.Contexts
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens").HasKey(x => x.UserId);
 
-            modelBuilder.Entity<CartProduct>().HasKey(cp => new { cp.CartID, cp.ProductID });
-            modelBuilder.Entity<CategoryLanguage>().HasKey(cl => new { cl.CategoryId, cl.LanguageId });
-            modelBuilder.Entity<ProductLanguage>().HasKey(pl => new { pl.ProductId, pl.LanguageId });
+            modelBuilder.Entity<CartProduct>().HasKey(cp => new { cp.CartID, cp.ProductID });            
             modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.OrderId, od.ProductId });
 
             modelBuilder.Seed();
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductLanguage> ProductLanguages { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryLanguage> CategoryLanguages { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }       
+        public DbSet<Category> Categories { get; set; }      
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartProduct> CartProducts { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Language> Languages { get; set; }
+        public DbSet<Contact> Contacts { get; set; }       
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Discount> Discounts { get; set; }

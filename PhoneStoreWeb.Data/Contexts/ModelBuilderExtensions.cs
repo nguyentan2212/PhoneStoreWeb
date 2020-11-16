@@ -16,11 +16,8 @@ namespace PhoneStoreWeb.Data.Contexts
                 new Contact() { Id = 2, Name = "Phuong Quyen", Email = "hieuvo044@gmail.com", Message = "Very good" },
                 new Contact() { Id = 3, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" }
             );
-            //Languages
-            modelBuilder.Entity<Language>().HasData(
-                new Language() { Id = "vn", Name = "VIETNAM" },
-                new Language() { Id = "en", Name = "ENGLISH" }
-            );
+           
+           
             //Discounts
             modelBuilder.Entity<Discount>().HasData(
                 new Discount() { Id = 1, Code = "123", DiscountAmount = 10000 },
@@ -35,11 +32,7 @@ namespace PhoneStoreWeb.Data.Contexts
                     Status = Enums.CategoryStatus.Active
                 }
            );
-            //CategoryLanguages
-            modelBuilder.Entity<CategoryLanguage>().HasData(
-                  new CategoryLanguage() { Name = "Bánh ngọt", LanguageId = "vn", CategoryId = 1 },
-                  new CategoryLanguage() { Name = "Cake", LanguageId = "en", CategoryId = 1 }
-             );
+           
             //Products
             modelBuilder.Entity<Product>().HasData(
                  new Product()
@@ -50,11 +43,7 @@ namespace PhoneStoreWeb.Data.Contexts
                      CategoryId = 1
                  }
             );
-            //ProductLanguages
-            modelBuilder.Entity<ProductLanguage>().HasData(
-                new ProductLanguage() { ProductId = 1, Name = "Bánh ngọt1", LanguageId = "vn", Description = "This is banh ngot 1" },
-                new ProductLanguage() { ProductId = 1, Name = "Cake1", LanguageId = "en", Description = "This is cake1" }
-            );
+            
             //ProductImages
             modelBuilder.Entity<ProductImage>().HasData(
                new ProductImage() { ProductId = 1, Id = 1, ImagePath = "http://product.hstatic.net/1000026716/product/81ax00mcvn_bd76b8bf0aed4307bc9714e4dc5830f0_large.jpg", Caption = "!23", IsDefault = true },

@@ -10,11 +10,14 @@ using PhoneStoreWeb.API.Services.ProductServices;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
+using PhoneStoreWeb.Communication.Products;
 
 namespace PhoneStoreWeb.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public class ProductsController : ControllerBase
     {
         private readonly PhoneStoreDbContext _context;
@@ -33,16 +36,6 @@ namespace PhoneStoreWeb.API.Controllers
         {
             var result = await productService.GetAllProducts();
             var response = new ResponseResult<IEnumerable<ProductResponse>>();
-            return Ok(response.Succeed(result));
-        }
-
-        // GET: api/Products/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
-        {
-            var result = await productService.GetAllProducts();
-            var response = new ResponseResult<IEnumerable<ProductResponse>>();
-
             if (result == null)
             {
                 return NotFound(response.Failed("Not found"));
@@ -50,35 +43,38 @@ namespace PhoneStoreWeb.API.Controllers
             return Ok(response.Succeed(result));
         }
 
+        // GET: api/Products/5
+        [HttpGet("{id}")]        
+        public async Task<ActionResult> GetProduct(int id)
+        {
+            var result = await productService.GetById(id);
+            var response = new ResponseResult<ProductResponse>();
+         
+            if (result == null)
+            {
+                return NotFound(response.Failed("Not found"));
+            }             
+            return Ok(response.Succeed(result));
+        }
+
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, Product product)
+        [HttpPut("{id}")]        
+        public async Task<IActionResult> PutProduct(UpdateProductRequest request)
         {
-            if (id != product.Id)
+            var response = new ResponseResult<string>();
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                var errors = productService.GetErrors(ModelState);
+                return BadRequest(response.Failed("Data wrong", errors));
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-
-            try
+            string result = await productService.Update(request);
+            if (result != null)
             {
-                await _context.SaveChangesAsync();
+                return BadRequest(response.Failed(result));               
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(response.Succeed("Succeed"));
         }
 
         // POST: api/Products

@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PhoneStoreWeb.Services.AuthenticationServices
+namespace PhoneStoreWeb.API.Services.AuthenticationServices
 {
     public class AuthService : ServiceBase, IAuthService
     {

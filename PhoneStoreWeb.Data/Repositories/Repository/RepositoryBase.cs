@@ -52,7 +52,22 @@ namespace PhoneStoreWeb.Data.Repositories.Repository
         }
         public void Update(TEntity entity)
         {
-            DbSetEntity.Update(entity);
+            DbSetEntity.Update(entity);            
+        }
+
+        public void Remove(int id)
+        {
+            TEntity entity = GetAsync(id).Result;
+            DbSetEntity.Remove(entity);
+        }
+
+        public async Task AddOrUpdateAsync(TEntity entity, int id)
+        {
+            var result = await GetAsync(id);
+            if (result is null)
+                await AddAsync(entity);
+            else
+                Update(entity);
         }
     }
 }

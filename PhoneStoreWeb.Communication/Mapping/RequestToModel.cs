@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PhoneStoreWeb.Communication.Products;
 
 namespace PhoneStoreWeb.Communication.Mapping
 {
@@ -14,6 +10,10 @@ namespace PhoneStoreWeb.Communication.Mapping
         public RequestToModel()
         {
             CreateMap<RegisterRequest, AppUser>();
+            CreateMap<CreateProductRequest, Product>();
+            CreateMap<UpdateProductRequest, Product>();
+            CreateMap<AddProductImageRequest, ProductImage>().ForMember(des => des.FileSize,
+                opt => opt.MapFrom(src => src.ThumbnailImage.Length));
         }
     }
 }

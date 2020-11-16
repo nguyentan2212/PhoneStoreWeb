@@ -3,7 +3,8 @@ using System;
 using PhoneStoreWeb.Data.Repositories.ProductRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
 using PhoneStoreWeb.Data.Repositories.BlogRepo;
-using PhoneStoreWeb.Data.Repositories.ProductLanguageRepo;
+using PhoneStoreWeb.Data.Repositories.ProductImageRepo;
+using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.UnitOfWork
 {
@@ -13,8 +14,8 @@ namespace PhoneStoreWeb.Data.UnitOfWork
         private ProductRepository products;
         private BlogRepository blogs;
         private OrderRepository orders;
-        private ProductLanguageRepository productLanguages;
-
+        private ProductImageRepository productImages;
+     
         public UnitOfWork()
         {
             context = new PhoneStoreDbContext();
@@ -56,22 +57,22 @@ namespace PhoneStoreWeb.Data.UnitOfWork
             }
         }
 
-        public ProductLanguageRepository ProductLanguages
+        public ProductImageRepository ProductImages
         {
             get
             {
-                if (productLanguages is null)
+                if (productImages is null)
                 {
-                    productLanguages = new ProductLanguageRepository(context);
+                    productImages = new ProductImageRepository(context);
                 }
-                return productLanguages;
+                return productImages;
             }
         }
         #endregion
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         #region Dispose
         private bool disposed = false;

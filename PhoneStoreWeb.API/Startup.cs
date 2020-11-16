@@ -10,12 +10,13 @@ using Microsoft.IdentityModel.Tokens;
 using PhoneStoreWeb.Communication.Mapping;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
-using PhoneStoreWeb.Services.AuthenticationServices;
 using PhoneStoreWeb.Data.Repositories.BlogRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
 using PhoneStoreWeb.Data.Repositories.ProductRepo;
 using System.Text;
 using PhoneStoreWeb.API.Services.ProductServices;
+using PhoneStoreWeb.API.Services.StorageServices;
+using PhoneStoreWeb.API.Services.AuthenticationServices;
 
 namespace PhoneStoreWeb.API
 {
@@ -75,6 +76,7 @@ namespace PhoneStoreWeb.API
                     Configuration.GetValue<int>("JWTLifespan")
                 )
             );
+            services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddAutoMapper(typeof(ModelToResponse));
             services.AddAutoMapper(typeof(RequestToModel));

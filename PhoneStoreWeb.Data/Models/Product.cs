@@ -8,6 +8,8 @@ namespace PhoneStoreWeb.Data.Models
     public class Product
     {
         public int Id { set; get; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int CategoryId { set; get; }
 
         [Required]
@@ -35,7 +37,6 @@ namespace PhoneStoreWeb.Data.Models
         public OrderDetail OrderDetail { set; get; }
         public Category Category { set; get; }
         public List<CartProduct> CartProducts { set; get; }
-        public List<ProductImage> ProductImages { set; get; }
-        public List<ProductLanguage> ProductLanguages { set; get; }
+        public List<ProductImage> ProductImages { set; get; }        
     }
 }

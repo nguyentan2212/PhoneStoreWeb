@@ -9,13 +9,12 @@ namespace PhoneStoreWeb.API.Services.Base
 {
     public abstract class ServiceBase : IServiceBase
     {
-        protected readonly IMapper mapper;
-        protected string languageId;
+        protected readonly IMapper mapper;      
 
         public ServiceBase(IMapper mapper)
         {
             this.mapper = mapper;
-            SetLanguage();
+            
         }
 
         public IEnumerable<string> GetErrors(ModelStateDictionary modelState)
@@ -28,11 +27,6 @@ namespace PhoneStoreWeb.API.Services.Base
         {
             IEnumerable<string> errors = identityResult.Errors.Select(x => x.Description);
             return errors;
-        }
-
-        public void SetLanguage(string languageId = "vn")
-        {
-            this.languageId = languageId;
-        }
+        }    
     }
 }

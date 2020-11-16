@@ -7,7 +7,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace PhoneStoreWeb.Services.AuthenticationServices
+namespace PhoneStoreWeb.API.Services.AuthenticationServices
 {
     public interface IAuthService : IServiceBase
     {

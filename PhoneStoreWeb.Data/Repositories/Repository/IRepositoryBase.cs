@@ -16,7 +16,9 @@ namespace PhoneStoreWeb.Data.Repositories.Repository
         public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
         public Task AddAsync(TEntity entity);
         public Task AddRangeAsync(IEnumerable<TEntity> entities);
+        public Task AddOrUpdateAsync(TEntity entity, int id);
         public void Remove(TEntity entity);
+        public void Remove(int id);
         public void RemoveRange(IEnumerable<TEntity> entities);
         public void Update(TEntity entity);
     }

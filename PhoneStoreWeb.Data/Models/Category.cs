@@ -9,6 +9,8 @@ namespace PhoneStoreWeb.Data.Models
     public class Category
     {
         public int Id { set; get; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         [Required]
         public bool IsShowOnHome { set; get; }
         [Required]
@@ -17,8 +19,7 @@ namespace PhoneStoreWeb.Data.Models
         [Column(TypeName = "Date")]
         public DateTime Created_At { set; get; }
         public string ImagePath { get; set; }
-        public List<Product> Products { set; get; }
-        public List<CategoryLanguage> CategoryLanguages { set; get; }
+        public List<Product> Products { set; get; }        
         public List<Blog> Blogs { set; get; }
     }
 }
