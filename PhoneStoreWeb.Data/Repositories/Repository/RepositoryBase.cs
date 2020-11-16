@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.Repositories.Repository
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
         protected readonly PhoneStoreDbContext context;
         protected DbSet<TEntity> DbSetEntity;
-        public Repository(PhoneStoreDbContext context)
+        public RepositoryBase(PhoneStoreDbContext context)
         {
             this.context = context;
             DbSetEntity = this.context.Set<TEntity>();

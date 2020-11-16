@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PhoneStoreWeb.Data.Repositories.Repository
 {
 
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepositoryBase<TEntity> where TEntity : class
     {
         public Task<TEntity> GetAsync(int id);
         public Task<IEnumerable<TEntity>> GetAllAsync();
