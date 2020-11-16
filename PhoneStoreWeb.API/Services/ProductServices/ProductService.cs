@@ -11,8 +11,7 @@ using PhoneStoreWeb.Data.Models;
 namespace PhoneStoreWeb.API.Services.ProductServices
 {
     public class ProductService : ServiceBase, IProductService
-    {
-        MapperConfiguration configuration;
+    {       
         public ProductService(IMapper mapper) : base(mapper)
         {          
         }
@@ -31,7 +30,24 @@ namespace PhoneStoreWeb.API.Services.ProductServices
                 }
             }
             return result;
-        }      
+        }
+
+        public async Task<IEnumerable<ProductResponse>> GetAllProductsByCategory(int categoryId)
+        {
+            IEnumerable<ProductResponse> result;
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var products = await uow.Products.FindAsync(x => x.CategoryId == categoryId);
+                result = mapper.Map<IEnumerable<Product>, IEnumerable<ProductResponse>>(products);
+                foreach (var item in result)
+                {
+                    ProductLanguage p = await GetLanguage(item.Id, languageId);
+                    item.Name = p.Name;
+                    item.Description = p.Description;
+                }
+            }
+            return result;
+        }
 
         public async Task<ProductResponse> GetById(int id)
         {

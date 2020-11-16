@@ -12,6 +12,7 @@ namespace PhoneStoreWeb.API.Services.ProductServices
     {
         public Task<IEnumerable<ProductResponse>> GetAllProducts();
         public Task<ProductResponse> GetById(int id);
+        public Task<IEnumerable<ProductResponse>> GetAllProductsByCategory(int categoryId);
         public Task<ProductLanguage> GetLanguage(int id, string languageId);
     }
 }

@@ -31,9 +31,6 @@ namespace PhoneStoreWeb.API.Controllers
         [HttpGet]
         public async Task<ActionResult<ResponseResult<IEnumerable<ProductResponse>>>> GetProducts()
         {
-            //var products = await _context.Products.ToListAsync();
-            //IEnumerable<ProductResponse> response = mapper.Map< IEnumerable<Product>, IEnumerable<ProductResponse>>(products);
-            //return Ok(response);
             var result = await productService.GetAllProducts();
             var response = new ResponseResult<IEnumerable<ProductResponse>>();
             return Ok(response.Succeed(result));
@@ -43,14 +40,14 @@ namespace PhoneStoreWeb.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var result = await productService.GetAllProducts();
+            var response = new ResponseResult<IEnumerable<ProductResponse>>();
 
-            if (product == null)
+            if (result == null)
             {
-                return NotFound();
+                return NotFound(response.Failed("Not found"));
             }
-
-            return product;
+            return Ok(response.Succeed(result));
         }
 
         // PUT: api/Products/5
