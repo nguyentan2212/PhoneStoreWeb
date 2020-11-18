@@ -37,12 +37,4 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\ProductsReceivedRepo\" />
-    <Folder Include="Repositories\CartRepo\" />
-    <Folder Include="Repositories\CartProductRepo\" />
-    <Folder Include="Repositories\ContactRepo\" />
-    <Folder Include="Repositories\DiscountRepo\" />
-  </ItemGroup>
-
 </Project>
