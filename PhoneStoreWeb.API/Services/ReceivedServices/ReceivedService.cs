@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using PhoneStoreWeb.API.Services.Base;
 
-namespace PhoneStoreWeb.API.Services.ImportServices
+namespace PhoneStoreWeb.API.Services.ReceivedServices
 {
-    public class ImportService : ServiceBase, IImportService
+    public class ReceivedService : ServiceBase, IReceivedService
     {
-        public ImportService(IMapper mapper) : base(mapper)
+        public ReceivedService(IMapper mapper) : base(mapper)
         {
 
         }

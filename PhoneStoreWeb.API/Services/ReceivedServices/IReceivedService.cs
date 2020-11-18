@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using PhoneStoreWeb.API.Services.Base;
 
-namespace PhoneStoreWeb.API.Services.ImportServices
+namespace PhoneStoreWeb.API.Services.ReceivedServices
 {
-    public interface IImportService : IServiceBase
+    public interface IReceivedService : IServiceBase
     {
     }
 }
