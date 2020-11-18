@@ -11,11 +11,11 @@ namespace PhoneStoreWeb.Data.Models
         [Required]
         [Column(TypeName = "Money")]
         public decimal Price { set; get; }
-        [Required]
         [Column(TypeName = "Date")]
         public DateTime Created_At { set; get; }
         public Guid UserId { set; get; }
-        public List<CartProduct> CartProducts { set; get; }
         public AppUser AppUser { set; get; }
+        public List<CartProduct> CartProducts { set; get; }
+        
     }
 }

@@ -21,7 +21,9 @@ namespace PhoneStoreWeb.Communication.Products
         [Required]
         public string Name { set; get; }
         [Required]
-        public string Description { set; get; }               
+        public string Description { set; get; }  
+        [Required]
+        public float Profitpercentage { get; set; }
         [Required]
         public IFormFile ThumbnailImage { get; set; }
     }

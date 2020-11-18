@@ -21,6 +21,8 @@ namespace PhoneStoreWeb.Data.Models
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
         public decimal OriginalPrice { set; get; }
+        [Required]
+        public float Profitpercentage { get; set; }
 
         [Required]
         public int Stock { set; get; }
@@ -34,8 +36,9 @@ namespace PhoneStoreWeb.Data.Models
         public int BatteryCapacity { get; set; }       
         public bool HasQuickCharge { get; set; }
 
-        public OrderDetail OrderDetail { set; get; }
+        
         public Category Category { set; get; }
+        public List<ProductItem> Items { get; set; }
         public List<CartProduct> CartProducts { set; get; }
         public List<ProductImage> ProductImages { set; get; }        
     }

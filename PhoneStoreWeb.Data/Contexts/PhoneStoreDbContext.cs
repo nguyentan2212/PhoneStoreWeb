@@ -31,8 +31,7 @@ namespace PhoneStoreWeb.Data.Contexts
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens").HasKey(x => x.UserId);
 
-            modelBuilder.Entity<CartProduct>().HasKey(cp => new { cp.CartID, cp.ProductID });            
-            modelBuilder.Entity<OrderDetail>().HasKey(od => new { od.OrderId, od.ProductId });
+            modelBuilder.Entity<CartProduct>().HasKey(cp => new { cp.CartID, cp.ProductID });                      
 
             modelBuilder.Seed();
         }
@@ -44,11 +43,13 @@ namespace PhoneStoreWeb.Data.Contexts
         public DbSet<CartProduct> CartProducts { get; set; }
         public DbSet<Contact> Contacts { get; set; }       
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<ProductItem> ProductItems { get; set; }
+        public DbSet<ProductsReceived> ProductsReceiveds { get; set; }
+        public DbSet<ProductsDelivery> ProductsDeliveries { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Review> ReViews { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<Like> Likes { get; set; }
     }
 }

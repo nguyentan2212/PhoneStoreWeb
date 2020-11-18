@@ -139,7 +139,7 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "cf725855-5205-44b4-95b3-14d26efb2e6a",
+                            ConcurrencyStamp = "17becd98-1e94-4f15-9bb0-6ebd8a187088",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -147,7 +147,7 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dd"),
-                            ConcurrencyStamp = "ce3da197-33fd-43e8-bfa6-7b7cd05d52cf",
+                            ConcurrencyStamp = "a32394a0-a4f5-46f7-9a8c-309e720602d4",
                             Description = "Client role",
                             Name = "client",
                             NormalizedName = "client"
@@ -231,14 +231,14 @@ namespace PhoneStoreWeb.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43a12b2e-619f-4491-8ccd-d87f8dcad3bc",
+                            ConcurrencyStamp = "991d78b2-588d-4c43-968d-5f03c4adabea",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hieuvo044@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "hieuvo044@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGcnzFw41cwFK4blJvmkcMYJUGtRWWkh/YSBIu7YISw8SLD6mrCwWVz8ChXqMMMQ5w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELZbuLPoP5yxgYU3SFa3+0v4T8Aal9LjiBFcypk18/uK5zXPay6Q9jS6QGs1u6qLew==",
                             PhoneNumberConfirmed = false,
                             RoleID = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
                             SecurityStamp = "",
@@ -324,7 +324,7 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Created_At = new DateTime(2020, 11, 16, 17, 1, 58, 653, DateTimeKind.Local).AddTicks(9792),
+                            Created_At = new DateTime(2020, 11, 18, 9, 58, 47, 366, DateTimeKind.Local).AddTicks(2970),
                             Price = 0m,
                             UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de")
                         });
@@ -605,28 +605,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("PhoneStoreWeb.Data.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("Money");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -661,6 +639,9 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("Money");
 
+                    b.Property<float>("Profitpercentage")
+                        .HasColumnType("real");
+
                     b.Property<int>("RAM")
                         .HasColumnType("int");
 
@@ -686,6 +667,7 @@ namespace PhoneStoreWeb.Data.Migrations
                             HasQuickCharge = false,
                             OriginalPrice = 17000m,
                             Price = 20000m,
+                            Profitpercentage = 0f,
                             RAM = 0,
                             Stock = 0,
                             Storage = 0
@@ -742,6 +724,93 @@ namespace PhoneStoreWeb.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<decimal>("ImportPrice")
+                        .HasColumnType("Money");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsDeliveryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsReceivedId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Seri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SoldPrice")
+                        .HasColumnType("Money");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductsDeliveryId");
+
+                    b.HasIndex("ProductsReceivedId");
+
+                    b.ToTable("ProductItems");
+                });
+
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductsDelivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("Date");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductsDeliveries");
+                });
+
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductsReceived", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("Date");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("Money");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductsReceiveds");
+                });
+
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -774,7 +843,7 @@ namespace PhoneStoreWeb.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ReViews");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.AppUser", b =>
@@ -880,25 +949,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Navigation("Discount");
                 });
 
-            modelBuilder.Entity("PhoneStoreWeb.Data.Models.OrderDetail", b =>
-                {
-                    b.HasOne("PhoneStoreWeb.Data.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PhoneStoreWeb.Data.Models.Product", "Product")
-                        .WithOne("OrderDetail")
-                        .HasForeignKey("PhoneStoreWeb.Data.Models.OrderDetail", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Product", b =>
                 {
                     b.HasOne("PhoneStoreWeb.Data.Models.Category", "Category")
@@ -919,6 +969,33 @@ namespace PhoneStoreWeb.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductItem", b =>
+                {
+                    b.HasOne("PhoneStoreWeb.Data.Models.Order", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("PhoneStoreWeb.Data.Models.Product", null)
+                        .WithMany("Items")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("PhoneStoreWeb.Data.Models.ProductsDelivery", "ProductsDelivery")
+                        .WithMany("Items")
+                        .HasForeignKey("ProductsDeliveryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PhoneStoreWeb.Data.Models.ProductsReceived", "ProductsReceived")
+                        .WithMany("Items")
+                        .HasForeignKey("ProductsReceivedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductsDelivery");
+
+                    b.Navigation("ProductsReceived");
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Review", b =>
@@ -969,16 +1046,26 @@ namespace PhoneStoreWeb.Data.Migrations
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Order", b =>
                 {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Product", b =>
                 {
                     b.Navigation("CartProducts");
 
-                    b.Navigation("OrderDetail");
+                    b.Navigation("Items");
 
                     b.Navigation("ProductImages");
+                });
+
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductsDelivery", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("PhoneStoreWeb.Data.Models.ProductsReceived", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

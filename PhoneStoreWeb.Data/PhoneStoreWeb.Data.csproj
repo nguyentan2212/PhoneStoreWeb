@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20201118025847_InitDB.cs" />
+    <Compile Include="Migrations\20201118025847_InitDB.Designer.cs" />
+    <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
@@ -23,6 +35,14 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\ProductsReceivedRepo\" />
+    <Folder Include="Repositories\CartRepo\" />
+    <Folder Include="Repositories\CartProductRepo\" />
+    <Folder Include="Repositories\ContactRepo\" />
+    <Folder Include="Repositories\DiscountRepo\" />
   </ItemGroup>
 
 </Project>

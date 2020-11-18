@@ -22,5 +22,7 @@ namespace PhoneStoreWeb.Communication.Products
         public decimal Price { set; get; }
         [Required]
         public decimal OriginalPrice { set; get; }
+        [Required]
+        public float Profitpercentage { get; set; }
     }
 }

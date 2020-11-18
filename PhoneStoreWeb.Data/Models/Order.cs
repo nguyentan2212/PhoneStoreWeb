@@ -42,6 +42,6 @@ namespace PhoneStoreWeb.Data.Models
         [Column(TypeName = "Date")]
         public DateTime Created_At { set; get; }
 
-        public List<OrderDetail> OrderDetails { set; get; }
+        public List<ProductItem> Items { set; get; }
     }
 }
