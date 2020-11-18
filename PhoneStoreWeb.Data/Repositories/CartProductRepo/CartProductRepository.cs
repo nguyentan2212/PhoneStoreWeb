@@ -4,9 +4,9 @@ using PhoneStoreWeb.Data.Repositories.Repository;
 
 namespace PhoneStoreWeb.Data.Repositories.CartProductRepo
 {
-    public class CartProdcutRepository : RepositoryBase<CartProduct>, ICartProdcutRepository
+    public class CartProductRepository : RepositoryBase<CartProduct>, ICartProductRepository
     {
-        public CartProdcutRepository(PhoneStoreDbContext dbContext) : base(dbContext)
+        public CartProductRepository(PhoneStoreDbContext dbContext) : base(dbContext)
         {
 
         }

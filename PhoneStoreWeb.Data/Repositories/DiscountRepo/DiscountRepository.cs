@@ -4,7 +4,7 @@ using PhoneStoreWeb.Data.Repositories.Repository;
 
 namespace PhoneStoreWeb.Data.Repositories.DiscountRepo
 {
-    class DiscountRepository : RepositoryBase<Discount>, IDiscountRepository
+    public class DiscountRepository : RepositoryBase<Discount>, IDiscountRepository
     {
         public DiscountRepository(PhoneStoreDbContext dbContext) : base(dbContext)
         {
