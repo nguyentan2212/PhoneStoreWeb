@@ -7,16 +7,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using PhoneStoreWeb.API.Services.AuthenticationServices;
+using PhoneStoreWeb.API.Services.CategoryServices;
+using PhoneStoreWeb.API.Services.DeliveryServices;
+using PhoneStoreWeb.API.Services.OrderServices;
+using PhoneStoreWeb.API.Services.ProductServices;
+using PhoneStoreWeb.API.Services.ReceivedServices;
+using PhoneStoreWeb.API.Services.ReportServices;
+using PhoneStoreWeb.API.Services.StorageServices;
+using PhoneStoreWeb.API.Services.UserServices;
 using PhoneStoreWeb.Communication.Mapping;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
-using PhoneStoreWeb.Data.Repositories.BlogRepo;
-using PhoneStoreWeb.Data.Repositories.OrderRepo;
-using PhoneStoreWeb.Data.Repositories.ProductRepo;
 using System.Text;
-using PhoneStoreWeb.API.Services.ProductServices;
-using PhoneStoreWeb.API.Services.StorageServices;
-using PhoneStoreWeb.API.Services.AuthenticationServices;
 
 namespace PhoneStoreWeb.API
 {
@@ -67,17 +70,21 @@ namespace PhoneStoreWeb.API
                         )
                     };
                 });
-            services.AddScoped<IBlogRepository, BlogRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddSingleton<IAuthService>(
                 new AuthService(
                     Configuration.GetValue<string>("JWTSecretKey"),
                     Configuration.GetValue<int>("JWTLifespan")
                 )
             );
-            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IDeliveryService, DeliveryService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IReceivedService, ReceivedService>();
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddAutoMapper(typeof(ModelToResponse));
             services.AddAutoMapper(typeof(RequestToModel));
             services.AddControllers();
