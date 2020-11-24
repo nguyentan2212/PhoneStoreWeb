@@ -12,6 +12,7 @@ using PhoneStoreWeb.Data.Repositories.ProductsDeliveryRepo;
 using PhoneStoreWeb.Data.Repositories.ProductsReceivedRepo;
 using System.Threading.Tasks;
 using System;
+using PhoneStoreWeb.Data.Repositories.CategoryRepo;
 
 namespace PhoneStoreWeb.Data.UnitOfWork
 {
@@ -23,6 +24,7 @@ namespace PhoneStoreWeb.Data.UnitOfWork
         private BlogRepository blogs;
         private CartProductRepository cartProducts;
         private CartRepository carts;
+        private CategoryRepository categories;
         private ContactRepository contacts;
         private DiscountRepository discounts;
         private OrderRepository orders;
@@ -70,6 +72,18 @@ namespace PhoneStoreWeb.Data.UnitOfWork
                     carts = new CartRepository(context);
                 }
                 return carts;
+            }
+        }
+
+        public CategoryRepository Categories
+        {
+            get
+            {
+                if (categories is null)
+                {
+                    categories = new CategoryRepository(context);
+                }
+                return categories;
             }
         }
 

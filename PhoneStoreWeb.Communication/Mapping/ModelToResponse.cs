@@ -14,6 +14,7 @@ namespace PhoneStoreWeb.Communication.Mapping
         public ModelToResponse()
         {
             CreateMap<Product, ProductResponse>();
+            CreateMap<Category, CategoryResponse>();
             CreateMap<Order, OrderResponse>();
             CreateMap<Blog, BlogResponse>();
         }

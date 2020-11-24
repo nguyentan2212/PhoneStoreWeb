@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@{ var url = @Context.Request.GetDisplayUrl();
+    string[] arrListUrl = url.Split('/');
+    if (arrListUrl[3] == "") arrListUrl[3] = "index";}
+<!doctype html>
+<html class="no-js " lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <title>Bakery</title>
+    <link rel="icon" href="/icon.ico" type="image/x-icon"> <!-- Favicon-->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/charts-c3/plugin.css" />
+    <link rel="stylesheet" href="/assets/plugins/morrisjs/morris.min.css" />
+    <link href="~/lib/jquery-toast-plugin/jquery.toast.min.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <style>
+        .language-select {
+            padding: 4px 0px;
+        }
+
+        .radio-inline {
+            padding: 0px 18px;
+        }
+
+        h5, .h5 {
+            font-size: 1.20em;
+            margin-bottom: 10px;
+        }
+
+        .carousel .carousel-inner {
+            box-shadow: none;
+        }
+    </style>
+    @RenderSection("Header", required: false)
+</head>
+
+<body class="theme-blush">
+
+    <!-- Page Loader -->
+    <partial name="_Loader.cshtml">
+
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+
+        <!-- Main Search -->
+        <partial name="_MainSearch.cshtml">
+
+            <!-- Right Icon menu Sidebar -->
+            <partial name="_RightIcon.cshtml">
+
+                <!-- Left Sidebar -->
+                <partial name="_LeftSidebar.cshtml">
+
+                    <!-- Right Sidebar -->
+                    <partial name="_RightSidebar.cshtml">
+
+                        <section class="content">
+                            @RenderBody()
+                            <div id="notify-sound">
+
+                            </div>
+                        </section>
+
+                        <!-- Jquery Core Js -->
+                        <script src="/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+                        <script src="/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+
+
+                        <script src="/assets/bundles/c3.bundle.js"></script>
+
+                        <script src="/assets/bundles/mainscripts.bundle.js"></script>
+                        <script src="/assets/js/pages/index.js"></script>
+                        <!--Jquery-validate-->
+                        @*<script src="~/lib/jquery/jquery.js"></script>*@
+                        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+                        <script src="~/lib/jquery-toast-plugin/jquery.toast.js"></script>
+                        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+                        <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+                        @* Swal delete*@
+                        <script>
+                            $(document).ready(function () {
+                                $('.delete').click(async function (e) {
+                                    e.preventDefault();
+                                    var href = ($(this).attr('href') == undefined) ? $(this).attr('action') : $(this).attr('href');
+                                    const { value: success } = await Swal.fire({
+                                        title: 'You want delete it?',
+                                        text: "Data will be completely lost!",
+                                        type: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        cancelButtonText: 'Trở về',
+                                    })
+
+                                    if (success) {
+                                        window.location = href;
+                                    }
+                                });
+                            });
+                        </script>
+                        @*active menu*@
+                        <script>
+                            $(document).ready(function () {
+                                var className = ".menu-@arrListUrl[3]";
+                                @*var subClassName = ".sub-menu-@arrListUrl[4]";*@
+                                $(className).toggleClass("active open");
+                                //$(subClassName).toggleClass("active open");
+                            });
+                        </script>
+                        @RenderSection("Scripts", required: false)
+</body>
+
+
+</html>

@@ -108,24 +108,24 @@ namespace PhoneStoreWeb.API.Services.ProductServices
             }
         }
 
-        public async Task<IEnumerable<ProductResponse>> GetAllProducts()
+        public async Task<List<ProductResponse>> GetAllProducts()
         {
-            IEnumerable<ProductResponse> result;
+            List<ProductResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
             {
                 var products = await uow.Products.GetAllAsync();
-                result = mapper.Map<IEnumerable<Product>, IEnumerable<ProductResponse>>(products);                
+                result = mapper.Map<List<Product>, List<ProductResponse>>(products.ToList());                
             }
             return result;
         }
 
-        public async Task<IEnumerable<ProductResponse>> GetAllProductsByCategory(int categoryId)
+        public async Task<List<ProductResponse>> GetAllProductsByCategory(int categoryId)
         {
-            IEnumerable<ProductResponse> result;
+            List<ProductResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
             {
                 var products = await uow.Products.FindAsync(x => x.CategoryId == categoryId);
-                result = mapper.Map<IEnumerable<Product>, IEnumerable<ProductResponse>>(products);                
+                result = mapper.Map<List<Product>, List<ProductResponse>>(products.ToList());                
             }
             return result;
         }

@@ -9,9 +9,9 @@ namespace PhoneStoreWeb.API.Services.ProductServices
 {
     public interface IProductService : IServiceBase
     {
-        public Task<IEnumerable<ProductResponse>> GetAllProducts();
+        public Task<List<ProductResponse>> GetAllProducts();
         public Task<ProductResponse> GetById(int id);
-        public Task<IEnumerable<ProductResponse>> GetAllProductsByCategory(int categoryId);      
+        public Task<List<ProductResponse>> GetAllProductsByCategory(int categoryId);      
 
         public Task<string> Create(CreateProductRequest request);
         public Task<string> Update(UpdateProductRequest request);

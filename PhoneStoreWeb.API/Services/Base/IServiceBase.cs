@@ -6,7 +6,7 @@ namespace PhoneStoreWeb.API.Services.Base
 {
     public interface IServiceBase
     {
-        public IEnumerable<string> GetErrors(ModelStateDictionary modelState);
-        public IEnumerable<string> GetErrors(IdentityResult identityResult);     
+        public List<string> GetErrors(ModelStateDictionary modelState);
+        public List<string> GetErrors(IdentityResult identityResult);     
     }
 }

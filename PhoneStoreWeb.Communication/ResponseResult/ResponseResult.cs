@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 namespace PhoneStoreWeb.Communication.ResponseResult
 {
@@ -12,13 +9,21 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public bool IsSucceed { get; set; }
         public string Message { get; set; }
         public TResult Result { get; set; }
-        public IEnumerable<string> Errors { get; set; }
+        public List<string> Errors { get; set; }
+
+        public ResponseResult()
+        {
+            IsSucceed = false;
+            Message = "Request failed";
+            Errors = new List<string>();
+            Result = null;
+        }
 
         public ResponseResult<TResult> Succeed(TResult result)
         {
             IsSucceed = true;
             Message = string.Empty;
-            Errors = Enumerable.Empty<string>();
+            Errors = new List<string>();
             Result = result;
             return this;
         }
@@ -26,15 +31,15 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         {
             IsSucceed = false;
             Message = content;
-            Errors = Enumerable.Empty<string>();
+            Errors = new List<string>();
             Result = null;
             return this;
         }
-        public ResponseResult<TResult> Failed(string content, IEnumerable<string> errors)
+        public ResponseResult<TResult> Failed(string content, ICollection<string> errors)
         {
             IsSucceed = false;
             Message = content;
-            Errors = (Errors ?? Enumerable.Empty<string>()).Concat(errors ?? Enumerable.Empty<string>());
+            Errors.AddRange(errors);
             Result = null;
             return this;
         }       

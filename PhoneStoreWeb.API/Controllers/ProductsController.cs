@@ -11,22 +11,19 @@ using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Communication.Products;
+using Newtonsoft.Json;
 
 namespace PhoneStoreWeb.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public class ProductsController : ControllerBase
     {
-        private readonly PhoneStoreDbContext _context;
-        private readonly IMapper mapper;
         private readonly IProductService productService;
-        public ProductsController(PhoneStoreDbContext context, IMapper mapper, IProductService productService)
-        {
-            _context = context;
-            this.mapper = mapper;
+        public ProductsController(IProductService productService)
+        {          
             this.productService = productService;
         }
 
@@ -35,16 +32,13 @@ namespace PhoneStoreWeb.API.Controllers
         public async Task<IActionResult> GetProducts()
         {
             var result = await productService.GetAllProducts();
-            var response = new ResponseResult<IEnumerable<ProductResponse>>();
-            if (result == null)
-            {
-                return NotFound(response.Failed("Not found"));
-            }
+            var response = new ResponseResult<List<ProductResponse>>();             
             return Ok(response.Succeed(result));
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetProduct(int id)
         {
             var result = await productService.GetById(id);
@@ -77,7 +71,6 @@ namespace PhoneStoreWeb.API.Controllers
         }
 
         // POST: api/Products
-
         [HttpPost]
         public async Task<IActionResult> PostProduct(CreateProductRequest request)
         {
@@ -110,6 +103,7 @@ namespace PhoneStoreWeb.API.Controllers
 
         // GET:api/products/category/3
         [HttpGet("category/{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProductByCategory(int id)
         {
             var result = await productService.GetAllProductsByCategory(id);

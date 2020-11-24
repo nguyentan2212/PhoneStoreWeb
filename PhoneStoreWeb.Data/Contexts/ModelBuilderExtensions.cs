@@ -32,7 +32,7 @@ namespace PhoneStoreWeb.Data.Contexts
                     Status = Enums.CategoryStatus.Active
                 }
            );
-           
+
             //Products
             modelBuilder.Entity<Product>().HasData(
                  new Product()
@@ -40,7 +40,9 @@ namespace PhoneStoreWeb.Data.Contexts
                      Id = 1,
                      Price = 20000,
                      OriginalPrice = 17000,
-                     CategoryId = 1
+                     CategoryId = 1,
+                     Name = "Hello",
+                     
                  }
             );
             

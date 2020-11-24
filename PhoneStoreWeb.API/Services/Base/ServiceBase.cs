@@ -17,15 +17,15 @@ namespace PhoneStoreWeb.API.Services.Base
             
         }
 
-        public IEnumerable<string> GetErrors(ModelStateDictionary modelState)
+        public List<string> GetErrors(ModelStateDictionary modelState)
         {
-            IEnumerable<string> errors = modelState.Values.SelectMany(v => v.Errors).Select(x => x.ErrorMessage);
+            List<string> errors = modelState.Values.SelectMany(v => v.Errors).Select(x => x.ErrorMessage).ToList();
             return errors;
         }
 
-        public IEnumerable<string> GetErrors(IdentityResult identityResult)
+        public List<string> GetErrors(IdentityResult identityResult)
         {
-            IEnumerable<string> errors = identityResult.Errors.Select(x => x.Description);
+            List<string> errors = identityResult.Errors.Select(x => x.Description).ToList();
             return errors;
         }    
     }
