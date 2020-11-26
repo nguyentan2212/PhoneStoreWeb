@@ -27,11 +27,9 @@ namespace PhoneStoreWeb.Service.ProductService
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
-                {
-                    ProductImage productImage = mapper.Map<AddProductImageRequest, ProductImage>(request);
-                    productImage.ImagePath = await SaveFile(request.ThumbnailImage);
-
-                    await uow.ProductImages.AddAsync(productImage);
+                {                  
+                    string imagePath = await SaveFile(request.ThumbnailImage);
+                    await uow.Products.AddOrUpdateImageAsync(request.ProductId, imagePath);
                     await uow.SaveAsync();
                     return null;
                 }
@@ -49,19 +47,10 @@ namespace PhoneStoreWeb.Service.ProductService
                 using (UnitOfWork uow = new UnitOfWork())
                 {
                     var product = mapper.Map<CreateProductRequest, Product>(request);
-                    product.Created_At = DateTime.Today;
-                    product.ProductImages = new List<ProductImage>()
-                    {
-                        new ProductImage()
-                        {
-                            Caption = "Thumbnail image",
-                            FileSize = request.ThumbnailImage.Length,
-                            ImagePath = await SaveFile(request.ThumbnailImage),
-                            IsDefault = true,
-                        }
-                    };
+                    product.CreatedDate = DateTime.Today;
+                    product.Status = Data.Enums.ProductStatus.OutOfStock;
+                    product.Image = await SaveFile(request.ThumbnailImage);                   
                     await uow.Products.AddAsync(product);
-
                     await uow.SaveAsync();
                     return null;
                 }
@@ -87,25 +76,7 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 return e.Message;
             }
-        }
-
-        public async Task<string> DeleteImage(int id)
-        {
-            try
-            {
-                using (UnitOfWork uow = new UnitOfWork())
-                {
-                    uow.ProductImages.Remove(id);
-                    await uow.SaveAsync();
-                    return null;
-                }
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
-
+        }        
         public async Task<List<ProductResponse>> GetAllProducts()
         {
             List<ProductResponse> result;
@@ -122,7 +93,7 @@ namespace PhoneStoreWeb.Service.ProductService
             List<ProductResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
             {
-                var products = await uow.Products.FindAsync(x => x.CategoryId == categoryId);
+                var products = await uow.Products.FindAsync(x => x.Category.Id == categoryId);
                 result = mapper.Map<List<Product>, List<ProductResponse>>(products.ToList());
             }
             return result;

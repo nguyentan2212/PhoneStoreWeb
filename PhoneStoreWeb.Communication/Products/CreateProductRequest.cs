@@ -13,17 +13,19 @@ namespace PhoneStoreWeb.Communication.Products
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public int CategoryId { set; get; }
-        [Required]
-        public decimal OriginalPrice { set; get; }
-        [Required]
-        public int Stock { set; get; }
+        public int CategoryId { set; get; }       
         [Required]
         public string Name { set; get; }
         [Required]
-        public string Description { set; get; }  
+        public string Description { set; get; }          
         [Required]
-        public float Profitpercentage { get; set; }
+        public string OS { get; set; }
+        [Required]
+        public int RAM { get; set; }
+        [Required]
+        public int Storage { get; set; }
+        [Required]
+        public int BatteryCapacity { get; set; }      
         [Required]
         public IFormFile ThumbnailImage { get; set; }
     }

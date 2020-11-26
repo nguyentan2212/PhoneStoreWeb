@@ -2,8 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,8 +30,9 @@ namespace PhoneStoreWeb.AdminApp
         {
             services.AddDbContext<PhoneStoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
-                //options.UseNpgsql(Configuration.GetConnectionString("DATABASE_URL"));
+                //options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
+                //options.UseSqlite(Configuration.GetConnectionString("PhoneStoreContextSQLite"));  
+                options.UseInMemoryDatabase("data-context");
             });
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<PhoneStoreDbContext>();
             // configure identity options
@@ -74,6 +73,7 @@ namespace PhoneStoreWeb.AdminApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();

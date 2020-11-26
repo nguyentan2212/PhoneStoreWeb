@@ -11,9 +11,7 @@ namespace PhoneStoreWeb.Communication.Mapping
         {
             CreateMap<RegisterRequest, AppUser>();
             CreateMap<CreateProductRequest, Product>();
-            CreateMap<UpdateProductRequest, Product>();
-            CreateMap<AddProductImageRequest, ProductImage>().ForMember(des => des.FileSize,
-                opt => opt.MapFrom(src => src.ThumbnailImage.Length));
+            CreateMap<UpdateProductRequest, Product>();            
         }
     }
 }

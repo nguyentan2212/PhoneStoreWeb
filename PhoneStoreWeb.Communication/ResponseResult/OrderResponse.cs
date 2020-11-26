@@ -14,10 +14,10 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public string UserName { set; get; }
         public int CartId { set; get; }
         public int DiscountId { set; get; }
-        public int DiscountDiscount { set; get; }
+        public int DiscountAmount { set; get; }
         public string ShipName { set; get; }
         public string ShipEmail { set; get; }
-        public string ShipPhone { set; get; }
+        public string ShipPhoneNumber { set; get; }
         public string ShipAddress { set; get; }
         public string OrderNotes { set; get; }
         public decimal Total { set; get; }

@@ -16,75 +16,53 @@ namespace PhoneStoreWeb.Data.Contexts
                 new Contact() { Id = 2, Name = "Phuong Quyen", Email = "hieuvo044@gmail.com", Message = "Very good" },
                 new Contact() { Id = 3, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" }
             );
-           
-           
+                     
             //Discounts
             modelBuilder.Entity<Discount>().HasData(
                 new Discount() { Id = 1, Code = "123", DiscountAmount = 10000 },
                 new Discount() { Id = 2, Code = "1234", DiscountAmount = 20000 }
             );
             //Categories
-            modelBuilder.Entity<Category>().HasData(
-                new Category()
-                {
-                    Id = 1,
-                    IsShowOnHome = true,
-                    Status = Enums.CategoryStatus.Active
-                }
-           );
+            Category category = new Category()
+            {
+                Id = 1,
+                Name = "Iphone",
+                Description = "Dien thoai Iphone"
+            };
+            modelBuilder.Entity<Category>().HasData(category);
 
             //Products
-            modelBuilder.Entity<Product>().HasData(
-                 new Product()
-                 {
-                     Id = 1,
-                     Price = 20000,
-                     OriginalPrice = 17000,
-                     CategoryId = 1,
-                     Name = "Hello",
-                     
-                 }
-            );
-            
-            //ProductImages
-            modelBuilder.Entity<ProductImage>().HasData(
-               new ProductImage() { ProductId = 1, Id = 1, ImagePath = "http://product.hstatic.net/1000026716/product/81ax00mcvn_bd76b8bf0aed4307bc9714e4dc5830f0_large.jpg", Caption = "!23", IsDefault = true },
-               new ProductImage() { ProductId = 1, Id = 2, ImagePath = "http://product.hstatic.net/1000026716/product/81ax00mcvn_bd76b8bf0aed4307bc9714e4dc5830f0_large.jpg", Caption = "!23", IsDefault = false }
-            );
-            //Carts
-            modelBuilder.Entity<Cart>().HasData(
-                new Cart()
-                {
-                    Id = 1,
-                    Price = 20000
-                }
-           );
-            //CartProducts
-            modelBuilder.Entity<CartProduct>().HasData(
-                 new CartProduct() { ProductID = 1, Quantity = 2, CartID = 1 }
-            );
+            Product product = new Product()
+            {
+                Id = 1,
+                Price = 20000,
+                Stock = 10,
+                CategoryId = category.Id,
+                Name = "Iphone 12",
+
+            };
+            modelBuilder.Entity<Product>().HasData(product);                                     
             // any guid
             var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
             var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
-            modelBuilder.Entity<AppRole>().HasData(
-                new AppRole
-                {
-                    Id = roleId,
-                    Name = "admin",
-                    NormalizedName = "admin",
-                    Description = "Administrator role"
-                },
-                 new AppRole
-                 {
-                     Id = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DD"),
-                     Name = "client",
-                     NormalizedName = "client",
-                     Description = "Client role"
-                 }
-            );
+            AppRole admin = new AppRole
+            {
+                Id = roleId,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Administrator role"
+            };
+            AppRole client = new AppRole
+            {
+                Id = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DD"),
+                Name = "client",
+                NormalizedName = "client",
+                Description = "Client role"
+            };
+            modelBuilder.Entity<AppRole>().HasData(admin,client);
 
             var hasher = new PasswordHasher<AppUser>();
-            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            AppUser user = new AppUser
             {
                 Id = adminId,
                 UserName = "admin",
@@ -94,17 +72,13 @@ namespace PhoneStoreWeb.Data.Contexts
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "123"),
                 SecurityStamp = string.Empty,
-                Dob = new DateTime(2020, 01, 31),
-                RoleID = roleId
-            });
-            modelBuilder.Entity<Cart>().HasData(new Cart
-            {
-                Id = 2,
-                UserId = adminId,
-                Price = 0,
-                Created_At = DateTime.Now,
-                CartProducts = new List<CartProduct>(),
-            });
+                Birthdate = new DateTime(2020, 01, 31),
+                RoleId = adminId
+            };
+            modelBuilder.Entity<AppUser>().HasData(user);           
+            //CartProducts
+            modelBuilder.Entity<CartItem>().HasData(
+                new CartItem() { Id = 1, ProductId = product.Id, Quantity = 2, CustomerId = user.Id});
         }
     }
 }

@@ -2,6 +2,9 @@
 {
     public enum OrderStatus
     {
+        Unconfirm,
+        Confirm,
+        Cancelled,
         InProgress,
         Shipping,
         Delivered

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PhoneStoreWeb.Data.Enums;
 
@@ -8,18 +9,21 @@ namespace PhoneStoreWeb.Data.Models
     {
         public int Id { get; set; }
         [Required]
-        public string Seri { get; set; }
+        public string SerialNumber { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
-        public decimal ImportPrice { get; set; }
+        public decimal ReceivedPrice { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
+        public DateTime ReceivedDate { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
-        public decimal SoldPrice { get; set; }
-        
-        public int ProductsReceivedId { get; set; }
-        public ProductsReceived ProductsReceived { get; set; }
-
-        public int ProductsDeliveryId { get; set; }
-        public ProductsDelivery ProductsDelivery { get; set; }
-
+        public decimal SoldPrice { get; set; }   
+        public AppUser Staff { get; set; }
+        public Product Product { get; set; }
         public ProductItemStatus Status { get; set; }
     }
 }

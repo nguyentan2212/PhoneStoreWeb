@@ -1,15 +1,10 @@
 ﻿using PhoneStoreWeb.Data.Contexts;
-using PhoneStoreWeb.Data.Repositories.BlogRepo;
 using PhoneStoreWeb.Data.Repositories.CartProductRepo;
-using PhoneStoreWeb.Data.Repositories.CartRepo;
 using PhoneStoreWeb.Data.Repositories.ContactRepo;
 using PhoneStoreWeb.Data.Repositories.DiscountRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
-using PhoneStoreWeb.Data.Repositories.ProductImageRepo;
 using PhoneStoreWeb.Data.Repositories.ProductItemRepo;
 using PhoneStoreWeb.Data.Repositories.ProductRepo;
-using PhoneStoreWeb.Data.Repositories.ProductsDeliveryRepo;
-using PhoneStoreWeb.Data.Repositories.ProductsReceivedRepo;
 using System.Threading.Tasks;
 using System;
 using PhoneStoreWeb.Data.Repositories.CategoryRepo;
@@ -19,62 +14,31 @@ namespace PhoneStoreWeb.Data.UnitOfWork
     public class UnitOfWork : IDisposable
     {
         #region Repositories variables
-        private readonly PhoneStoreDbContext context;
-
-        private BlogRepository blogs;
-        private CartProductRepository cartProducts;
-        private CartRepository carts;
+        private readonly PhoneStoreDbContext context;       
+        private CartItemRepository cartItems;        
         private CategoryRepository categories;
         private ContactRepository contacts;
         private DiscountRepository discounts;
-        private OrderRepository orders;
-        private ProductImageRepository productImages;
+        private OrderRepository orders;       
         private ProductItemRepository productItems;
-        private ProductRepository products;
-        private ProductsDeliveryRepository productsDeliveries;
-        private ProductsReceivedRepository productsReceiveds;
+        private ProductRepository products;        
         #endregion
         public UnitOfWork()
         {
             context = new PhoneStoreDbContext();
         }
-        #region Repositories properties
-        public BlogRepository Blogs
+        #region Repositories properties       
+        public CartItemRepository CartItems
         {
             get
             {
-                if (blogs is null)
+                if (cartItems is null)
                 {
-                    blogs = new BlogRepository(context);
+                    cartItems = new CartItemRepository(context);
                 }
-                return blogs;
+                return cartItems;
             }
         }
-        
-        public CartProductRepository CartProducts
-        {
-            get
-            {
-                if (cartProducts is null)
-                {
-                    cartProducts = new CartProductRepository(context);
-                }
-                return cartProducts;
-            }
-        }
-
-        public CartRepository Carts
-        {
-            get
-            {
-                if (carts is null)
-                {
-                    carts = new CartRepository(context);
-                }
-                return carts;
-            }
-        }
-
         public CategoryRepository Categories
         {
             get
@@ -122,19 +86,6 @@ namespace PhoneStoreWeb.Data.UnitOfWork
                 return orders;
             }
         }
-
-        public ProductImageRepository ProductImages
-        {
-            get
-            {
-                if (productImages is null)
-                {
-                    productImages = new ProductImageRepository(context);
-                }
-                return productImages;
-            }
-        }
-
         public ProductItemRepository ProductItems
         {
             get
@@ -158,35 +109,6 @@ namespace PhoneStoreWeb.Data.UnitOfWork
                 return products; 
             }           
         }
-
-        public ProductsDeliveryRepository ProductsDeliveries
-        {
-            get
-            {
-                if (productsDeliveries is null)
-                {
-                    productsDeliveries = new ProductsDeliveryRepository(context);
-                }
-                return productsDeliveries;
-            }
-        }
-        
-        public ProductsReceivedRepository ProductsReceiveds
-        {
-            get
-            {
-                if (productsReceiveds is null)
-                {
-                    productsReceiveds = new ProductsReceivedRepository(context);
-                }
-                return productsReceiveds;
-            }
-        }
-
-
-
-
-
         #endregion
 
         public async Task SaveAsync()

@@ -11,10 +11,7 @@ namespace PhoneStoreWeb.Communication.Products
     public class AddProductImageRequest
     {
         [Required]
-        public int ProductId { get; set; }
-        public string Caption { get; set; }
-        [Required]
-        public bool IsDefault { get; set; }
+        public int ProductId { get; set; }       
         [Required]
         public IFormFile ThumbnailImage { get; set; }
     }

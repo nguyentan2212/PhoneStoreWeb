@@ -10,16 +10,8 @@ namespace PhoneStoreWeb.Data.Models
     {
         public int Id { set; get; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        [Required]
-        public bool IsShowOnHome { set; get; }
-        [Required]
-        public CategoryStatus Status { set; get; }
-        [Required]
-        [Column(TypeName = "Date")]
-        public DateTime Created_At { set; get; }
+        public string Description { get; set; }                   
         public string ImagePath { get; set; }
-        public List<Product> Products { set; get; }        
-        public List<Blog> Blogs { set; get; }
+        public List<Product> Products { set; get; }               
     }
 }

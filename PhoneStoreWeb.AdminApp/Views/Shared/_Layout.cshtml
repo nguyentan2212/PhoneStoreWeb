@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
 @{ var url = @Context.Request.GetDisplayUrl();
     string[] arrListUrl = url.Split('/');
-    if (arrListUrl[3] == "") arrListUrl[3] = "index";}
+    if (arrListUrl[3] == "") arrListUrl[3] = "index";
+    var result = ViewBag.result;
+    var type = (User.Identity.IsAuthenticated) ? "success" : "error";
+}
 <!doctype html>
 <html class="no-js " lang="en">
 
@@ -44,78 +47,126 @@
 <body class="theme-blush">
 
     <!-- Page Loader -->
-    <partial name="_Loader.cshtml">
+    <partial name="_Loader.cshtml" />
 
-        <!-- Overlay For Sidebars -->
-        <div class="overlay"></div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
 
-        <!-- Main Search -->
-        <partial name="_MainSearch.cshtml">
+    <!-- Main Search -->
+    <partial name="_MainSearch.cshtml" />
 
-            <!-- Right Icon menu Sidebar -->
-            <partial name="_RightIcon.cshtml">
+    <!-- Right Icon menu Sidebar -->
+    <partial name="_RightIcon.cshtml" />
 
-                <!-- Left Sidebar -->
-                <partial name="_LeftSidebar.cshtml">
+    <!-- Left Sidebar -->
+    <partial name="_LeftSidebar.cshtml" />
 
-                    <!-- Right Sidebar -->
-                    <partial name="_RightSidebar.cshtml">
+    <!-- Right Sidebar -->
+    <partial name="_RightSidebar.cshtml" />
+    
 
-                        <section class="content">
-                            @RenderBody()
-                            <div id="notify-sound">
+    <section class="content">
+        @RenderBody()
+        <div id="notify-sound">
 
-                            </div>
-                        </section>
+        </div>
+    </section>
 
-                        <!-- Jquery Core Js -->
-                        <script src="/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
-                        <script src="/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+    <!-- Jquery Core Js -->
+    <script src="/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="/assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
 
 
-                        <script src="/assets/bundles/c3.bundle.js"></script>
+    <script src="/assets/bundles/c3.bundle.js"></script>
 
-                        <script src="/assets/bundles/mainscripts.bundle.js"></script>
-                        <script src="/assets/js/pages/index.js"></script>
-                        <!--Jquery-validate-->
-                        @*<script src="~/lib/jquery/jquery.js"></script>*@
-                        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
-                        <script src="~/lib/jquery-toast-plugin/jquery.toast.js"></script>
-                        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-                        <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
-                        @* Swal delete*@
-                        <script>
-                            $(document).ready(function () {
-                                $('.delete').click(async function (e) {
-                                    e.preventDefault();
-                                    var href = ($(this).attr('href') == undefined) ? $(this).attr('action') : $(this).attr('href');
-                                    const { value: success } = await Swal.fire({
-                                        title: 'You want delete it?',
-                                        text: "Data will be completely lost!",
-                                        type: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#d33',
-                                        cancelButtonColor: '#3085d6',
-                                        cancelButtonText: 'Trở về',
-                                    })
+    <script src="/assets/bundles/mainscripts.bundle.js"></script>
+    <script src="/assets/js/pages/index.js"></script>
+    <!--Jquery-validate-->
+    @*<script src="~/lib/jquery/jquery.js"></script>*@
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-toast-plugin/jquery.toast.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://js.pusher.com/4.2/pusher.min.js"></script>
+    @* Swal delete*@
+    <script>
+        $(document).ready(function () {
+            $('.delete').click(async function (e) {
+                e.preventDefault();
+                var href = ($(this).attr('href') == undefined) ? $(this).attr('action') : $(this).attr('href');
+                const { value: success } = await Swal.fire({
+                    title: 'You want delete it?',
+                    text: "Data will be completely lost!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    cancelButtonText: 'Trở về',
+                })
 
-                                    if (success) {
-                                        window.location = href;
-                                    }
-                                });
-                            });
-                        </script>
-                        @*active menu*@
-                        <script>
+                if (success) {
+                    window.location = href;
+                }
+            });
+        });
+    </script>
+    @*active menu*@
+    <script>
                             $(document).ready(function () {
                                 var className = ".menu-@arrListUrl[3]";
                                 @*var subClassName = ".sub-menu-@arrListUrl[4]";*@
                                 $(className).toggleClass("active open");
                                 //$(subClassName).toggleClass("active open");
                             });
-                        </script>
-                        @RenderSection("Scripts", required: false)
+    </script>
+    @{ if (result != null)
+        {
+            <script>
+                                        $(document).ready(function () {
+                                            var notifination = '@result';
+                                            const Toast = Swal.mixin({
+                                            toast: true,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    timer: 3000,
+
+                                            });
+                                            Toast.fire({
+                                            type: '@type',
+                                                    title: notifination,
+                                                    });
+                                         });
+            </script>
+        } }
+    <script type="text/javascript">
+        const pusher = new Pusher('dcba60eb11fd18857d17', {
+            cluster: 'ap1'
+        });
+        const channel = pusher.subscribe('feed');
+        channel.bind('new_feed', function (data) {
+            $("#notify-sound").append('<audio src="assets/sound/pristine.mp3" autoplay></audio>');
+            $.toast({
+                text: "<a href='/order/detail/" + data.Id + "'>#" + data.Id + "</a>",
+                heading: 'Have a new order',
+                icon: 'info',
+                showHideTransition: 'fade',
+                allowToastClose: true,
+                hideAfter: 8000,
+                stack: 5,
+                position: 'top-right',
+                textAlign: 'left',
+                loader: true,
+                loaderBg: '#9EC600',
+                beforeShow: function () { },
+                afterShown: function () { },
+                beforeHide: function () { },
+                afterHidden: function () { }
+            })
+            $('.order-table').prepend(`<tr></td>`);
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 
 

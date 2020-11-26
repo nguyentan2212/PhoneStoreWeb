@@ -15,8 +15,7 @@ namespace PhoneStoreWeb.Communication.Mapping
         {
             CreateMap<Product, ProductResponse>();
             CreateMap<Category, CategoryResponse>();
-            CreateMap<Order, OrderResponse>();
-            CreateMap<Blog, BlogResponse>();
+            CreateMap<Order, OrderResponse>();          
         }
     }
 }

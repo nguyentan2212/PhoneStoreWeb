@@ -18081,8 +18081,8 @@ section.content {
         content: "\f3ab"
     }
 
-    .big_icon.traffic::before {
-        content: "\f1e2"
+    .big_icon.revenue::before {
+        content: "\f198"
     }
 
     .big_icon.sales::before {

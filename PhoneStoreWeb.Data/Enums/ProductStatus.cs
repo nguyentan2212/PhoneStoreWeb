@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PhoneStoreWeb.Data.Enums
+﻿namespace PhoneStoreWeb.Data.Enums
 {
     public enum ProductStatus
     {
-        InOfStock,
+        InStock,
         OutOfStock,
         SoldOut
     }

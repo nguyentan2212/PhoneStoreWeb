@@ -10,19 +10,17 @@ namespace PhoneStoreWeb.Communication.Products
 {
     public class UpdateProductRequest
     {
-        public int Id { set; get; }
         [Required]
-        public string Name { set; get; }
-        public string Description { set; get; }              
-        [Required]
-        public int CategoryId { set; get; }
-        [Required]
-        public int Stock { set; get; }
-        [Required]
-        public decimal Price { set; get; }
-        [Required]
-        public decimal OriginalPrice { set; get; }
-        [Required]
-        public float Profitpercentage { get; set; }
+        public int Id { set; get; }        
+        public decimal Price { get; set; }
+        public int CategoryId { set; get; }        
+        public string Name { set; get; }      
+        public string Description { set; get; }       
+        public float Profitpercentage { get; set; }       
+        public string OS { get; set; }
+        public int RAM { get; set; }
+        public int Storage { get; set; }
+        public int BatteryCapacity { get; set; }
+        public bool HasQuickCharge { get; set; }
     }
 }

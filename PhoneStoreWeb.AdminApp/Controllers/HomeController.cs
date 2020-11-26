@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
-    //[Authorize]
-    
+    [Authorize]
     public class HomeController : Controller
-    {
-        private readonly ILogger<HomeController> _logger;
+    {       
         private readonly IProductService productService;
         private readonly IcategoryService categoryService;
 
@@ -22,11 +20,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             this.productService = productService;
             this.categoryService = categoryService;
             
-        }
-        [AllowAnonymous]
+        }        
         public async Task<IActionResult> Index()
         {
-            ViewBag.ImagePath = "/images/xs/avatar1.jpg";            
+            ViewBag.ImagePath = "/images/xs/avatar1.jpg";
+            ViewBag.result = "Have a nofification";
             var categories = await categoryService.GetAllCategories();
             var products = await productService.GetAllProducts();
             ViewData["categories"] = categories;

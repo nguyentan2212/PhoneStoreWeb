@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.Enums
 {
-    public enum ProductItemStatus
+    public enum AccountStatus
     {
-        Available,        
-        Sold
+        Active,
+        Locked
     }
 }

@@ -1,6 +1,7 @@
 ﻿using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Data.Repositories.Repository;
+using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.Repositories.ProductRepo
 {
@@ -10,6 +11,11 @@ namespace PhoneStoreWeb.Data.Repositories.ProductRepo
         {
 
         }
-        
+
+        public async Task AddOrUpdateImageAsync(int id, string path)
+        {
+            Product product = await GetAsync(id);
+            product.Image = path;
+        }       
     }
 }
