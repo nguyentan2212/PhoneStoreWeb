@@ -12,9 +12,9 @@ namespace PhoneStoreWeb.Data.Contexts
         {
             //Contacts
             modelBuilder.Entity<Contact>().HasData(
-                new Contact() { Id = 1, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" },
-                new Contact() { Id = 2, Name = "Phuong Quyen", Email = "hieuvo044@gmail.com", Message = "Very good" },
-                new Contact() { Id = 3, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" }
+                new Contact() { Id = 1, Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                new Contact() { Id = 2, Name = "Tan Nguyen", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                new Contact() { Id = 3, Name = "Nguyen Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" }
             );
                      
             //Discounts
@@ -67,18 +67,15 @@ namespace PhoneStoreWeb.Data.Contexts
                 Id = adminId,
                 UserName = "admin",
                 NormalizedUserName = "admin",
-                Email = "hieuvo044@gmail.com",
-                NormalizedEmail = "hieuvo044@gmail.com",
+                Email = "nguyentan2212@gmail.com",
+                NormalizedEmail = "nguyentan2212@gmail.com",
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "123"),
                 SecurityStamp = string.Empty,
                 Birthdate = new DateTime(2020, 01, 31),
-                RoleId = adminId
+                RoleId = roleId
             };
-            modelBuilder.Entity<AppUser>().HasData(user);           
-            //CartProducts
-            modelBuilder.Entity<CartItem>().HasData(
-                new CartItem() { Id = 1, ProductId = product.Id, Quantity = 2, CustomerId = user.Id});
+            modelBuilder.Entity<AppUser>().HasData(user);                   
         }
     }
 }

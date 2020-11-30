@@ -10,8 +10,8 @@ using PhoneStoreWeb.Data.Contexts;
 namespace PhoneStoreWeb.Data.Migrations
 {
     [DbContext(typeof(PhoneStoreDbContext))]
-    [Migration("20201126104952_InitialDB")]
-    partial class InitialDB
+    [Migration("20201130021809_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,7 +141,7 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "a4806186-82c0-4b4f-8c2b-46b3e61bef95",
+                            ConcurrencyStamp = "242f118b-ab65-4c47-b4a1-34d84d6d0318",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -149,7 +149,7 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dd"),
-                            ConcurrencyStamp = "afb1d9b1-dae5-44ca-94d8-9c0c1ef87fe0",
+                            ConcurrencyStamp = "492f1b9a-0645-4699-87df-4ef8ed8cb5ec",
                             Description = "Client role",
                             Name = "client",
                             NormalizedName = "client"
@@ -240,16 +240,16 @@ namespace PhoneStoreWeb.Data.Migrations
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
                             Birthdate = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "bf25fde2-7708-4076-8d05-74f73e228275",
+                            ConcurrencyStamp = "bb21a618-b599-4b9e-a48f-30f1d3f1cf11",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hieuvo044@gmail.com",
+                            Email = "nguyentan2212@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedEmail = "hieuvo044@gmail.com",
+                            NormalizedEmail = "nguyentan2212@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENqC3OVZGahQPVbpmsV9GQt6uG2H7ou6zAINQhf+G8fSgP8dBoqYBFQVmTwwekRZoQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDSXC8zQcvljEWh40YWV9E8sa9jTAhhWYl3Fp9I/iC3AlGso4/U3cECp4Fh4xYxXKA==",
                             PhoneNumberConfirmed = false,
-                            RoleId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
+                            RoleId = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
                             SecurityStamp = "",
                             Status = 0,
                             TwoFactorEnabled = false,
@@ -283,16 +283,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            ProductId = 1,
-                            Quantity = 2,
-                            TotalPrice = 0m
-                        });
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Category", b =>
@@ -350,23 +340,23 @@ namespace PhoneStoreWeb.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "hieuvo044@gmail.com",
+                            Email = "18520150@gm.uit.edu.vn",
                             Message = "Very good",
-                            Name = "Võ Trung Hiếu"
+                            Name = "Minh Tan"
                         },
                         new
                         {
                             Id = 2,
-                            Email = "hieuvo044@gmail.com",
+                            Email = "18520150@gm.uit.edu.vn",
                             Message = "Very good",
-                            Name = "Phuong Quyen"
+                            Name = "Tan Nguyen"
                         },
                         new
                         {
                             Id = 3,
-                            Email = "hieuvo044@gmail.com",
+                            Email = "18520150@gm.uit.edu.vn",
                             Message = "Very good",
-                            Name = "Võ Trung Hiếu"
+                            Name = "Nguyen Tan"
                         });
                 });
 

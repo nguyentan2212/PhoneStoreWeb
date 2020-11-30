@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PhoneStoreWeb.Data.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -358,9 +358,9 @@ namespace PhoneStoreWeb.Data.Migrations
                 columns: new[] { "Id", "Email", "Message", "Name" },
                 values: new object[,]
                 {
-                    { 1, "hieuvo044@gmail.com", "Very good", "Võ Trung Hiếu" },
-                    { 2, "hieuvo044@gmail.com", "Very good", "Phuong Quyen" },
-                    { 3, "hieuvo044@gmail.com", "Very good", "Võ Trung Hiếu" }
+                    { 1, "18520150@gm.uit.edu.vn", "Very good", "Minh Tan" },
+                    { 2, "18520150@gm.uit.edu.vn", "Very good", "Tan Nguyen" },
+                    { 3, "18520150@gm.uit.edu.vn", "Very good", "Nguyen Tan" }
                 });
 
             migrationBuilder.InsertData(
@@ -377,24 +377,19 @@ namespace PhoneStoreWeb.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "a4806186-82c0-4b4f-8c2b-46b3e61bef95", "Administrator role", "admin", "admin" },
-                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dd"), "afb1d9b1-dae5-44ca-94d8-9c0c1ef87fe0", "Client role", "client", "client" }
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "242f118b-ab65-4c47-b4a1-34d84d6d0318", "Administrator role", "admin", "admin" },
+                    { new Guid("8d04dce2-969a-435d-bba4-df3f325983dd"), "492f1b9a-0645-4699-87df-4ef8ed8cb5ec", "Client role", "client", "client" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "AppRoleId", "Birthdate", "ConcurrencyStamp", "CreatedDate", "Email", "EmailConfirmed", "FullName", "ImagePath", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleId", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, null, new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "bf25fde2-7708-4076-8d05-74f73e228275", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "hieuvo044@gmail.com", true, null, null, false, null, "hieuvo044@gmail.com", "admin", "AQAAAAEAACcQAAAAENqC3OVZGahQPVbpmsV9GQt6uG2H7ou6zAINQhf+G8fSgP8dBoqYBFQVmTwwekRZoQ==", null, false, new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), "", 0, false, "admin" });
+                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, null, null, new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "bb21a618-b599-4b9e-a48f-30f1d3f1cf11", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyentan2212@gmail.com", true, null, null, false, null, "nguyentan2212@gmail.com", "admin", "AQAAAAEAACcQAAAAEDSXC8zQcvljEWh40YWV9E8sa9jTAhhWYl3Fp9I/iC3AlGso4/U3cECp4Fh4xYxXKA==", null, false, new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "", 0, false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "BatteryCapacity", "CategoryId", "CreatedDate", "Description", "Image", "Name", "OS", "Price", "RAM", "Status", "Stock", "Storage" },
                 values: new object[] { 1, 0, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, "Iphone 12", null, 20000m, 0, 0, 10, 0 });
-
-            migrationBuilder.InsertData(
-                table: "CartItems",
-                columns: new[] { "Id", "CustomerId", "ProductId", "Quantity", "TotalPrice" },
-                values: new object[] { 1, new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 1, 2, 0m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_CustomerId",
