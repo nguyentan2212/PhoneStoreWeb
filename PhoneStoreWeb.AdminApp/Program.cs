@@ -50,8 +50,8 @@ namespace PhoneStoreWeb.AdminApp
                         Id = adminId,
                         UserName = "admin",
                         NormalizedUserName = "admin",
-                        Email = "hieuvo044@gmail.com",
-                        NormalizedEmail = "hieuvo044@gmail.com",
+                        Email = "nguyentan2212@gmail.com",
+                        NormalizedEmail = "nguyentan2212@gmail.com",
                         EmailConfirmed = true,
                         SecurityStamp = string.Empty,
                         Birthdate = new DateTime(2020, 01, 31),
@@ -60,9 +60,9 @@ namespace PhoneStoreWeb.AdminApp
                     result = userMgr.CreateAsync(user, "123").GetAwaiter().GetResult();
 
                     ctx.Contacts.AddRange(new List<Contact>() {
-                        new Contact() { Id = 1, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" },
-                        new Contact() { Id = 2, Name = "Phuong Quyen", Email = "hieuvo044@gmail.com", Message = "Very good" },
-                        new Contact() { Id = 3, Name = "Võ Trung Hiếu", Email = "hieuvo044@gmail.com", Message = "Very good" }
+                        new Contact() { Id = 1, Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                        new Contact() { Id = 2, Name = "Tan Nguyen", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                        new Contact() { Id = 3, Name = "Nguyen Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" }
                     });
                     ctx.Discounts.AddRange(new List<Discount>() {
                         new Discount() { Id = 1, Code = "123", DiscountAmount = 10000 },
