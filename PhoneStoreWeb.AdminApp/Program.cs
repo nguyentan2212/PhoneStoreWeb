@@ -42,9 +42,8 @@ namespace PhoneStoreWeb.AdminApp
                         NormalizedName = "client",
                         Description = "Client role"
                     };
-                    var result = roleMgr.CreateAsync(admin).GetAwaiter().GetResult();
-                    result = roleMgr.CreateAsync(client).GetAwaiter().GetResult();
-
+                    roleMgr.CreateAsync(admin).GetAwaiter().GetResult();
+                    roleMgr.CreateAsync(client).GetAwaiter().GetResult();
                     AppUser user = new AppUser
                     {
                         Id = adminId,
@@ -57,7 +56,7 @@ namespace PhoneStoreWeb.AdminApp
                         Birthdate = new DateTime(2020, 01, 31),
                         RoleId = adminRoleId
                     };
-                    result = userMgr.CreateAsync(user, "123").GetAwaiter().GetResult();
+                    userMgr.CreateAsync(user, "12345").GetAwaiter().GetResult();
 
                     ctx.Contacts.AddRange(new List<Contact>() {
                         new Contact() { Id = 1, Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
@@ -82,7 +81,6 @@ namespace PhoneStoreWeb.AdminApp
                         Stock = 0,
                         CategoryId = category.Id,
                         Name = "Iphone 12",
-
                     };
                     ctx.Products.Add(product);
                     ctx.SaveChanges();

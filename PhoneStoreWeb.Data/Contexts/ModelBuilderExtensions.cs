@@ -70,7 +70,7 @@ namespace PhoneStoreWeb.Data.Contexts
                 Email = "nguyentan2212@gmail.com",
                 NormalizedEmail = "nguyentan2212@gmail.com",
                 EmailConfirmed = true,
-                PasswordHash = hasher.HashPassword(null, "123"),
+                PasswordHash = hasher.HashPassword(null, "12345"),
                 SecurityStamp = string.Empty,
                 Birthdate = new DateTime(2020, 01, 31),
                 RoleId = roleId

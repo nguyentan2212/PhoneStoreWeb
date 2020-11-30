@@ -31,7 +31,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         
         [HttpPost]
         public async Task<IActionResult> Login([FromForm] LoginRequest request, [FromQuery] string returnUrl)
-        {
+        {           
             var result = await signInManager.PasswordSignInAsync(request.UserName, request.Password, request.RememberMe, false);
             if (result != Microsoft.AspNetCore.Identity.SignInResult.Success)
             {
