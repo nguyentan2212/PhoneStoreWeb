@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using PhoneStoreWeb.Data.Enums;
 namespace PhoneStoreWeb.Communication.ResponseResult
 {
     public class UserResponse
@@ -16,7 +12,7 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public string Address { set; get; }
         public string UserName { set; get; }
         public string Role { get; set; }
-        public Guid RoleId { get; set; }
+        public AccountStatus Status { get; set; }
         public Guid Id { set; get; }
     }
 }
