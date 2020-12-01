@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneStoreWeb.Data.Models
 {
@@ -9,6 +10,7 @@ namespace PhoneStoreWeb.Data.Models
     {
         [Required]
         public string Description { set; get; }
-        public List<AppUser> Users { set; get; }
+
+        public virtual List<AppUser> AppUsers { set; get; }
     }
 }

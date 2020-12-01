@@ -20,21 +20,32 @@ namespace PhoneStoreWeb.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(AppConstant.DbConnectionString);   
-            optionsBuilder.UseInMemoryDatabase("data-context");
+            optionsBuilder.UseSqlServer(AppConstant.DbConnectionString);   
+            //optionsBuilder.UseInMemoryDatabase("data-context");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {           
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<WarrantyCard>()
+                .HasOne(p => p.Staff)
+                .WithMany(x => x.StaffWarrantyCards)
+                .HasForeignKey(t => t.StaffID) 
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
-            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins").HasKey(x => x.UserId);
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles").HasNoKey();
-            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims");
-            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens").HasKey(x => x.UserId);
+            modelBuilder.Entity<WarrantyCard>()
+                .HasOne(p => p.Customer)
+                .WithMany(x => x.CustomerWarrantyCards)
+                .HasForeignKey(t => t.CustomerID)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
+
             modelBuilder.Seed();
-        }
-
+        }   
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Category> Categories { get; set; }             
         public DbSet<Contact> Contacts { get; set; }       

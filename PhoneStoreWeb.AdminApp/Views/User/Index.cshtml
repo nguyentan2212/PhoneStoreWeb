@@ -1,0 +1,127 @@
+﻿@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Communication.Authentication;
+@model RegisterRequest;
+@{
+    List<UserResponse> users = ViewData["users"] as List<UserResponse>;      
+}
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css"/>
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item active">User</li>
+                </ul>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Users</strong> </h2>
+                        <div class="float-right">
+                            <form asp-action="Create" asp-controller="User" method="get">
+                                <button type="submit" style="margin-top: -50px;"
+                                        class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
+                                    <i class="fa fa-cog mr-1"></i>
+                                    Add
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>FullName</th>
+                                        <th>UserName</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ if (users != null)
+                                        {
+                                            int i = 0;
+                                            foreach (var user in users)
+                                            {
+                                                var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
+                                                i++;
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@user.FullName</td>
+                                                    <td>@user.UserName</td>
+                                                    <td>@user.PhoneNumber</td>
+                                                    <td>
+                                                        <span class="email"><a href="javascript:void(0);" title="">@user.Email</a></span>
+                                                    </td>
+                                                    <td>@user.Role</td>
+                                                    <td class="text-center">
+                                                        <img src="@imagePath" asp-append-version="true" width="48" height="48" alt="user img">
+                                                    </td>
+                                                    <td width="15%" class="footable-last-visible" style="display: table-cell;">
+                                                        <div class="btn btn-primary btn-sm">
+                                                            <a class="text-white" asp-controller="user" asp-action="create" asp-route-id=@user.Id>
+                                                                <i class="zmdi zmdi-edit"></i>
+                                                                Edit
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn btn-danger btn-sm">
+                                                            <a class="text-white" asp-controller="user" asp-action="delete" asp-route-id=@user.Id>
+                                                                <i class="zmdi zmdi-delete"></i>
+                                                                Delete
+                                                            </a>
+                                                        </div>
+                                                        
+                                                    </td>
+                                                </tr>
+
+                                            }
+
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+    <script src="/assets/js/pages/forms/dropify.js"></script>
+}

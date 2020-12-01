@@ -9,9 +9,7 @@ namespace PhoneStoreWeb.Data.Models
 {
     public class Order
     {
-        public int Id { set; get; }        
-        public AppUser AppUser { set; get; }        
-        public Discount Discount { set; get; }
+        public int Id { set; get; }               
         [Required]
         public string ShipName { set; get; }
         [Required]
@@ -32,6 +30,9 @@ namespace PhoneStoreWeb.Data.Models
         [Required]
         [Column(TypeName = "Date")]
         public DateTime CreatedDate { set; get; }
-        public List<ProductItem> Items { set; get; }
+
+        public virtual AppUser AppUser { set; get; }
+        public virtual Discount Discount { set; get; }
+        public virtual List<ProductItem> ProductItems { set; get; }
     }
 }

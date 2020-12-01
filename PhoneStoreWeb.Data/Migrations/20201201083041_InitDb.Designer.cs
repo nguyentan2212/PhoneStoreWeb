@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneStoreWeb.Data.Contexts;
 
 namespace PhoneStoreWeb.Data.Migrations
 {
     [DbContext(typeof(PhoneStoreDbContext))]
-    partial class PhoneStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201201083041_InitDb")]
+    partial class InitDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -588,9 +590,11 @@ namespace PhoneStoreWeb.Data.Migrations
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.AppUser", b =>
                 {
-                    b.HasOne("PhoneStoreWeb.Data.Models.AppRole", null)
+                    b.HasOne("PhoneStoreWeb.Data.Models.AppRole", "AppRole")
                         .WithMany("AppUsers")
                         .HasForeignKey("AppRoleId");
+
+                    b.Navigation("AppRole");
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.CartItem", b =>

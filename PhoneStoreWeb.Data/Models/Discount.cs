@@ -8,8 +8,7 @@ namespace PhoneStoreWeb.Data.Models
 {
     public class Discount
     {
-        public int Id { set; get; }
-        public AppUser Staff { get; set; }
+        public int Id { set; get; }        
         [Required]
         public string Code { set; get; }
         public int DiscountPercent { set; get; }
@@ -22,6 +21,8 @@ namespace PhoneStoreWeb.Data.Models
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime ToDate { set; get; }
-        public List<Order> Orders { set; get; }
+
+        public virtual AppUser AppUser { get; set; }
+        public virtual List<Order> Orders { set; get; }
     }
 }

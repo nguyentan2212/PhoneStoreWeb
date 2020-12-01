@@ -24,67 +24,66 @@ namespace PhoneStoreWeb.AdminApp
                 var ctx = scope.ServiceProvider.GetRequiredService<PhoneStoreDbContext>();
                 var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
                 var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
-                var adminRoleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
-                var adminId = new Guid("69BD714F-9576-45BA-B5B7-F00649BE00DE");
                 if (!ctx.Roles.Any())
+                {                
+                    roleMgr.CreateAsync(new AppRole() { Name = "admin", Description = "admin" }).GetAwaiter().GetResult();
+                    roleMgr.CreateAsync(new AppRole() { Name = "client", Description = "client" }).GetAwaiter().GetResult();
+                    if (!ctx.Users.Any())
+                    {
+                        AppUser user = new AppUser
+                        {
+                            UserName = "admin",
+                            NormalizedUserName = "admin",
+                            Email = "nguyentan2212@gmail.com",
+                            NormalizedEmail = "nguyentan2212@gmail.com",
+                            EmailConfirmed = true,
+                            SecurityStamp = string.Empty,
+                            BirthDate = new DateTime(2020, 01, 31),
+                            PhoneNumber = "09122334455",
+                            FullName = "Nguyen Minh Tan",                            
+                        };
+                        userMgr.CreateAsync(user, "12345").GetAwaiter().GetResult();
+                        userMgr.AddToRoleAsync(user, "admin").GetAwaiter().GetResult();
+                    }
+                }               
+                if (!ctx.Contacts.Any())
                 {
-                    AppRole admin = new AppRole
-                    {
-                        Id = adminRoleId,
-                        Name = "admin",
-                        NormalizedName = "admin",
-                        Description = "Administrator role"
-                    };
-                    AppRole client = new AppRole
-                    {
-                        Id = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DD"),
-                        Name = "client",
-                        NormalizedName = "client",
-                        Description = "Client role"
-                    };
-                    roleMgr.CreateAsync(admin).GetAwaiter().GetResult();
-                    roleMgr.CreateAsync(client).GetAwaiter().GetResult();
-                    AppUser user = new AppUser
-                    {
-                        Id = adminId,
-                        UserName = "admin",
-                        NormalizedUserName = "admin",
-                        Email = "nguyentan2212@gmail.com",
-                        NormalizedEmail = "nguyentan2212@gmail.com",
-                        EmailConfirmed = true,
-                        SecurityStamp = string.Empty,
-                        Birthdate = new DateTime(2020, 01, 31),
-                        RoleId = adminRoleId
-                    };
-                    userMgr.CreateAsync(user, "12345").GetAwaiter().GetResult();
-
                     ctx.Contacts.AddRange(new List<Contact>() {
-                        new Contact() { Id = 1, Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
-                        new Contact() { Id = 2, Name = "Tan Nguyen", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
-                        new Contact() { Id = 3, Name = "Nguyen Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" }
+                        new Contact() { Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                        new Contact() { Name = "Tan Nguyen", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
+                        new Contact() { Name = "Nguyen Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" }
                     });
+                    ctx.SaveChanges();
+                }
+                if (!ctx.Discounts.Any())
+                {
                     ctx.Discounts.AddRange(new List<Discount>() {
-                        new Discount() { Id = 1, Code = "123", DiscountAmount = 10000 },
-                        new Discount() { Id = 2, Code = "1234", DiscountAmount = 20000 }
+                        new Discount() { Code = "123", DiscountAmount = 10000 },
+                        new Discount() { Code = "1234", DiscountAmount = 20000 }
                     });
+                    ctx.SaveChanges();
+                }
+                if (!ctx.Categories.Any())
+                {
                     Category category = new Category()
-                    {
-                        Id = 1,
+                    {  
                         Name = "Iphone",
                         Description = "Dien thoai Iphone"
                     };
                     ctx.Categories.Add(category);
-                    Product product = new Product()
+                    if (!ctx.Products.Any())
                     {
-                        Id = 1,
-                        Price = 20000,
-                        Stock = 0,
-                        CategoryId = category.Id,
-                        Name = "Iphone 12",
-                    };
-                    ctx.Products.Add(product);
+                        Product product = new Product()
+                        {                          
+                            Price = 20000,
+                            Stock = 0,
+                            Category = category,
+                            Name = "Iphone 12",
+                        };
+                        ctx.Products.Add(product);                        
+                    }
                     ctx.SaveChanges();
-                }            
+                }                
             }
             catch (Exception e)
             {

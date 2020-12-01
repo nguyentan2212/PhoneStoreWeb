@@ -21,9 +21,10 @@ namespace PhoneStoreWeb.Data.Models
         [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
-        public decimal SoldPrice { get; set; }   
-        public AppUser Staff { get; set; }
-        public Product Product { get; set; }
+        public decimal SoldPrice { get; set; }
         public ProductItemStatus Status { get; set; }
+
+        public virtual AppUser AppUsers { get; set; }
+        public virtual Product Product { get; set; }       
     }
 }

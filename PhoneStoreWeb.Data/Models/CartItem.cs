@@ -6,15 +6,14 @@ namespace PhoneStoreWeb.Data.Models
 {
     public class CartItem
     {       
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public Product Product { set; get; }    
-        public Guid CustomerId { get; set; }
-        public AppUser Customer { get; set; }
+        public int Id { get; set; }       
         public int Quantity { set; get; }
         [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
         public decimal TotalPrice { get; set; }
+        
+        public virtual Product Product { set; get; }       
+        public virtual AppUser AppUser { get; set; }
     }
 }

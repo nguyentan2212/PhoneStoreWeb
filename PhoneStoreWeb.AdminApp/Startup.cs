@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Service.FileService;
 using PhoneStoreWeb.Service.ProductService;
+using PhoneStoreWeb.Service.UserService;
 
 namespace PhoneStoreWeb.AdminApp
 {
@@ -30,9 +32,9 @@ namespace PhoneStoreWeb.AdminApp
         {
             services.AddDbContext<PhoneStoreDbContext>(options =>
             {
-                //options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
+                options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
                 //options.UseSqlite(Configuration.GetConnectionString("PhoneStoreContextSQLite"));  
-                options.UseInMemoryDatabase("data-context");
+                //options.UseInMemoryDatabase("data-context");
             });
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<PhoneStoreDbContext>();
             // configure identity options
@@ -51,12 +53,12 @@ namespace PhoneStoreWeb.AdminApp
                    options.LoginPath = "Account/Login/";
                    options.AccessDeniedPath = "Account/User/Forbidden/";
                });
-
+            services.AddAutoMapper(typeof(ModelToResponse));
+            services.AddAutoMapper(typeof(RequestToModel));
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IcategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
-            services.AddAutoMapper(typeof(ModelToResponse));
-            services.AddAutoMapper(typeof(RequestToModel));
+            services.AddScoped<IUserService, UserService>();         
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
         }
 

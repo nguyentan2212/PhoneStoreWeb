@@ -14,8 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\20201130021809_Init.cs" />
-    <Compile Include="Migrations\20201130021809_Init.Designer.cs" />
+    <Compile Include="Migrations\20201201083041_InitDb.cs" />
+    <Compile Include="Migrations\20201201083041_InitDb.Designer.cs" />
+    <Compile Include="Migrations\20201201085132_UpdateDb.cs" />
+    <Compile Include="Migrations\20201201085132_UpdateDb.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

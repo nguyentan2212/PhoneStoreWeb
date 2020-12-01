@@ -12,6 +12,7 @@ namespace PhoneStoreWeb.Data.Models
         public string Name { get; set; }
         public string Description { get; set; }                   
         public string ImagePath { get; set; }
-        public List<Product> Products { set; get; }               
+
+        public virtual List<Product> Products { set; get; }               
     }
 }

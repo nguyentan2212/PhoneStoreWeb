@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
 using System;
@@ -15,7 +16,9 @@ namespace PhoneStoreWeb.Communication.Mapping
         {
             CreateMap<Product, ProductResponse>();
             CreateMap<Category, CategoryResponse>();
-            CreateMap<Order, OrderResponse>();          
+            CreateMap<Order, OrderResponse>();
+            CreateMap<AppUser, UserResponse>();
+            CreateMap<AppRole, RoleResponse>();
         }
     }
 }

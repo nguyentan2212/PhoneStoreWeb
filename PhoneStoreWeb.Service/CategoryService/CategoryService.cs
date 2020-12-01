@@ -2,10 +2,8 @@
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Data.UnitOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Service.CategoryService

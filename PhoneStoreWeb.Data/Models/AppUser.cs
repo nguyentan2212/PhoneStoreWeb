@@ -7,25 +7,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneStoreWeb.Data.Models
 {
-    public class AppUser :IdentityUser<Guid>
+    public class AppUser : IdentityUser<Guid>
     {
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
-        public DateTime Birthdate { set; get; }
+        public DateTime BirthDate { set; get; }       
         public string FullName { set; get; }        
         public string Address { set; get; }
-        public string ImagePath { get; set; }  
-        public Guid RoleId { get; set; }
-        public AppRole AppRole { set; get; }      
-        public List<Order> Orders { set; get; }
-        public List<WarrantyCard> WarrantyCards { get; set; }
-        public List<CartItem> Carts { set; get; }
+        public string ImagePath { get; set; }          
         [Required]
         public AccountStatus Status { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime CreatedDate { set; get; }
+
+        public virtual List<Order> Orders { set; get; }
+        public virtual List<WarrantyCard> StaffWarrantyCards { get; set; }
+        public virtual List<WarrantyCard> CustomerWarrantyCards { get; set; }
+        public virtual List<CartItem> CartItems { set; get; }
     }
 }

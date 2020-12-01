@@ -7,10 +7,7 @@ namespace PhoneStoreWeb.Data.Models
 {
     public class WarrantyCard
     {
-        public int Id { get; set; }
-        public Guid StaffID { get; set; }
-        public Guid CustomerID { get; set; }
-        public ProductItem Item { get; set; }
+        public int Id { get; set; }        
         [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
@@ -25,5 +22,12 @@ namespace PhoneStoreWeb.Data.Models
         [Column(TypeName = "Date")]
         public DateTime DeliveriedDate { get; set; }
         public WarrentyCardStatus Status { get; set; }
+
+        public Guid StaffID { get; set; }
+        public Guid CustomerID { get; set; }
+
+        public virtual AppUser Staff { get; set; }
+        public virtual AppUser Customer { get; set; }
+        public virtual ProductItem ProductItems { get; set; }
     }
 }

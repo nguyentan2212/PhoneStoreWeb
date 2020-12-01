@@ -52,5 +52,4 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             return RedirectToAction("Login");
         }        
     }
-
 }
