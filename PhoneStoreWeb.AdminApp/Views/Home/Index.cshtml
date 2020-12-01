@@ -1,7 +1,8 @@
 ﻿@using PhoneStoreWeb.Communication.ResponseResult;
 
 @{
-    var products = (List<ProductResponse>)ViewData["products"];}
+    var products = (List<ProductResponse>)ViewData["products"];
+    }
     <div class="body_scroll">
         <div class="block-header">
             <div class="row">
@@ -145,22 +146,7 @@
         </div>
     </div>
     </div>
-    @section Scripts{ 
-        if (User.Identity.IsAuthenticated){
-            <script>
-                $(document).ready(function () {
-                    var message = '@User.Identity.Name';
-                    Swal.fire({
-                        type: 'success',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        width: '500px'
-                    })
-
-                });
-            </script>
-        }
+    @section Scripts{        
         <script>
             $(document).ready(function () {
                 var values = ['Total', 110, 102, 130, 114, 215, 168, 117, 181, 192, 220, 121, 222];

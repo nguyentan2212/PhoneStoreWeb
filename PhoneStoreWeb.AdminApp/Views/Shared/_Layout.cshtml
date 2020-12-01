@@ -2,8 +2,7 @@
 @{ var url = @Context.Request.GetDisplayUrl();
     string[] arrListUrl = url.Split('/');
     if (arrListUrl[3] == "") arrListUrl[3] = "index";
-    var result = ViewBag.result;
-    var type = (User.Identity.IsAuthenticated) ? "success" : "error";
+    string error = TempData["result"] as string;
 }
 <!doctype html>
 <html class="no-js " lang="en">
@@ -63,7 +62,7 @@
 
     <!-- Right Sidebar -->
     <partial name="_RightSidebar.cshtml" />
-    
+
 
     <section class="content">
         @RenderBody()
@@ -103,41 +102,35 @@
                     cancelButtonColor: '#3085d6',
                     cancelButtonText: 'Trở về',
                 })
-
                 if (success) {
                     window.location = href;
                 }
             });
         });
     </script>
+    @*error message*@
+    @if (error != null)
+    {
+        <script>
+            $(document).ready(function () {
+                var message = '@error';
+                    Swal.fire({
+                        type: 'error',
+                        title: message,
+                        showConfirmButton: false,
+                        timer: 1500,
+                        width: '500px'
+                    })
+                });
+        </script>
+    }
     @*active menu*@
     <script>
-                            $(document).ready(function () {
-                                var className = ".menu-@arrListUrl[3]";
-                                @*var subClassName = ".sub-menu-@arrListUrl[4]";*@
-                                $(className).toggleClass("active open");
-                                //$(subClassName).toggleClass("active open");
-                            });
+        $(document).ready(function () {
+            var className = ".menu-@arrListUrl[3]";
+            $(className).toggleClass("active open");
+        });
     </script>
-    @{ if (result != null)
-        {
-            <script>
-                                        $(document).ready(function () {
-                                            var notifination = '@result';
-                                            const Toast = Swal.mixin({
-                                            toast: true,
-                                                    position: 'top-end',
-                                                    showConfirmButton: false,
-                                                    timer: 3000,
-
-                                            });
-                                            Toast.fire({
-                                            type: '@type',
-                                                    title: notifination,
-                                                    });
-                                         });
-            </script>
-        } }
     <script type="text/javascript">
         const pusher = new Pusher('dcba60eb11fd18857d17', {
             cluster: 'ap1'

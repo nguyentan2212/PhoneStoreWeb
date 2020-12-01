@@ -22,9 +22,8 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var users = await userService.GetAllUsersAsync();           
-            ViewData["users"] = users;    
-            return View();
+            var users = await userService.GetAllUsersAsync();                         
+            return View(users);
         }       
         [HttpGet]
         public IActionResult Create()
@@ -46,6 +45,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
                 return View();
             }
             return BadRequest();
+        }
+        [HttpGet]
+        public async Task<IActionResult> ChangeStatus(string id)
+        {
+            string result = await userService.ChangeStatusAsync(id);
+            result = "error";
+            TempData["result"] = result;
+            return RedirectToAction("Index");
         }
     }
 }

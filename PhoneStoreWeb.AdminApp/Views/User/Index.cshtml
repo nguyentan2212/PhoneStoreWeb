@@ -1,13 +1,15 @@
 ﻿@using PhoneStoreWeb.Communication.ResponseResult;
 @using PhoneStoreWeb.Communication.Authentication;
-@model RegisterRequest;
-@{
-    List<UserResponse> users = ViewData["users"] as List<UserResponse>;      
+@using PhoneStoreWeb.Communication.Extension;
+@using PhoneStoreWeb.Data.Enums;
+@model List<UserResponse>;
+@{   
+    string result = ViewData["result"] as string;
 }
 
 @section Header{
-    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css"/>
-    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css"/>
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css" />
     <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
 }
 <div class="body_scroll">
@@ -30,7 +32,6 @@
         </div>
     </div>
     <div class="container-fluid">
-        <!-- Basic Examples -->
         <div class="row clearfix">
             <div class="col-lg-12">
                 <div class="card">
@@ -57,15 +58,16 @@
                                         <th>Phone</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th>Status</th>
                                         <th>Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @{ if (users != null)
+                                    @{ if (Model != null)
                                         {
                                             int i = 0;
-                                            foreach (var user in users)
+                                            foreach (var user in Model)
                                             {
                                                 var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
                                                 i++;
@@ -78,31 +80,43 @@
                                                         <span class="email"><a href="javascript:void(0);" title="">@user.Email</a></span>
                                                     </td>
                                                     <td>@user.Role</td>
+                                                    <td>@user.Status.ToDescriptionString()</td>
                                                     <td class="text-center">
                                                         <img src="@imagePath" asp-append-version="true" width="48" height="48" alt="user img">
                                                     </td>
-                                                    <td width="15%" class="footable-last-visible" style="display: table-cell;">
-                                                        <div class="btn btn-primary btn-sm">
-                                                            <a class="text-white" asp-controller="user" asp-action="create" asp-route-id=@user.Id>
-                                                                <i class="zmdi zmdi-edit"></i>
-                                                                Edit
-                                                            </a>
+                                                    <td width="15%" class="footable-last-visible text-center" style="display: table-cell;">
+                                                        <div>
+                                                            @if (user.Status == AccountStatus.Locked)
+                                                            {
+                                                                <div class="btn btn-primary btn-sm">
+                                                                    <a class="text-white"
+                                                                       asp-action="changeStatus"
+                                                                       asp-controller="user"
+                                                                       asp-route-id="@user.Id">
+                                                                        <i class="zmdi zmdi-edit"></i>
+                                                                        Kích hoạt
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="btn btn-danger btn-sm">
+                                                                    <a class="text-white"
+                                                                       asp-action="changeStatus"
+                                                                       asp-controller="user"
+                                                                       asp-route-id="@user.Id">
+                                                                        <i class="zmdi zmdi-delete"></i>
+                                                                        Khóa
+                                                                    </a>
+                                                                </div>
+                                                            }
                                                         </div>
-                                                        <div class="btn btn-danger btn-sm">
-                                                            <a class="text-white" asp-controller="user" asp-action="delete" asp-route-id=@user.Id>
-                                                                <i class="zmdi zmdi-delete"></i>
-                                                                Delete
-                                                            </a>
-                                                        </div>
-                                                        
+
                                                     </td>
                                                 </tr>
-
                                             }
-
                                         }
                                     }
-
                                 </tbody>
                             </table>
                         </div>

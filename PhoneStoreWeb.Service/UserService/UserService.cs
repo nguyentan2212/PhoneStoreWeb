@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
+using PhoneStoreWeb.Data.Enums;
 using PhoneStoreWeb.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,29 @@ namespace PhoneStoreWeb.Service.UserService
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+        }
+
+        public async Task<string> ChangeStatusAsync(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+                return "User not found";
+            }
+            if (user.Status == AccountStatus.Active)
+            {
+                user.Status = AccountStatus.Locked;
+            }
+            else
+            {
+                user.Status = AccountStatus.Active;
+            }
+            var result = await userManager.UpdateAsync(user);
+            if (result != IdentityResult.Success)
+            {
+                return GetErrors(result).FirstOrDefault();
+            }
+            return null;
         }
 
         public async Task<string> CreateUserAsync(RegisterRequest request)
