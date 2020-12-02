@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PhoneStoreWeb.Communication.Authentication;
+using PhoneStoreWeb.Communication.Users;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
 namespace PhoneStoreWeb.Communication.Mapping

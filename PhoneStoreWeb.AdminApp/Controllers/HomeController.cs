@@ -23,7 +23,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         }        
         public async Task<IActionResult> Index()
         {
-            ViewBag.ImagePath = "/images/xs/avatar1.jpg";
+            ViewBag.ImagePath = "/assets/images/xs/avatar1.jpg";
             ViewBag.result = "Have a nofification";
             var categories = await categoryService.GetAllCategories();
             var products = await productService.GetAllProducts();

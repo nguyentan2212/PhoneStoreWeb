@@ -1,5 +1,6 @@
 ﻿using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
+using PhoneStoreWeb.Communication.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace PhoneStoreWeb.Service.UserService
     {
         public Task<List<UserResponse>> GetAllUsersAsync();
         public Task<UserResponse> GetUserByIdAsync(string id);
+        public Task<UserResponse> GetUserByNameAsync(string name);
+        public Task<UserUpdateRequest> GetUpdateRequestAsync(string id);
         public Task<string> CreateUserAsync(RegisterRequest request);
+        public Task<string> UpdateUserAsync(UserUpdateRequest request);
         public List<RoleResponse> GetAllRoles();
         public Task<string> ChangeStatusAsync(string id);
     }

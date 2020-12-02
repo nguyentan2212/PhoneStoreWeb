@@ -13,11 +13,8 @@ namespace PhoneStoreWeb.Data.Models
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime BirthDate { set; get; }  
-        [Required]
         public string FullName { set; get; }    
-        [Required]
         public string Address { set; get; }
-        [Required]
         public string ImagePath { get; set; }          
         [Required]
         public AccountStatus Status { get; set; }

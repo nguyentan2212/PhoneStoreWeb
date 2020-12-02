@@ -18,6 +18,8 @@
     <Compile Include="Migrations\20201201083041_InitDb.Designer.cs" />
     <Compile Include="Migrations\20201201085132_UpdateDb.cs" />
     <Compile Include="Migrations\20201201085132_UpdateDb.Designer.cs" />
+    <Compile Include="Migrations\20201202053855_updataAppUser.cs" />
+    <Compile Include="Migrations\20201202053855_updataAppUser.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 
