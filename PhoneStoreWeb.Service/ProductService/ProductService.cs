@@ -28,7 +28,7 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {                  
-                    string imagePath = await SaveFile(request.ThumbnailImage);
+                    string imagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
                     await uow.Products.AddOrUpdateImageAsync(request.ProductId, imagePath);
                     await uow.SaveAsync();
                     return null;
@@ -49,7 +49,7 @@ namespace PhoneStoreWeb.Service.ProductService
                     var product = mapper.Map<CreateProductRequest, Product>(request);
                     product.CreatedDate = DateTime.Today;
                     product.Status = Data.Enums.ProductStatus.OutOfStock;
-                    product.Image = await SaveFile(request.ThumbnailImage);                   
+                    product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);                   
                     await uow.Products.AddAsync(product);
                     await uow.SaveAsync();
                     return null;
@@ -127,14 +127,6 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 return e.Message;
             }
-        }
-
-        private async Task<string> SaveFile(IFormFile file)
-        {
-            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            await fileService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return fileService.GetFileUrl(fileName);
-        }
+        }       
     }
 }
