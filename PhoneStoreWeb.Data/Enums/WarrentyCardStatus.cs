@@ -9,8 +9,6 @@ namespace PhoneStoreWeb.Data.Enums
     public enum WarrentyCardStatus
     {
         Recceived,
-        InProgress,
-        Done,
-        Deliveried
+        Done
     }
 }

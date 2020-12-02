@@ -20,6 +20,8 @@
     <Compile Include="Migrations\20201201085132_UpdateDb.Designer.cs" />
     <Compile Include="Migrations\20201202053855_updataAppUser.cs" />
     <Compile Include="Migrations\20201202053855_updataAppUser.Designer.cs" />
+    <Compile Include="Migrations\20201202065422_updataEnums.cs" />
+    <Compile Include="Migrations\20201202065422_updataEnums.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

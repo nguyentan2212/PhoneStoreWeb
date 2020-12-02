@@ -4,9 +4,6 @@
     {
         Unconfirm,
         Confirm,
-        Cancelled,
-        InProgress,
-        Shipping,
-        Delivered
+        Cancelled
     }
 }
