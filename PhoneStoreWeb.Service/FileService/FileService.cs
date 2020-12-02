@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace PhoneStoreWeb.Service.FileService
 {
@@ -41,6 +42,13 @@ namespace PhoneStoreWeb.Service.FileService
             {
                 await Task.Run(() => File.Delete(filePath));
             }
+        }
+        public async Task<string> UploadFileAsync(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await SaveFileAsync(file.OpenReadStream(), fileName);
+            return GetFileUrl(fileName);
         }
     }
 }
