@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Imports\" />
+    <Folder Include="Users\" />
   </ItemGroup>
 
 </Project>

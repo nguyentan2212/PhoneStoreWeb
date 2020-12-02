@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
 namespace PhoneStoreWeb.Communication.Mapping
@@ -12,6 +13,8 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<Order, OrderResponse>();
             CreateMap<AppUser, UserResponse>();              
             CreateMap<AppRole, RoleResponse>();
+
+            CreateMap<UserResponse, UserUpdateRequest>();                
         }
     }
 }

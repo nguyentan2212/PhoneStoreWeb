@@ -23,8 +23,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> Index()
-        {
-            ViewBag.ImagePath = "/images/xs/avatar1.jpg";
+        {            
             var products = await productService.GetAllProducts();
             return View(products);
         }

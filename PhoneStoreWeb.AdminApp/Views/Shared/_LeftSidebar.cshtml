@@ -1,6 +1,7 @@
 ﻿@using PhoneStoreWeb.Communication.ResponseResult
 @{
     var categories = (List<CategoryResponse>)ViewData["categories"];
+    var image = TempData["image"] as string;
 }
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
@@ -11,10 +12,9 @@
         <ul class="list" id="list-menu">
             <li>
                 <div class="user-info">
-                    <a class="image" href="javascript:void(0)"><img src="~/assets/@ViewBag.ImagePath" alt="User"></a>
+                    <a class="image" href="javascript:void(0)"><img src="@image" alt="User"></a>
                     <div class="detail">
-                        <h4>@User.Identity.Name</h4>
-                        <small>@ViewBag.Role</small>
+                        <h4>@User.Identity.Name</h4>                        
                     </div>
                 </div>
             </li>

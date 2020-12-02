@@ -3,9 +3,6 @@
 @using PhoneStoreWeb.Communication.Extension;
 @using PhoneStoreWeb.Data.Enums;
 @model List<UserResponse>;
-@{   
-    string result = ViewData["result"] as string;
-}
 
 @section Header{
     <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
@@ -109,7 +106,7 @@
                                                                         Khóa
                                                                     </a>
                                                                 </div>
-                                                            }
+                                                            }  
                                                             <div class="btn btn-warning btn-sm">
                                                                 <a class="text-white"
                                                                    asp-action="update"
