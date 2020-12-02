@@ -84,6 +84,8 @@ namespace PhoneStoreWeb.Service.UserService
         {
             var user = await userManager.FindByIdAsync(id);
             var userResult = mapper.Map<AppUser, UserResponse>(user);
+            var roles = await userManager.GetRolesAsync(user);
+            userResult.Role = roles.FirstOrDefault();
             return userResult;
         }
     }
