@@ -1,10 +1,10 @@
-﻿@using PhoneStoreWeb.Communication.ResponseResult
-@model List<ProductResponse>
-    @using Microsoft.AspNetCore.Http.Extensions
-    @section Header{
+﻿@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Communication.Extension;
+@model List<ProductResponse>;
+@section Header{
     <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
-    }
+}
     <div class="body_scroll">
         <div class="block-header">
             <div class="row">
@@ -50,6 +50,7 @@
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Stock</th>
+                                            <th>Status</th>
                                             <th>Image</th>
                                             <th>Action</th>
                                         </tr>
@@ -66,13 +67,14 @@
                                                 <td>@product.Name</td>
                                                 <td>@product.Price</td>
                                                 <td>@product.Stock</td>
+                                                <td>@Html.DisplayFor(item => product.Status)</td>
                                                 <td class="text-center">
                                                     <img style="display: block; margin: auto;padding-bottom: 13px;" src="@product.ImagePath" width="48" asp-append-version="true" alt="product img">                                                    
-                                                </td>
+                                                </td>                                               
                                                 <td width="15%" class="footable-last-visible text-center"
                                                     style="display: table-cell;">
                                                     <div class="btn btn-primary btn-sm">
-                                                        <a class="text-white" asp-action="Edit" asp-controller="Product"
+                                                        <a class="text-white" asp-action="Update" asp-controller="Product"
                                                            asp-route-id="@product.Id">
                                                             <i class="zmdi zmdi-edit"></i>
                                                             Edit
