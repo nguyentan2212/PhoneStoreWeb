@@ -25,6 +25,7 @@ namespace PhoneStoreWeb.Data.Models
         public ProductItemStatus Status { get; set; }
         [Required]
         public int WarrantyPeriod { get; set; }
+        public virtual Order Order { get; set; }
         public virtual AppUser AppUsers { get; set; }
         public virtual Product Product { get; set; }       
     }
