@@ -129,7 +129,15 @@ namespace PhoneStoreWeb.Service.ProductService
                 {
                     var product = mapper.Map<UpdateProductRequest, Product>(request);
                     // check category
-                    product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);
+                    if (request.ThumbnailImage != null)
+                    {                       
+                        product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);
+                    }   
+                    else
+                    {
+                        var p = await GetById(request.Id);
+                        product.Image = p.ImagePath;
+                    }    
                     uow.Products.Update(product);
                     await uow.SaveAsync();
                     return null;
