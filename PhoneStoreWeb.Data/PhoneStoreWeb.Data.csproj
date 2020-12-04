@@ -24,6 +24,8 @@
     <Compile Include="Migrations\20201202065422_updataEnums.Designer.cs" />
     <Compile Include="Migrations\20201204054927_addWarrantyPeriod.cs" />
     <Compile Include="Migrations\20201204054927_addWarrantyPeriod.Designer.cs" />
+    <Compile Include="Migrations\20201204062522_addOrder2ProductItem.cs" />
+    <Compile Include="Migrations\20201204062522_addOrder2ProductItem.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 
