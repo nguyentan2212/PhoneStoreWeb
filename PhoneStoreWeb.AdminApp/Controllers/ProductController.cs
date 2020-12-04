@@ -54,5 +54,23 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             string result = await productService.Delete(id);
             return RedirectToAction("Index", "Product");
         }
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var result = await productService.GetUpdateDefault(id);
+            ViewData["categories"] = await categoryService.GetAllCategories();
+            return View(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update([FromForm] UpdateProductRequest request)
+        {
+            var result = await productService.Update(request);
+            if (result is null)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewData["result"] = result;
+            return View(request);
+        }
     }
 }

@@ -1,0 +1,193 @@
+﻿@using PhoneStoreWeb.Communication.Products;
+@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Data.Enums;
+@model UpdateProductRequest;
+@{
+    var categories = ViewData["categories"] as List<CategoryResponse>;
+}
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="/assets/plugins/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css"/>
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Product</a></li>
+                    <li class="breadcrumb-item active">
+                </ul>
+                <h2>Edit Product</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form asp-action="Update" asp-controller="Product" method="post" enctype="multipart/form-data">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <input asp-for="Id" type="hidden" />
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Category</label>
+                                    <div class="form-group">
+                                        <select class="form-control ms" id="select-category" asp-for="CategoryId">
+                                            @if (categories != null)
+                                            {
+                                                foreach (var category in categories)
+                                                {
+                                                    <option value="@category.Id">@category.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Name</label>
+                                    <div class="form-group">
+                                        <input type="text" asp-for="Name" class="form-control" required>
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>OS</label>
+                                        <input type="text" asp-for="OS" class="form-control" required>
+                                        <span asp-validation-for="OS" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>RAM</label>
+                                        <input type="number" asp-for="RAM" class="form-control" required>
+                                        <span asp-validation-for="RAM" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Storage</label>
+                                        <input type="number" asp-for="Storage" class="form-control" required>
+                                        <span asp-validation-for="Storage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Battery Capacity</label>
+                                        <input type="number" asp-for="BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
+                                        <span asp-validation-for="BatteryCapacity" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
+                                            </div>
+                                            <input type="number" class="form-control price"
+                                                   placeholder="Ex: 100,000,000,000 vnđ" asp-for="Price" required>
+                                        </div>
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-star"></i></span>
+                                            </div>
+                                            <select class="form-control ms" asp-for="Status" asp-items="Html.GetEnumSelectList<ProductStatus>()">
+                                                <option selected="selected" value="">Please select</option>
+                                            </select>
+                                        </div>
+                                        <span asp-validation-for="Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Warranty Period</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-watch"></i></span>
+                                            </div>
+                                            <input type="number" class="form-control"
+                                                   placeholder="12 month" asp-for="WarrantyPeriod" required>
+                                        </div>
+                                        <span asp-validation-for="WarrantyPeriod" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <strong>Description</strong>
+                                        </div>
+                                        <textarea class="col-lg summernote" asp-for="Description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <label>Image</label>
+                                        </div>
+                                        <div class="body">
+                                            <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
+                                                   data-default-file="jpg"
+                                                   data-allowed-file-extensions="jpg png">
+                                            <span asp-validation-for="ThumbnailImage" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="modal-footer">
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+    <script src="/assets/js/pages/forms/dropify.js"></script>
+    <script src="/assets/plugins/summernote/dist/summernote.js"></script>
+}
