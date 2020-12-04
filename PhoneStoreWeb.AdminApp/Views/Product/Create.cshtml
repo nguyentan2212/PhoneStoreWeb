@@ -112,7 +112,20 @@
                                         <span asp-validation-for="Price" class="text-danger"></span>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Warranty Period</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-watch"></i></span>
+                                            </div>
+                                            <input type="number" class="form-control"
+                                                   value="" placeholder="12 month" asp-for="WarrantyPeriod" required>
+                                        </div>
+                                        <span asp-validation-for="WarrantyPeriod" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>                            
                             <div class="row clearfix">
                                 <div class="col-lg">
                                     <div class="form-group">
