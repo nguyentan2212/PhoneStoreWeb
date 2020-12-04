@@ -85,12 +85,12 @@
                                                         <div>
                                                             @if (user.Status == AccountStatus.Locked)
                                                             {
-                                                                <div class="btn btn-primary btn-sm">
+                                                                <div class="btn btn-warning btn-sm">
                                                                     <a class="text-white"
                                                                        asp-action="changeStatus"
                                                                        asp-controller="user"
                                                                        asp-route-id="@user.Id">
-                                                                        <i class="zmdi zmdi-edit"></i>
+                                                                        <i class="zmdi zmdi-wrench"></i>
                                                                         Kích hoạt
                                                                     </a>
                                                                 </div>
@@ -102,7 +102,7 @@
                                                                        asp-action="changeStatus"
                                                                        asp-controller="user"
                                                                        asp-route-id="@user.Id">
-                                                                        <i class="zmdi zmdi-delete"></i>
+                                                                        <i class="zmdi zmdi-block"></i>
                                                                         Khóa
                                                                     </a>
                                                                 </div>
