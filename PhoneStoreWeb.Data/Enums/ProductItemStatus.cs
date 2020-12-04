@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PhoneStoreWeb.Data.Enums
 {
     public enum ProductItemStatus
     {
-        Available,        
+        [Display(Name = "Sẵn sàng")]
+        Available,
+        [Display(Name = "Đã bán")]
         Sold
     }
 }

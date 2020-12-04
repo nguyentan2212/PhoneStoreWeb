@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneStoreWeb.Data.Enums
 {
     public enum ProductStatus
     {
-        [Description("Còn hàng")]
+        [Display(Name = "Còn hàng")]        
         InStock,
-        [Description("Hết hàng")]
+        [Display(Name = "Hết hàng")]       
         OutOfStock,
-        [Description("Ngừng bán")]
+        [Display(Name = "Ngừng bán")]       
         SoldOut
     }
 }
