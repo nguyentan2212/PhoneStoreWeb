@@ -27,7 +27,7 @@ namespace PhoneStoreWeb.Data.Models
         public int BatteryCapacity { get; set; }              
         public ProductStatus Status { get; set; }
         public string Image { get; set; }
-               
+        public int WarrantyPeriod { get; set; }
         public virtual Category Category { set; get; }
         public virtual List<ProductItem> ProductItems { get; set; }
         public virtual List<CartItem> CartItems { set; get; }          
