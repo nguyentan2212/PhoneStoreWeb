@@ -67,7 +67,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Update([FromForm] UserUpdateRequest request)
         {           
             var result = await userService.UpdateUserAsync(request);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
