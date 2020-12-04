@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
+using PhoneStoreWeb.Communication.Users;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Service.UserService;
 using System;
@@ -50,8 +51,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangeStatus(string id)
         {
-            string result = await userService.ChangeStatusAsync(id);
-            result = "error";
+            string result = await userService.ChangeStatusAsync(id);          
             TempData["result"] = result;
             return RedirectToAction("Index");
         }
@@ -62,6 +62,12 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             var defaultRequest = await userService.GetUpdateRequestAsync(id);
             ViewData["roles"] = roles;
             return View(defaultRequest);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update([FromForm] UserUpdateRequest request)
+        {           
+            var result = await userService.UpdateUserAsync(request);
+            return View();
         }
     }
 }
