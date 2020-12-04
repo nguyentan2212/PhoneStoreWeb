@@ -110,6 +110,17 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
+        public async Task<UpdateProductRequest> GetUpdateDefault(int id)
+        {
+            UpdateProductRequest result;
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var product = await uow.Products.GetAsync(id);
+                result = mapper.Map<Product, UpdateProductRequest>(product);
+            }
+            return result;
+        }
+
         public async Task<string> Update(UpdateProductRequest request)
         {
             try
@@ -118,6 +129,7 @@ namespace PhoneStoreWeb.Service.ProductService
                 {
                     var product = mapper.Map<UpdateProductRequest, Product>(request);
                     // check category
+                    product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);
                     uow.Products.Update(product);
                     await uow.SaveAsync();
                     return null;
