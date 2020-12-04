@@ -9,7 +9,8 @@ namespace PhoneStoreWeb.Communication.Mapping
     {
         public ModelToResponse()
         {
-            CreateMap<Product, ProductResponse>();
+            CreateMap<Product, ProductResponse>()
+                .ForMember(des => des.ImagePath, opt => opt.MapFrom(src => src.Image));
             CreateMap<Category, CategoryResponse>();
             CreateMap<Order, OrderResponse>();
             CreateMap<AppUser, UserResponse>();              
