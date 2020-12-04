@@ -14,7 +14,8 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<AppUser, UserResponse>();              
             CreateMap<AppRole, RoleResponse>();
 
-            CreateMap<UserResponse, UserUpdateRequest>();                
+            CreateMap<UserResponse, UserUpdateRequest>()
+                .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id.ToString()));             
         }
     }
 }
