@@ -29,7 +29,6 @@ namespace PhoneStoreWeb.Communication.Products
         public int Storage { get; set; }
         [Required]
         public int BatteryCapacity { get; set; }
-        [Required]
         public IFormFile ThumbnailImage { get; set; }
         [Required]
         public ProductStatus Status { get; set; }
