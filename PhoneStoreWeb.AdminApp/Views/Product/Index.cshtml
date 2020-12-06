@@ -73,6 +73,13 @@
                                                 </td>                                               
                                                 <td width="15%" class="footable-last-visible text-center"
                                                     style="display: table-cell;">
+                                                    <div class="btn btn-success btn-sm">
+                                                        <a class="text-white" asp-action="Detail" asp-controller="Product"
+                                                           asp-route-id="@product.Id">
+                                                            <i class="zmdi zmdi-info"></i>
+                                                            Detail
+                                                        </a>
+                                                    </div>
                                                     <div class="btn btn-primary btn-sm">
                                                         <a class="text-white" asp-action="Update" asp-controller="Product"
                                                            asp-route-id="@product.Id">
@@ -86,7 +93,7 @@
                                                             <i class="zmdi zmdi-delete"></i>
                                                             Delete
                                                         </a>
-                                                    </div>                                  
+                                                    </div>
                                                 </td>
                                             </tr>
                                             }
