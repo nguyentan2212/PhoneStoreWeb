@@ -83,7 +83,7 @@ namespace PhoneStoreWeb.AdminApp
                         ctx.Products.Add(product);                        
                     }
                     ctx.SaveChanges();
-                }                
+                }                                
             }
             catch (Exception e)
             {
