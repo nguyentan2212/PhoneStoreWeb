@@ -22,5 +22,6 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public int BatteryCapacity { get; set; }
         public bool HasQuickCharge { get; set; }
         public ProductStatus Status { get; set; }
+        public int WarrantyPeriod { get; set; }
     }
 }
