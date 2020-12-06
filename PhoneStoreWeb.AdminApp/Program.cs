@@ -62,28 +62,7 @@ namespace PhoneStoreWeb.AdminApp
                         new Discount() { Code = "1234", DiscountAmount = 20000 }
                     });
                     ctx.SaveChanges();
-                }
-                if (!ctx.Categories.Any())
-                {
-                    Category category = new Category()
-                    {  
-                        Name = "Iphone",
-                        Description = "Dien thoai Iphone"
-                    };
-                    ctx.Categories.Add(category);
-                    if (!ctx.Products.Any())
-                    {
-                        Product product = new Product()
-                        {                          
-                            Price = 20000,
-                            Stock = 0,
-                            Category = category,
-                            Name = "Iphone 12",
-                        };
-                        ctx.Products.Add(product);                        
-                    }
-                    ctx.SaveChanges();
-                }                                
+                }                                           
             }
             catch (Exception e)
             {
