@@ -13,9 +13,9 @@ namespace PhoneStoreWeb.AdminApp.Controllers
     public class HomeController : Controller
     {       
         private readonly IProductService productService;
-        private readonly IcategoryService categoryService;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(IProductService productService, IcategoryService categoryService)
+        public HomeController(IProductService productService, ICategoryService categoryService)
         {
             this.productService = productService;
             this.categoryService = categoryService;
