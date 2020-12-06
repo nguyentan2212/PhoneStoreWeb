@@ -72,5 +72,20 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             ViewData["result"] = result;
             return View(request);
         }
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {     
+            var product = await productService.GetById(id);
+            ViewData["product"] = product;
+            ViewData["items"] = await productService.GetAllProductItemByProductId(id);
+            ViewData["category"] = await productService.GetCategory(id);
+            return View();
+        }
+        public async Task<IActionResult> AddProductItem(ProductItemReceivedRequest request)
+        {
+            var result = await productService.CreateProductItem(request);
+            ViewData["result"] = result;
+            return RedirectToAction("Detail", "Product", new { id = request.Id });
+        }
     }
 }

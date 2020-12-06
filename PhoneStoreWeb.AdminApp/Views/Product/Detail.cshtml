@@ -1,0 +1,242 @@
+﻿@using PhoneStoreWeb.Communication.Products;
+@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Data.Enums;
+@model ProductItemReceivedRequest;
+@{
+    ProductResponse product = ViewData["product"] as ProductResponse;
+    int Id = product.Id;
+    List<ProductItemResponse> items = ViewData["items"] as List<ProductItemResponse>;
+    string category = ViewData["category"] as string;
+}
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
+
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Product</a></li>
+                    <li class="breadcrumb-item active">
+                </ul>
+                <h2>@product.Name</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@product.Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">                        
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="AddProductItem" asp-controller="Product" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <input asp-for="@Id" type="hidden" />
+                                <label>Serial</label>
+                                <div class="form-group">
+                                    <input asp-for="@Model.SerialNumber" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Price</label>
+                                <div class="form-group">
+                                    <input asp-for="@Model.ReceivedPrice" type="number" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="container-fluid">
+        <form enctype="multipart/form-data">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Category</label>
+                                    <div class="form-group">
+                                        <input disabled type="text" asp-for="@category" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Id</label>
+                                    <div class="form-group">
+                                        <input disabled type="text" asp-for="@product.Id" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>OS</label>
+                                        <input disabled type="text" asp-for="@product.OS" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>RAM</label>
+                                        <input disabled type="number" asp-for="@product.RAM" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Storage</label>
+                                        <input disabled type="number" asp-for="@product.Storage" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Battery Capacity</label>
+                                        <input disabled type="number" asp-for="@product.BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
+                                            </div>
+                                            <input disabled type="number" class="form-control price"
+                                                   placeholder="Ex: 100,000,000,000 vnđ" asp-for="@product.Price" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-star"></i></span>
+                                            </div>
+                                            <select disabled class="form-control ms" asp-for="@product.Status" asp-items="Html.GetEnumSelectList<ProductStatus>()">
+                                                <option selected="selected" value="">Please select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Warranty Period</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-watch"></i></span>
+                                            </div>
+                                            <input disabled type="number" class="form-control"
+                                                   placeholder="12 month" asp-for="@product.WarrantyPeriod" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <strong>Description</strong>
+                                        </div>
+                                        @Html.Raw(@product.Description)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <label>Image</label>
+                                        </div>
+                                        <div class="body">
+                                            <img src="@product.ImagePath" class="rounded align-left" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <button type="button" class="btn btn-primary"
+                                        data-toggle="modal"
+                                        data-target="#exampleModal">
+                                    Add Item
+                                </button>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Serial Number</th>
+                                                <th>Received Price</th>
+                                                <th>Received Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (items != null)
+                                            {
+                                                foreach (var item in items)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Id</td>
+                                                        <td>@item.SerialNumber</td>
+                                                        <td>@item.ReceivedPrice</td>
+                                                        <td>@item.ReceivedDate</td>
+                                                        <td>@Html.DisplayFor(x => item.Status)</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+}
