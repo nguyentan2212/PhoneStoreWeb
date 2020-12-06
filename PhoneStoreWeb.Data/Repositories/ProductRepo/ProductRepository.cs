@@ -1,6 +1,8 @@
-﻿using PhoneStoreWeb.Data.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Data.Repositories.Repository;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.Repositories.ProductRepo
@@ -16,6 +18,15 @@ namespace PhoneStoreWeb.Data.Repositories.ProductRepo
         {
             Product product = await GetAsync(id);
             product.Image = path;
-        }       
+        }
+
+        public async Task<Product> GetWithIncludeAsync(int id)
+        {           
+            Product product = await DbSetEntity
+                .Include(c => c.Category)
+                .Include(po => po.ProductItems)
+                .FirstAsync(x => x.Id == id);
+            return product;
+        }
     }
 }
