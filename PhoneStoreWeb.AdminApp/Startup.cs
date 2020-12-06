@@ -56,7 +56,7 @@ namespace PhoneStoreWeb.AdminApp
             services.AddAutoMapper(typeof(ModelToResponse));
             services.AddAutoMapper(typeof(RequestToModel));
             services.AddScoped<IFileService, FileService>();
-            services.AddScoped<IcategoryService, CategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserService, UserService>();         
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
