@@ -81,7 +81,7 @@ namespace PhoneStoreWeb.Service.ProductService
                         Product = product,                      
                     };
                     await uow.ProductItems.AddAsync(item);
-                    await uow.SaveAsync();
+                    await uow.SaveAsync();                    
                     return null;
                 }
             }
