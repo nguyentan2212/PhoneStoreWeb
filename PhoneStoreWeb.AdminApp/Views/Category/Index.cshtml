@@ -1,0 +1,225 @@
+﻿@using PhoneStoreWeb.Communication.Categories
+@using PhoneStoreWeb.Communication.ResponseResult
+@using PhoneStoreWeb.Data.Enums
+@model CreateCategoryRequest
+
+@{ 
+    List<CategoryResponse> categories = ViewData["categories"] as List<CategoryResponse>;
+}
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Category">Category</a></li>
+                    <li class="breadcrumb-item active">
+                </ul>
+                <h2>Category</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Create" asp-controller="Category" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Name</label>
+                                <div class="form-group">
+                                    <input asp-for="Name" type="text" class="form-control" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Description</label>
+                                <div class="form-group">
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Image</label>
+                                <div class="form-group">
+                                    <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
+                                           data-default-file=""
+                                           data-allowed-file-extensions="jpg png">
+                                    <span asp-validation-for="ThumbnailImage" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Update Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Update" asp-controller="Category" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <input type="hidden" asp-for="Id"/>
+                                <label>Name</label>
+                                <div class="form-group">
+                                    <input asp-for="Name" type="text" class="form-control" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Description</label>
+                                <div class="form-group">
+                                    <textarea asp-for="Description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Image</label>
+                                <div class="form-group">
+                                    <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
+                                           data-default-file=""
+                                           data-allowed-file-extensions="jpg png">
+                                    <span asp-validation-for="ThumbnailImage" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Categories</strong> </h2>
+                        <div class="float-right">
+                            <button type="button" style="margin-top: -50px;"
+                                    data-toggle="modal" data-target="#exampleModal"
+                                    class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
+                                <i class="fa fa-cog mr-1"></i>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (categories != null)
+                                    {
+                                        foreach (var item in categories)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Description</td>
+                                                <td class="text-center">
+                                                    <img src="@item.ImagePath" asp-append-version="true" width="48" height="48" alt="category img">
+                                                </td>
+                                                <td width="15%" class="footable-last-visible text-center"
+                                                    style="display: table-cell;">
+                                                    <div class="btn btn-primary btn-sm">
+                                                        <a class="text-white update" 
+                                                           data-id="@item.Id"
+                                                           data-iname="@item.Name"
+                                                           data-idescription="@item.Description"
+                                                           data-toggle="modal" 
+                                                           data-target="#updateModal">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                            Update
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+    <script src="/assets/js/pages/forms/dropify.js"></script>
+<script>
+    $(document).on('click', '.update',function () {
+        var id = $(this).data('id');
+        var name = $(this).data('iname');
+        var description = $(this).data('idescription');
+        $('#updateModal [name=Id]').val(id);
+        $('#updateModal [name=Name]').val(name);
+        $('#updateModal [name=Description]').val(description);
+    });
+</script>
+}
+
