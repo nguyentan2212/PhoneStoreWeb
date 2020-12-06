@@ -46,7 +46,9 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {
+                    var category = await uow.Categories.GetAsync(request.CategoryId);
                     var product = mapper.Map<CreateProductRequest, Product>(request);
+                    product.Category = category;
                     product.CreatedDate = DateTime.Today;
                     product.Status = Data.Enums.ProductStatus.OutOfStock;
                     product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);                   
@@ -56,6 +58,34 @@ namespace PhoneStoreWeb.Service.ProductService
                 }
             }
             catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public async Task<string> CreateProductItem(ProductItemReceivedRequest request)
+        {
+            try
+            {
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    Product product = await uow.Products.GetAsync(request.Id);
+                    ProductItem item = new ProductItem()
+                    {
+                        SerialNumber = request.SerialNumber,
+                        ReceivedPrice = request.ReceivedPrice,
+                        ReceivedDate = DateTime.Today,
+                        SoldPrice = 0,
+                        Status = Data.Enums.ProductItemStatus.Available,
+                        WarrantyPeriod = product.WarrantyPeriod,
+                        Product = product,                      
+                    };
+                    await uow.ProductItems.AddAsync(item);
+                    await uow.SaveAsync();
+                    return null;
+                }
+            }
+            catch(Exception e)
             {
                 return e.Message;
             }
@@ -76,7 +106,19 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 return e.Message;
             }
-        }        
+        }
+
+        public async Task<List<ProductItemResponse>> GetAllProductItemByProductId(int productId)
+        {
+            List<ProductItemResponse> result;
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var items = await uow.ProductItems.GetAllByProductIdAsync(productId);
+                result = mapper.Map<List<ProductItem>, List<ProductItemResponse>>(items);
+            }
+            return result;
+        }
+
         public async Task<List<ProductResponse>> GetAllProducts()
         {
             List<ProductResponse> result;
@@ -108,6 +150,15 @@ namespace PhoneStoreWeb.Service.ProductService
                 result = mapper.Map<Product, ProductResponse>(product);
             }
             return result;
+        }
+
+        public async Task<string> GetCategory(int productId)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var product = await uow.Products.GetWithIncludeAsync(productId);
+                return product.Category.Name;
+            }
         }
 
         public async Task<UpdateProductRequest> GetUpdateDefault(int id)
