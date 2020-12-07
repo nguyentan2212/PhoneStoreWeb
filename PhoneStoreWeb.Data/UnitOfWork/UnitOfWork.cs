@@ -1,6 +1,5 @@
 ﻿using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Repositories.CartProductRepo;
-using PhoneStoreWeb.Data.Repositories.ContactRepo;
 using PhoneStoreWeb.Data.Repositories.DiscountRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
 using PhoneStoreWeb.Data.Repositories.ProductItemRepo;
@@ -17,7 +16,6 @@ namespace PhoneStoreWeb.Data.UnitOfWork
         private readonly PhoneStoreDbContext context;       
         private CartItemRepository cartItems;        
         private CategoryRepository categories;
-        private ContactRepository contacts;
         private DiscountRepository discounts;
         private OrderRepository orders;       
         private ProductItemRepository productItems;
@@ -48,18 +46,6 @@ namespace PhoneStoreWeb.Data.UnitOfWork
                     categories = new CategoryRepository(context);
                 }
                 return categories;
-            }
-        }
-
-        public ContactRepository Contacts
-        {
-            get
-            {
-                if (contacts is null)
-                {
-                    contacts = new ContactRepository(context);
-                }
-                return contacts;
             }
         }
 

@@ -47,8 +47,7 @@ namespace PhoneStoreWeb.Data.Contexts
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Category> Categories { get; set; }             
-        public DbSet<Contact> Contacts { get; set; }       
+        public DbSet<Category> Categories { get; set; }                    
         public DbSet<Discount> Discounts { get; set; }    
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }

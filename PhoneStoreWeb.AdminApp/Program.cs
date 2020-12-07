@@ -46,15 +46,6 @@ namespace PhoneStoreWeb.AdminApp
                         userMgr.AddToRoleAsync(user, "admin").GetAwaiter().GetResult();
                     }
                 }               
-                if (!ctx.Contacts.Any())
-                {
-                    ctx.Contacts.AddRange(new List<Contact>() {
-                        new Contact() { Name = "Minh Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
-                        new Contact() { Name = "Tan Nguyen", Email = "18520150@gm.uit.edu.vn", Message = "Very good" },
-                        new Contact() { Name = "Nguyen Tan", Email = "18520150@gm.uit.edu.vn", Message = "Very good" }
-                    });
-                    ctx.SaveChanges();
-                }
                 if (!ctx.Discounts.Any())
                 {
                     ctx.Discounts.AddRange(new List<Discount>() {
