@@ -28,6 +28,8 @@
     <Compile Include="Migrations\20201204062522_addOrder2ProductItem.Designer.cs" />
     <Compile Include="Migrations\20201207063150_deleteContactEntity.cs" />
     <Compile Include="Migrations\20201207063150_deleteContactEntity.Designer.cs" />
+    <Compile Include="Migrations\20201207073822_deleteCartItemEntity.cs" />
+    <Compile Include="Migrations\20201207073822_deleteCartItemEntity.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

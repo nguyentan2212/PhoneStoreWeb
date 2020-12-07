@@ -1,5 +1,4 @@
 ﻿using PhoneStoreWeb.Data.Contexts;
-using PhoneStoreWeb.Data.Repositories.CartProductRepo;
 using PhoneStoreWeb.Data.Repositories.DiscountRepo;
 using PhoneStoreWeb.Data.Repositories.OrderRepo;
 using PhoneStoreWeb.Data.Repositories.ProductItemRepo;
@@ -13,8 +12,7 @@ namespace PhoneStoreWeb.Data.UnitOfWork
     public class UnitOfWork : IDisposable
     {
         #region Repositories variables
-        private readonly PhoneStoreDbContext context;       
-        private CartItemRepository cartItems;        
+        private readonly PhoneStoreDbContext context;              
         private CategoryRepository categories;
         private DiscountRepository discounts;
         private OrderRepository orders;       
@@ -26,17 +24,6 @@ namespace PhoneStoreWeb.Data.UnitOfWork
             context = new PhoneStoreDbContext();
         }
         #region Repositories properties       
-        public CartItemRepository CartItems
-        {
-            get
-            {
-                if (cartItems is null)
-                {
-                    cartItems = new CartItemRepository(context);
-                }
-                return cartItems;
-            }
-        }
         public CategoryRepository Categories
         {
             get

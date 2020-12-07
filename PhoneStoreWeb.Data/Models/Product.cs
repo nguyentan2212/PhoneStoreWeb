@@ -29,7 +29,6 @@ namespace PhoneStoreWeb.Data.Models
         public string Image { get; set; }
         public int WarrantyPeriod { get; set; }
         public virtual Category Category { set; get; }
-        public virtual List<ProductItem> ProductItems { get; set; }
-        public virtual List<CartItem> CartItems { set; get; }          
+        public virtual List<ProductItem> ProductItems { get; set; }          
     }
 }

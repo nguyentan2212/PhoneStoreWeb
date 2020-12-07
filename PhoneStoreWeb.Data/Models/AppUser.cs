@@ -26,6 +26,5 @@ namespace PhoneStoreWeb.Data.Models
         public virtual List<Order> Orders { set; get; }
         public virtual List<WarrantyCard> StaffWarrantyCards { get; set; }
         public virtual List<WarrantyCard> CustomerWarrantyCards { get; set; }
-        public virtual List<CartItem> CartItems { set; get; }
     }
 }
