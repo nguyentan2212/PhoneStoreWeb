@@ -3,6 +3,7 @@ using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Communication.Products;
 using System;
+using PhoneStoreWeb.Communication.Discounts;
 
 namespace PhoneStoreWeb.Communication.Mapping
 {
@@ -12,7 +13,8 @@ namespace PhoneStoreWeb.Communication.Mapping
         {
             CreateMap<RegisterRequest, AppUser>();
             CreateMap<CreateProductRequest, Product>();
-            CreateMap<UpdateProductRequest, Product>();                       
+            CreateMap<UpdateProductRequest, Product>();
+            CreateMap<DiscountRequest, Discount>();
         }
     }
 }

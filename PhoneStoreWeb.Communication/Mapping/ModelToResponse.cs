@@ -21,6 +21,7 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<UserResponse, UserUpdateRequest>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id.ToString()));
             CreateMap<Product, UpdateProductRequest>();
+            CreateMap<Discount, DiscountResponse>();
         }
     }
 }
