@@ -2,7 +2,7 @@
 @{ var url = @Context.Request.GetDisplayUrl();
     string[] arrListUrl = url.Split('/');
     if (arrListUrl[3] == "") arrListUrl[3] = "index";
-    string error = TempData["result"] as string;
+    string error = ViewData["result"] as string;
 }
 <!doctype html>
 <html class="no-js " lang="en">
