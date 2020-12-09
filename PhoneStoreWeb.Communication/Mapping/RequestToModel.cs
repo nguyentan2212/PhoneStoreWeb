@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using PhoneStoreWeb.Communication.Authentication;
-using PhoneStoreWeb.Data.Models;
-using PhoneStoreWeb.Communication.Products;
-using System;
 using PhoneStoreWeb.Communication.Discounts;
+using PhoneStoreWeb.Communication.Orders;
+using PhoneStoreWeb.Communication.Products;
+using PhoneStoreWeb.Data.Models;
 
 namespace PhoneStoreWeb.Communication.Mapping
 {
@@ -15,6 +15,8 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<CreateProductRequest, Product>();
             CreateMap<UpdateProductRequest, Product>();
             CreateMap<DiscountRequest, Discount>();
+            CreateMap<CreateOrderRequest, Order>()
+                .ForMember(des => des.Total, opt => opt.MapFrom(src => src.FinalPrice));
         }
     }
 }
