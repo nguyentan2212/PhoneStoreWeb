@@ -10,5 +10,7 @@ namespace PhoneStoreWeb.Data.Repositories.OrderRepo
 {
     public interface IOrderRepository : IRepositoryBase<Order>
     {
+        public Task<List<Order>> GetAllWithIncludeAsync();
+        public Task<Order> GetWithIncludeAsync(int id);
     }
 }
