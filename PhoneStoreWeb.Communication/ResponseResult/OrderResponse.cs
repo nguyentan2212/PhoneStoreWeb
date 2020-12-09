@@ -1,4 +1,5 @@
-﻿using PhoneStoreWeb.Data.Enums;
+﻿using PhoneStoreWeb.Communication.Orders;
+using PhoneStoreWeb.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,6 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public decimal Total { set; get; }
         public OrderStatus Status { set; get; }
         public DateTime Created_At { set; get; }
+        public List<OrderItem> Items { get; set; }
     }
 }
