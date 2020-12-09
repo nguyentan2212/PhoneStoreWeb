@@ -1,4 +1,5 @@
-﻿using PhoneStoreWeb.Data.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Data.Repositories.Repository;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
             var productItem = await GetAsync(id);
             var name = productItem.Product.Name;
             return name;
+        }
+
+        public async Task<ProductItem> GetIncludeProductAsync(int id)
+        {
+            ProductItem item = await DbSetEntity
+                .Include(x => x.Product).FirstOrDefaultAsync(y => y.Id == id);
+            return item;
         }
     }
 }
