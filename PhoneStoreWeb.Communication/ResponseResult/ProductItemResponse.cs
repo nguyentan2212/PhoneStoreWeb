@@ -16,6 +16,5 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public DateTime SoldDate { get; set; }
         public decimal SoldPrice { get; set; }
         public ProductItemStatus Status { get; set; }      
-        public int WarrantyPeriod { get; set; }
     }
 }

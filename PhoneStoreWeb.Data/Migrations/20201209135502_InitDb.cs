@@ -38,21 +38,6 @@ namespace PhoneStoreWeb.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contacts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -251,46 +236,18 @@ namespace PhoneStoreWeb.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "Money", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShipName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipEmail = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ShipPhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TransactionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Total = table.Column<decimal>(type: "Money", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "Money", nullable: false),
+                    FinalPrice = table.Column<decimal>(type: "Money", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "Date", nullable: false),
                     AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -324,9 +281,9 @@ namespace PhoneStoreWeb.Data.Migrations
                     ReceivedDate = table.Column<DateTime>(type: "Date", nullable: false),
                     SoldPrice = table.Column<decimal>(type: "Money", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
                     AppUsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -347,42 +304,6 @@ namespace PhoneStoreWeb.Data.Migrations
                         name: "FK_ProductItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WarrantyCards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<decimal>(type: "Money", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReceivedDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    DeliveriedDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    StaffID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CustomerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductItemsId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WarrantyCards", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WarrantyCards_AspNetUsers_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_WarrantyCards_AspNetUsers_StaffID",
-                        column: x => x.StaffID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_WarrantyCards_ProductItems_ProductItemsId",
-                        column: x => x.ProductItemsId,
-                        principalTable: "ProductItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -432,16 +353,6 @@ namespace PhoneStoreWeb.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_AppUserId",
-                table: "CartItems",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ProductId",
-                table: "CartItems",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Discounts_AppUserId",
                 table: "Discounts",
                 column: "AppUserId");
@@ -475,21 +386,6 @@ namespace PhoneStoreWeb.Data.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WarrantyCards_CustomerID",
-                table: "WarrantyCards",
-                column: "CustomerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WarrantyCards_ProductItemsId",
-                table: "WarrantyCards",
-                column: "ProductItemsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WarrantyCards_StaffID",
-                table: "WarrantyCards",
-                column: "StaffID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -508,15 +404,6 @@ namespace PhoneStoreWeb.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "CartItems");
-
-            migrationBuilder.DropTable(
-                name: "Contacts");
-
-            migrationBuilder.DropTable(
-                name: "WarrantyCards");
 
             migrationBuilder.DropTable(
                 name: "ProductItems");

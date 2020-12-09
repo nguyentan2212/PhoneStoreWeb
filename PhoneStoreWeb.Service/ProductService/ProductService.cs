@@ -75,7 +75,6 @@ namespace PhoneStoreWeb.Service.ProductService
                         ReceivedDate = DateTime.Today,
                         SoldPrice = 0,
                         Status = Data.Enums.ProductItemStatus.Available,
-                        WarrantyPeriod = product.WarrantyPeriod,
                         Product = product,                      
                     };
                     await uow.ProductItems.AddAsync(item);
@@ -172,7 +171,6 @@ namespace PhoneStoreWeb.Service.ProductService
                 item.ProductItemId = pi.Id;
                 item.SerialNumber = pi.SerialNumber;
                 item.SoldPrice = pi.Product.Price;
-                item.WarrantyPeriod = pi.Product.WarrantyPeriod;
                 item.Name = pi.Product.Name;
                 return item;
             }

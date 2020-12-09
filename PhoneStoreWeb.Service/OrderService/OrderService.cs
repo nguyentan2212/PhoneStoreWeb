@@ -82,8 +82,7 @@ namespace PhoneStoreWeb.Service.OrderService
                     foreach(var item in request.Items)
                     {
                         var pi = await uow.ProductItems.GetAsync(item.ProductItemId);
-                        pi.SoldPrice = item.SoldPrice;
-                        pi.WarrantyPeriod = item.WarrantyPeriod;
+                        pi.SoldPrice = item.SoldPrice;                       
                         items.Add(pi);
                         price += pi.SoldPrice;
                     }
@@ -127,7 +126,6 @@ namespace PhoneStoreWeb.Service.OrderService
                         orderItem.ProductItemId = orders[i].ProductItems[j].Id;
                         orderItem.SerialNumber = orders[i].ProductItems[j].SerialNumber;
                         orderItem.SoldPrice = orders[i].ProductItems[j].SoldPrice;
-                        orderItem.WarrantyPeriod = orders[i].ProductItems[j].WarrantyPeriod;
                         orderItem.Name = await uow.ProductItems.GetProductNameAsync(orderItem.ProductItemId);
                         result[i].Items.Add(orderItem);
                     }

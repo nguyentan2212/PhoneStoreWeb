@@ -28,7 +28,5 @@ namespace PhoneStoreWeb.Communication.Products
         public int BatteryCapacity { get; set; }      
         [Required]
         public IFormFile ThumbnailImage { get; set; }
-        [Required]
-        public int WarrantyPeriod { get; set; }
     }
 }

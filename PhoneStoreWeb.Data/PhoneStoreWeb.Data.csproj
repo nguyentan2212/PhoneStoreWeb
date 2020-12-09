@@ -8,36 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Migrations\20201201083041_InitDb.cs" />
-    <Compile Include="Migrations\20201201083041_InitDb.Designer.cs" />
-    <Compile Include="Migrations\20201201085132_UpdateDb.cs" />
-    <Compile Include="Migrations\20201201085132_UpdateDb.Designer.cs" />
-    <Compile Include="Migrations\20201202053855_updataAppUser.cs" />
-    <Compile Include="Migrations\20201202053855_updataAppUser.Designer.cs" />
-    <Compile Include="Migrations\20201202065422_updataEnums.cs" />
-    <Compile Include="Migrations\20201202065422_updataEnums.Designer.cs" />
-    <Compile Include="Migrations\20201204054927_addWarrantyPeriod.cs" />
-    <Compile Include="Migrations\20201204054927_addWarrantyPeriod.Designer.cs" />
-    <Compile Include="Migrations\20201204062522_addOrder2ProductItem.cs" />
-    <Compile Include="Migrations\20201204062522_addOrder2ProductItem.Designer.cs" />
-    <Compile Include="Migrations\20201207063150_deleteContactEntity.cs" />
-    <Compile Include="Migrations\20201207063150_deleteContactEntity.Designer.cs" />
-    <Compile Include="Migrations\20201207073822_deleteCartItemEntity.cs" />
-    <Compile Include="Migrations\20201207073822_deleteCartItemEntity.Designer.cs" />
-    <Compile Include="Migrations\20201209024609_removeCustomerWarranty.cs" />
-    <Compile Include="Migrations\20201209024609_removeCustomerWarranty.Designer.cs" />
-    <Compile Include="Migrations\20201209050843_updateOrder.cs" />
-    <Compile Include="Migrations\20201209050843_updateOrder.Designer.cs" />
-    <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
@@ -55,6 +25,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

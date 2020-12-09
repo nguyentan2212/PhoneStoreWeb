@@ -32,7 +32,5 @@ namespace PhoneStoreWeb.Communication.Products
         public IFormFile ThumbnailImage { get; set; }
         [Required]
         public ProductStatus Status { get; set; }
-        [Required]
-        public int WarrantyPeriod { get; set; }
     }
 }

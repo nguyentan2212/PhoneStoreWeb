@@ -35,7 +35,6 @@ namespace PhoneStoreWeb.Data.Contexts
         public DbSet<Discount> Discounts { get; set; }    
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductItem> ProductItems { get; set; }       
-        public DbSet<WarrantyCard> WarrantyCards { get; set; }       
+        public DbSet<ProductItem> ProductItems { get; set; }             
     }
 }

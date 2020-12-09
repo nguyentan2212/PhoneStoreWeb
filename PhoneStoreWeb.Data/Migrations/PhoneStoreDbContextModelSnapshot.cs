@@ -390,9 +390,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Property<int>("Storage")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarrantyPeriod")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -432,9 +429,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("WarrantyPeriod")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUsersId");
@@ -444,43 +438,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductItems");
-                });
-
-            modelBuilder.Entity("PhoneStoreWeb.Data.Models.WarrantyCard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DeliveriedDate")
-                        .HasColumnType("Date");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("Money");
-
-                    b.Property<int?>("ProductItemsId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReceivedDate")
-                        .HasColumnType("Date");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ProductItemsId");
-
-                    b.ToTable("WarrantyCards");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -595,23 +552,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("PhoneStoreWeb.Data.Models.WarrantyCard", b =>
-                {
-                    b.HasOne("PhoneStoreWeb.Data.Models.AppUser", "AppUser")
-                        .WithMany("WarrantyCards")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PhoneStoreWeb.Data.Models.ProductItem", "ProductItems")
-                        .WithMany()
-                        .HasForeignKey("ProductItemsId");
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("ProductItems");
-                });
-
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.AppRole", b =>
                 {
                     b.Navigation("AppUsers");
@@ -620,8 +560,6 @@ namespace PhoneStoreWeb.Data.Migrations
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.AppUser", b =>
                 {
                     b.Navigation("Orders");
-
-                    b.Navigation("WarrantyCards");
                 });
 
             modelBuilder.Entity("PhoneStoreWeb.Data.Models.Category", b =>

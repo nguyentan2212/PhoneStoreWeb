@@ -24,6 +24,5 @@ namespace PhoneStoreWeb.Data.Models
         public DateTime CreatedDate { set; get; }
 
         public virtual List<Order> Orders { set; get; }
-        public virtual List<WarrantyCard> WarrantyCards { get; set; }
     }
 }
