@@ -20,7 +20,9 @@ namespace PhoneStoreWeb.Data.Models
         public string Address { set; get; }
         public string OrderNotes { set; get; }
         [Column(TypeName = "Money")]
-        public decimal Total { set; get; }
+        public decimal TotalPrice { set; get; }
+        [Column(TypeName = "Money")]
+        public decimal FinalPrice { set; get; }
         [Required]
         public OrderStatus Status { set; get; }
         [Required]

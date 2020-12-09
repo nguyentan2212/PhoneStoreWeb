@@ -32,6 +32,8 @@
     <Compile Include="Migrations\20201207073822_deleteCartItemEntity.Designer.cs" />
     <Compile Include="Migrations\20201209024609_removeCustomerWarranty.cs" />
     <Compile Include="Migrations\20201209024609_removeCustomerWarranty.Designer.cs" />
+    <Compile Include="Migrations\20201209050843_updateOrder.cs" />
+    <Compile Include="Migrations\20201209050843_updateOrder.Designer.cs" />
     <Compile Include="Migrations\PhoneStoreDbContextModelSnapshot.cs" />
   </ItemGroup>
 

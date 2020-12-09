@@ -15,8 +15,7 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<CreateProductRequest, Product>();
             CreateMap<UpdateProductRequest, Product>();
             CreateMap<DiscountRequest, Discount>();
-            CreateMap<CreateOrderRequest, Order>()
-                .ForMember(des => des.Total, opt => opt.MapFrom(src => src.FinalPrice));
+            CreateMap<CreateOrderRequest, Order>();
         }
     }
 }
