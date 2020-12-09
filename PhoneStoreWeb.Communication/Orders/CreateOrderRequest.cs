@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneStoreWeb.Communication.Orders
 {
@@ -8,11 +9,15 @@ namespace PhoneStoreWeb.Communication.Orders
         public decimal TotalPrice { get; set; }
         public decimal FinalPrice { get; set; }
         public int DiscountId { get; set; }
-        public string ShipName { set; get; }
-        public string ShipEmail { set; get; }
-        public string ShipPhoneNumber { set; get; }
-        public string ShipAddress { set; get; }
+        [Required]
+        public string Name { set; get; }
+        public string Email { set; get; }
+        [Required]
+        public string PhoneNumber { set; get; }
+        [Required]
+        public string Address { set; get; }
         public string OrderNotes { set; get; }
+        [Required]
         public List<OrderItem> Items { get; set; }
     }
 }
