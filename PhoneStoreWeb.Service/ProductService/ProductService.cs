@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using PhoneStoreWeb.Communication.Orders;
 using PhoneStoreWeb.Communication.Products;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Data.Models;
@@ -7,9 +7,7 @@ using PhoneStoreWeb.Data.UnitOfWork;
 using PhoneStoreWeb.Service.FileService;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Service.ProductService
@@ -158,6 +156,25 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 var product = await uow.Products.GetWithIncludeAsync(productId);
                 return product.Category.Name;
+            }
+        }
+
+        public async Task<OrderItem> GetOrderItemBySerial(string serial)
+        {
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                ProductItem pi = await uow.ProductItems.SingleOrDefaultAsync(x => x.SerialNumber == serial);
+                if (pi is null)
+                {
+                    return null;
+                }
+                OrderItem item = new OrderItem();
+                item.ProductItemId = pi.Id;
+                item.SerialNumber = pi.SerialNumber;
+                item.SoldPrice = pi.Product.Price;
+                item.WarrantyPeriod = pi.Product.WarrantyPeriod;
+                item.Name = pi.Product.Name;
+                return item;
             }
         }
 
