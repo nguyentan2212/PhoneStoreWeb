@@ -8,5 +8,6 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
     public interface IProductItemRepository : IRepositoryBase<ProductItem>
     {
         public Task<List<ProductItem>> GetAllByProductIdAsync(int id);
+        public Task<string> GetProductNameAsync(int id);
     }
 }

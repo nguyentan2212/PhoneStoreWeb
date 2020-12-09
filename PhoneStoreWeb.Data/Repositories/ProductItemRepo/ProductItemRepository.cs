@@ -18,5 +18,12 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
             var result = await FindAsync(x => x.Product.Id == id);
             return new List<ProductItem>(result);
         }
+
+        public async Task<string> GetProductNameAsync(int id)
+        {
+            var productItem = await GetAsync(id);
+            var name = productItem.Product.Name;
+            return name;
+        }
     }
 }
