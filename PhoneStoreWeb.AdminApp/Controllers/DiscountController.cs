@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PhoneStoreWeb.Service.DiscountService;
-using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Communication.Discounts;
-using System;
+using PhoneStoreWeb.Communication.ResponseResult;
+using PhoneStoreWeb.Service.DiscountService;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
@@ -19,7 +17,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<DiscountResponse> discounts = await discountService.GetAllProducts();
+            List<DiscountResponse> discounts = await discountService.GetAllDiscounts();
             ViewData["discounts"] = discounts;
             return View();
         }

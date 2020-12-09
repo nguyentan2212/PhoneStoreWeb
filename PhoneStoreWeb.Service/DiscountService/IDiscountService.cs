@@ -10,7 +10,7 @@ namespace PhoneStoreWeb.Service.DiscountService
 {
     public interface IDiscountService : IServiceBase
     {
-        public Task<List<DiscountResponse>> GetAllProducts();
+        public Task<List<DiscountResponse>> GetAllDiscounts();
         public Task<string> CreateDiscount(DiscountRequest request);
         public Task<string> UpdateDiscount(DiscountRequest request);
     }

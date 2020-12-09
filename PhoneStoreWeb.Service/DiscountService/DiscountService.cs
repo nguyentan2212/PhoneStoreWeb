@@ -36,7 +36,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<List<DiscountResponse>> GetAllProducts()
+        public async Task<List<DiscountResponse>> GetAllDiscounts()
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
