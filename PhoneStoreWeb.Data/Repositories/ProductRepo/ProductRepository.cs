@@ -2,7 +2,6 @@
 using PhoneStoreWeb.Data.Contexts;
 using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Data.Repositories.Repository;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Data.Repositories.ProductRepo
