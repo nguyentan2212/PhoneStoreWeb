@@ -23,11 +23,8 @@ namespace PhoneStoreWeb.Data.Models
         public DateTime DeliveriedDate { get; set; }
         public WarrentyCardStatus Status { get; set; }
 
-        public Guid StaffID { get; set; }
-        public Guid CustomerID { get; set; }
-
-        public virtual AppUser Staff { get; set; }
-        public virtual AppUser Customer { get; set; }
+        public Guid AppUserId { get; set; }      
+        public virtual AppUser AppUser { get; set; }       
         public virtual ProductItem ProductItems { get; set; }
     }
 }

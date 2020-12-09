@@ -26,22 +26,7 @@ namespace PhoneStoreWeb.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {           
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<WarrantyCard>()
-                .HasOne(p => p.Staff)
-                .WithMany(x => x.StaffWarrantyCards)
-                .HasForeignKey(t => t.StaffID) 
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<WarrantyCard>()
-                .HasOne(p => p.Customer)
-                .WithMany(x => x.CustomerWarrantyCards)
-                .HasForeignKey(t => t.CustomerID)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
-
-
+            base.OnModelCreating(modelBuilder);           
             modelBuilder.Seed();
         }   
         public DbSet<AppUser> AppUsers { get; set; }
