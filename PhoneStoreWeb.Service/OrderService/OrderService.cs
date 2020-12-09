@@ -78,14 +78,26 @@ namespace PhoneStoreWeb.Service.OrderService
                     order.Discount = await uow.Discounts.GetAsync(request.DiscountId);
                     order.AppUser = await userManager.FindByIdAsync(request.AppUserId);
                     List<ProductItem> items = new List<ProductItem>();
+                    decimal price = 0;
                     foreach(var item in request.Items)
                     {
                         var pi = await uow.ProductItems.GetAsync(item.ProductItemId);
                         pi.SoldPrice = item.SoldPrice;
                         pi.WarrantyPeriod = item.WarrantyPeriod;
                         items.Add(pi);
+                        price += pi.SoldPrice;
                     }
                     order.ProductItems = items;
+                    order.TotalPrice = price;
+                    decimal discountAmount = 0;
+                    decimal discountPercent = 0;
+                    if (order.Discount != null)
+                    {
+                        discountAmount = order.Discount.DiscountAmount;
+                        discountPercent = order.Discount.DiscountPercent;
+                    }
+                    price -= Math.Min(price - discountAmount, price * discountPercent / 100);
+                    order.FinalPrice = price;
                     await uow.Orders.AddAsync(order);
                     await uow.SaveAsync();
                     return null;
