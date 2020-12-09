@@ -14,6 +14,7 @@ using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Service.DiscountService;
 using PhoneStoreWeb.Service.FileService;
+using PhoneStoreWeb.Service.OrderService;
 using PhoneStoreWeb.Service.ProductService;
 using PhoneStoreWeb.Service.UserService;
 
@@ -60,7 +61,8 @@ namespace PhoneStoreWeb.AdminApp
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IDiscountService, DiscountService>();
-            services.AddScoped<IUserService, UserService>();         
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
         }
 
