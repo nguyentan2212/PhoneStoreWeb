@@ -77,6 +77,8 @@ namespace PhoneStoreWeb.Service.ProductService
                         Status = Data.Enums.ProductItemStatus.Available,
                         Product = product,                      
                     };
+                    product.Stock++;
+                    uow.Products.Update(product);
                     await uow.ProductItems.AddAsync(item);
                     await uow.SaveAsync();                    
                     return null;
@@ -95,6 +97,27 @@ namespace PhoneStoreWeb.Service.ProductService
                 using (UnitOfWork uow = new UnitOfWork())
                 {
                     uow.Products.Remove(id);
+                    await uow.SaveAsync();
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        public async Task<string> DeleteProductItem(int id)
+        {
+            try
+            {
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    ProductItem item = await uow.ProductItems.GetIncludeProductAsync(id);
+                    Product product = item.Product;
+                    uow.ProductItems.Remove(id);
+                    product.Stock--;
+                    uow.Products.Update(product);           
                     await uow.SaveAsync();
                     return null;
                 }
