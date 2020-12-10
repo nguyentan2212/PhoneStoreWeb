@@ -46,6 +46,16 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
+        public async Task<DiscountResponse> GetDiscount(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var discount = await uow.Discounts.GetAsync(id);
+                var result = mapper.Map<Discount, DiscountResponse>(discount);
+                return result;
+            }
+        }
+
         public async Task<string> UpdateDiscount(DiscountRequest request)
         {
             try

@@ -19,7 +19,7 @@ namespace PhoneStoreWeb.Service.OrderService
         {
             this.userManager = userManager;
         }
-
+       
         public async Task<string> CancelOrder(int id)
         {
             try
@@ -68,7 +68,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<string> CreateOrder(CreateOrderRequest request)
+        public async Task<int> CreateOrder(CreateOrderRequest request)
         {
             try
             {
@@ -79,13 +79,8 @@ namespace PhoneStoreWeb.Service.OrderService
                     order.AppUser = await userManager.FindByIdAsync(request.AppUserId);
                     List<ProductItem> items = new List<ProductItem>();
                     decimal price = 0;
-                    foreach(var item in request.Items)
-                    {
-                        var pi = await uow.ProductItems.GetAsync(item.ProductItemId);
-                        pi.SoldPrice = item.SoldPrice;                       
-                        items.Add(pi);
-                        price += pi.SoldPrice;
-                    }
+                    
+                    
                     order.ProductItems = items;
                     order.TotalPrice = price;
                     decimal discountAmount = 0;
@@ -97,16 +92,17 @@ namespace PhoneStoreWeb.Service.OrderService
                     }
                     price -= Math.Min(price - discountAmount, price * discountPercent / 100);
                     order.FinalPrice = price;
+                    order.Status = Data.Enums.OrderStatus.Unconfirm;
                     await uow.Orders.AddAsync(order);
                     await uow.SaveAsync();
-                    return null;
+                    return order.Id;
                 }
             }
             catch(Exception e)
             {
-                return e.Message;
+                return 0;
             }
-        }
+        }     
 
         public async Task<List<OrderResponse>> GetOrders()
         {

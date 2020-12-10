@@ -26,10 +26,10 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewData["orders"] = await orderService.GetOrders();
+            var orders = await orderService.GetOrders();
             ViewData["products"] = await productService.GetAllProducts();
-            ViewData["discounts"] = await discountService.GetAllDiscounts();
-            return View();
+            
+            return View(orders);
         }
         [HttpGet]
         public async Task<IActionResult> Confirm(int id)
@@ -44,45 +44,51 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             string result = await orderService.CancelOrder(id);
             ViewData["result"] = result;
             return RedirectToAction("Index");
-        }
+        }        
         [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Create(CreateOrderRequest request)
-        {
-            return View(request);
+        public async Task<IActionResult> Create()
+        {         
+            ViewData["discounts"] = await discountService.GetAllDiscounts();
+            return View(new CreateOrderRequest());
         }
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
+        public async Task<IActionResult> Create([FromQuery]bool iscreate, [FromForm] CreateOrderRequest request)
         {
+            ViewData["discounts"] = await discountService.GetAllDiscounts();
+            if (!iscreate)
+            {
+                var i = await productService.GetOrderItemBySerial(request.Serial);
+                if (request.Items is null)
+                {
+                    request.Items = new List<OrderItem>();
+                }
+                request.Items.Add(i);
+
+                decimal price = request.TotalPrice;
+                price += i.SoldPrice;
+                request.TotalPrice = price;
+                decimal discountAmount = 0;
+                decimal discountPercent = 0;
+                var discount = await discountService.GetDiscount(request.DiscountId);
+                if (discount != null)
+                {
+                    discountAmount = discount.DiscountAmount;
+                    discountPercent = discount.DiscountPercent;
+                }
+                decimal a = price - discountAmount;
+                decimal b = price - price * discountPercent / 100;
+                price = Math.Min(a, b);
+                request.FinalPrice = price;
+
+                return View(request);
+            }
             if (!ModelState.IsValid)
             {
                 ViewData["result"] = orderService.GetErrors(ModelState).FirstOrDefault();
-                return RedirectToAction("Create",request);
+                return View(request);
             }
-            string result = await orderService.CreateOrder(request);
-            ViewData["result"] = result;
-            return RedirectToAction("Index");
-        }
-        [HttpGet]
-        public async Task<IActionResult> AddItem(string serial, CreateOrderRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewData["result"] = orderService.GetErrors(ModelState).FirstOrDefault();
-                return RedirectToAction("Create", request);
-            }
-            var item = await productService.GetOrderItemBySerial(serial);
-            if (item is null)
-            {
-                ViewData["result"] = "Not Found";
-                return RedirectToAction("Create", request);
-            }
-            request.Items.Add(item);
-            return RedirectToAction("Create", request);
+            var result = await orderService.CreateOrder(request);
+            return View(request);            
         }
     }
 }

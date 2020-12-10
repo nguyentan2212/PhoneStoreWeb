@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using PhoneStoreWeb.Communication.ResponseResult;
 namespace PhoneStoreWeb.Communication.Orders
 {
     public class CreateOrderRequest
@@ -19,5 +19,6 @@ namespace PhoneStoreWeb.Communication.Orders
         public string OrderNotes { set; get; }
         [Required]
         public List<OrderItem> Items { get; set; }
+        public string Serial { set; get; }
     }
 }

@@ -7,8 +7,8 @@ namespace PhoneStoreWeb.Service.OrderService
 {
     public interface IOrderService : IServiceBase
     {
-        public Task<List<OrderResponse>> GetOrders();
-        public Task<string> CreateOrder(CreateOrderRequest request);
+        public Task<List<OrderResponse>> GetOrders();      
+        public Task<int> CreateOrder(CreateOrderRequest request);
         public Task<string> ConfirmOrder(int id);
         public Task<string> CancelOrder(int id);
     }

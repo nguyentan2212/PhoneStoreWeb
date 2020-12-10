@@ -185,7 +185,8 @@ namespace PhoneStoreWeb.Service.ProductService
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
-                ProductItem pi = await uow.ProductItems.SingleOrDefaultAsync(x => x.SerialNumber == serial);
+                ProductItem p = await uow.ProductItems.SingleOrDefaultAsync(x => x.SerialNumber == serial);
+                ProductItem pi = await uow.ProductItems.GetIncludeProductAsync(p.Id);
                 if (pi is null)
                 {
                     return null;

@@ -87,5 +87,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             ViewData["result"] = result;
             return RedirectToAction("Detail", "Product", new { id = request.Id });
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteProductItem(int id, int productId)
+        {
+            string result = await productService.DeleteProductItem(id);
+            return RedirectToAction("Index", "Detail", new { id = productId });
+        }
     }
 }
