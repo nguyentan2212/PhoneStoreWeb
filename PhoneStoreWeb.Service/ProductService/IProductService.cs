@@ -19,6 +19,7 @@ namespace PhoneStoreWeb.Service.ProductService
         public Task<string> Update(UpdateProductRequest request);
         public Task<string> Delete(int id);
         public Task<string> CreateProductItem(ProductItemReceivedRequest request);
-        public Task<string> AddImage(AddProductImageRequest request);        
+        public Task<string> AddImage(AddProductImageRequest request);
+        public Task<string> DeleteProductItem(int id);
     }
 }
