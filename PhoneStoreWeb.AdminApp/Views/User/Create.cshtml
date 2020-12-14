@@ -16,11 +16,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="User">User</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="User">Tài khoản</a></li>
                     <li class="breadcrumb-item active"></li>
                 </ul>
-                <h2>New User</h2>
+                <h2>Thêm tài khoản</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -41,27 +41,27 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Full Name</label>
+                                    <label>Tên đầy đủ</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
                                             </div>
                                             <input type="text" class="form-control credit-card" asp-for="FullName"
-                                                   placeholder="Ex: Cristiano Ronaldo">
+                                                   placeholder="Cristiano Ronaldo">
                                         </div>
                                         <span asp-validation-for="FullName" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>User Name</label>
+                                    <label>Tên người dùng</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
                                             </div>
                                             <input type="text" class="form-control credit-card" asp-for="UserName"
-                                                   placeholder="Ex: Cristiano Ronaldo">
+                                                   placeholder="Ronaldo">
                                         </div>
                                         <span asp-validation-for="UserName" class="text-danger"></span>
                                     </div>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Phone Number</label>
+                                    <label>Số điện thoại</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -96,7 +96,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Role</label>
+                                    <label>Chức vụ</label>
                                     <div class="form-group">
                                         <select asp-for="RoleId" id="role" class="form-control">
                                             @{ if (roles != null)
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Birth Date</label>
+                                    <label>Ngày sinh</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input">
                                             <div class="input-group-prepend">
@@ -125,7 +125,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Password</label>
+                                    <label>Mật khẩu</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -138,7 +138,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Confirm Password</label>
+                                    <label>Nhập lại mật khẩu</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -155,7 +155,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <label>Image</label>
+                                            <label>Hình ảnh</label>
                                         </div>
                                         <div class="body">
                                             <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
@@ -167,8 +167,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary cancel">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary cancel">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
                         </div>
                     </div>

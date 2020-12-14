@@ -24,26 +24,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="menu-user"><a asp-action="index" asp-controller="user"><i class="zmdi zmdi-account"></i><span>User</span></a></li>
-            <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Category</span></a></li>                        
-            <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Discount</span></a></li>
-            <li class="menu-order"><a asp-action="index" asp-controller="order"><i class="zmdi zmdi-chart"></i><span>Order</span></a></li>
-
+            <li class="menu-user"><a asp-action="index" asp-controller="user"><i class="zmdi zmdi-account"></i><span>Tài khoản</span></a></li>
+            <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Danh mục</span></a></li>                        
+            <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Khuyến mãi</span></a></li>
+            <li class="menu-order"><a asp-action="index" asp-controller="order"><i class="zmdi zmdi-chart"></i><span>Hóa đơn</span></a></li>
             <li class="menu-product">
-                <a asp-action="index" asp-controller="product" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>Product</span></a>
-                <ul class="ml-menu">
-                    @{
-                        if (categories != null)
-                        {
-                            foreach (var category in categories)
-                            {
-                                <li class="sub-menu-@category.Id">
-                                    <a href="@Url.Action("Get","Category",category.Id)"><span>@category.Name</span></a>
-                                </li>
-                            }
-                        }
-                    }
-                </ul>
+                <a asp-action="index" asp-controller="product" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>Sản phẩm</span></a>               
             </li>
         </ul>
     </div>

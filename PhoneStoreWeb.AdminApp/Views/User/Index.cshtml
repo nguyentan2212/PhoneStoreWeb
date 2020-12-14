@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item active">User</li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Tài khoản</li>
                 </ul>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
@@ -33,13 +33,13 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2><strong>Users</strong> </h2>
+                        <h2><strong>Người dùng</strong> </h2>
                         <div class="float-right">
                             <form asp-action="Create" asp-controller="User" method="get">
                                 <button type="submit" style="margin-top: -50px;"
                                         class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
                                     <i class="fa fa-cog mr-1"></i>
-                                    Add
+                                    Thêm
                                 </button>
                             </form>
                         </div>
@@ -48,16 +48,16 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>FullName</th>
-                                        <th>UserName</th>
-                                        <th>Phone</th>
+                                    <tr>                                       
+                                        <th>Tên đầy đủ</th>
+                                        <th>Tên người dùng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Sinh nhật</th>
                                         <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                        <th>Image</th>
-                                        <th>Action</th>
+                                        <th>Chức vụ</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,11 +68,11 @@
                                             {
                                                 var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
                                                 i++;
-                                                <tr>
-                                                    <td>@i</td>
+                                                <tr>                                                    
                                                     <td>@user.FullName</td>
                                                     <td>@user.UserName</td>
                                                     <td>@user.PhoneNumber</td>
+                                                    <td>@user.Birthdate.ToString("dd/MM/yyyy")</td>
                                                     <td>
                                                         <span class="email"><a href="javascript:void(0);" title="">@user.Email</a></span>
                                                     </td>

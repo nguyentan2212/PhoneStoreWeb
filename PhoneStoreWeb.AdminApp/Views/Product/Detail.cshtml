@@ -17,8 +17,8 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Product</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Sản phẩm</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
                 <h2>@product.Name</h2>
@@ -55,15 +55,15 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Price</label>
+                                <label>Giá</label>
                                 <div class="form-group">
                                     <input asp-for="@Model.ReceivedPrice" type="number" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
                         </div>
                     </form>
                 </div>                
@@ -79,13 +79,13 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Category</label>
+                                    <label>Danh mục</label>
                                     <div class="form-group">
                                         <input disabled type="text" asp-for="@category" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Id</label>
+                                    <label>Mã</label>
                                     <div class="form-group">
                                         <input disabled type="text" asp-for="@product.Id" class="form-control" required>
                                     </div>
@@ -108,13 +108,13 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Storage</label>
+                                        <label>Lưu trữ</label>
                                         <input disabled type="number" asp-for="@product.Storage" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Battery Capacity</label>
+                                        <label>Pin</label>
                                         <input disabled type="number" asp-for="@product.BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Price</label>
+                                        <label>Giá</label>
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Status</label>
+                                        <label>Trạng thái</label>
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-star"></i></span>
@@ -150,7 +150,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <strong>Description</strong>
+                                            <strong>Mô tả</strong>
                                         </div>
                                         @Html.Raw(@product.Description)
                                     </div>
@@ -160,7 +160,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <label>Image</label>
+                                            <label>Ảnh</label>
                                         </div>
                                         <div class="body">
                                             <img src="@product.ImagePath" class="rounded align-left" />
@@ -175,7 +175,7 @@
                                     <button type="button" class="float-right btn btn-primary"
                                             data-toggle="modal"
                                             data-target="#exampleModal">
-                                        Add Item
+                                        Thêm sản phẩm
                                     </button>
                                 </div>
                             </div>
@@ -185,10 +185,10 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Serial Number</th>
-                                                <th>Received Price</th>
-                                                <th>Received Date</th>
-                                                <th>Status</th>
+                                                <th>Số Serial</th>
+                                                <th>Giá nhập</th>
+                                                <th>Ngày nhập</th>
+                                                <th>Trạng thái</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -207,7 +207,7 @@
                                                                 <a class="text-white delete" 
                                                                    href="@Url.Action("DeleteProductItem","Product",new { @id = item.Id, @productId = product.Id})">
                                                                     <i class="zmdi zmdi-delete"></i>
-                                                                    Delete
+                                                                    Xóa
                                                                 </a>
                                                             </div>
                                                         </td>

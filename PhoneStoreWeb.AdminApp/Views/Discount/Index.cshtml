@@ -15,11 +15,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Discount">Discount</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Discount">Khuyến mãi</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>Discount</h2>
+                <h2>Khuyến mãi</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -36,7 +36,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Discount</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo khuyến mãi mới</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -44,7 +44,7 @@
                     <form asp-action="Create" asp-controller="Discount" method="post" enctype="multipart/form-data">
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Code</label>
+                                <label>Mã khuyến mãi</label>
                                 <div class="form-group">
                                     <input asp-for="Code" type="text" class="form-control" required>
                                     <span asp-validation-for="Code" class="text-danger"></span>
@@ -53,14 +53,14 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <label>Discount Percent</label>
+                                <label>Phần trăm giảm giá</label>
                                 <div class="form-group">
                                     <input asp-for="DiscountPercent" type="number" class="form-control" required></input>
                                     <span asp-validation-for="DiscountPercent" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>Discount Amount</label>
+                                <label>Số tiền giảm giá</label>
                                 <div class="form-group">
                                     <input asp-for="DiscountAmount" type="number" class="form-control" required></input>
                                     <span asp-validation-for="DiscountAmount" class="text-danger"></span>
@@ -69,14 +69,14 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <label>From</label>
+                                <label>Từ ngày</label>
                                 <div class="form-group">
                                     <input asp-for="FromDate" type="date" class="form-control" required></input>
                                     <span asp-validation-for="FromDate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>To</label>
+                                <label>Đến ngày</label>
                                 <div class="form-group">
                                     <input asp-for="ToDate" type="date" class="form-control" required></input>
                                     <span asp-validation-for="ToDate" class="text-danger"></span>
@@ -84,8 +84,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
                         </div>
                     </form>
                 </div>
@@ -97,7 +97,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Discount</h5>
+                    <h5 class="modal-title" id="updateModalLabel">Chỉnh sửa khuyến mãi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -105,7 +105,7 @@
                     <form asp-action="Update" asp-controller="Discount" method="post" enctype="multipart/form-data">
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Code</label>
+                                <label>Mã khuyến mãi</label>
                                 <div class="form-group">
                                     <input asp-for="Code" type="text" class="form-control" required>
                                     <span asp-validation-for="Code" class="text-danger"></span>
@@ -114,14 +114,14 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <label>Discount Percent</label>
+                                <label>Phần trăm giảm giá</label>
                                 <div class="form-group">
                                     <input asp-for="DiscountPercent" type="number" class="form-control" required></input>
                                     <span asp-validation-for="DiscountPercent" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>Discount Amount</label>
+                                <label>Số tiền giảm giá</label>
                                 <div class="form-group">
                                     <input asp-for="DiscountAmount" type="number" class="form-control" required></input>
                                     <span asp-validation-for="DiscountAmount" class="text-danger"></span>
@@ -130,14 +130,14 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-6">
-                                <label>From</label>
+                                <label>Từ ngày</label>
                                 <div class="form-group">
                                     <input asp-for="FromDate" type="date" class="form-control" required></input>
                                     <span asp-validation-for="FromDate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label>To</label>
+                                <label>Đến ngày</label>
                                 <div class="form-group">
                                     <input asp-for="ToDate" type="date" class="form-control" required></input>
                                     <span asp-validation-for="ToDate" class="text-danger"></span>
@@ -145,8 +145,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
                         </div>
                     </form>
                 </div>
@@ -165,7 +165,7 @@
                                     data-toggle="modal" data-target="#exampleModal"
                                     class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
                                 <i class="fa fa-cog mr-1"></i>
-                                Add
+                                Thêm
                             </button>
                         </div>
                     </div>
@@ -174,13 +174,13 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Code</th>
-                                        <th>Percent</th>
-                                        <th>Amount</th>
-                                        <th>Begin</th>
-                                        <th>End</th>
-                                        <th>Action</th>
+                                        <th>Mã</th>
+                                        <th>Mã khuyến mãi</th>
+                                        <th>Phần trăm</th>
+                                        <th>Số tiền</th>
+                                        <th>Bắt đầu</th>
+                                        <th>Kết thúc</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -206,7 +206,7 @@
                                                            data-toggle="modal"
                                                            data-target="#updateModal">
                                                             <i class="zmdi zmdi-edit"></i>
-                                                            Update
+                                                            Cập nhật
                                                         </a>
                                                     </div>
                                                 </td>

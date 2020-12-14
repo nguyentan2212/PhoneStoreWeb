@@ -49,7 +49,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Create()
         {         
             ViewData["discounts"] = await discountService.GetAllDiscounts();
-            return View(new CreateOrderRequest());
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromQuery]bool iscreate, [FromForm] CreateOrderRequest request)

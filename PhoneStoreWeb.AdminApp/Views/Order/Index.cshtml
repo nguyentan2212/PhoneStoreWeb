@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Order">Order</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Order">Hóa đơn</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>Category</h2>
+                <h2>Hóa đơn</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -34,13 +34,13 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2><strong>Orders</strong> </h2>
+                        <h2><strong>Hóa đơn</strong> </h2>
                         <div class="float-right">
                             <form asp-action="Create" asp-controller="Order" method="get">
                                 <button type="submit" style="margin-top: -50px;"
                                         class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
                                     <i class="fa fa-cog mr-1"></i>
-                                    Add
+                                    Thêm
                                 </button>
                             </form>
                         </div>
@@ -50,13 +50,13 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Name</th>
-                                        <th>DiscountCode</th>
-                                        <th>TotalPrice</th>
-                                        <th>FinalPrice</th>
-                                        <th>StaffName</th>
-                                        <th>Action</th>
+                                        <th>Mã</th>
+                                        <th>Khách hàng</th>
+                                        <th>Mã giảm giá</th>
+                                        <th>Tổng giá</th>
+                                        <th>Thành tiền</th>
+                                        <th>Nhân viên</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +76,7 @@
                                                     <div class="btn btn-primary btn-sm">
                                                         <a class="text-white">
                                                             <i class="zmdi zmdi-info"></i>
-                                                            Detail
+                                                            Chi tiết
                                                         </a>
                                                     </div>
                                                 </td>

@@ -15,11 +15,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Product</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Sản phẩm</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>New Product</h2>
+                <h2>Sản phẩm mới</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -39,7 +39,7 @@
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Category</label>
+                                    <label>Danh mục</label>
                                     <div class="form-group">
                                         <select class="form-control ms" id="select-category" asp-for="CategoryId">
                                             @if (categories != null)
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Name</label>
+                                    <label>Tên</label>
                                     <div class="form-group">
                                         <input type="text" asp-for="Name" class="form-control"
                                                value="" required>
@@ -83,7 +83,7 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Storage</label>
+                                        <label>Lưu trữ</label>
                                         <input type="number" asp-for="Storage" class="form-control"
                                                value="" required>
                                         <span asp-validation-for="Storage" class="text-danger"></span>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Battery Capacity</label>
+                                        <label>Pin</label>
                                         <input type="number" asp-for="BatteryCapacity" class="form-control"
                                                value="" placeholder="4000 mAh" required>
                                         <span asp-validation-for="BatteryCapacity" class="text-danger"></span>
@@ -101,7 +101,7 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Price</label>
+                                        <label>Giá</label>
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
@@ -117,7 +117,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <strong>Description</strong>
+                                            <strong>Mô tả</strong>
                                         </div>
                                         <textarea class="col-lg summernote" asp-for="Description"></textarea>
                                     </div>
@@ -127,7 +127,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <label>Image</label>
+                                            <label>Hình ảnh</label>
                                         </div>
                                         <div class="body">
                                             <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
@@ -141,8 +141,8 @@
                         </div>
                         <div class="body">
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
                         </div>
                     </div>

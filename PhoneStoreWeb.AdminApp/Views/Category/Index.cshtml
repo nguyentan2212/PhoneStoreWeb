@@ -19,11 +19,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Category">Category</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Category">Danh mục</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>Category</h2>
+                <h2>Danh mục</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -40,7 +40,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo danh mục mới</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -48,7 +48,7 @@
                     <form asp-action="Create" asp-controller="Category" method="post" enctype="multipart/form-data">
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Name</label>
+                                <label>Tên</label>
                                 <div class="form-group">
                                     <input asp-for="Name" type="text" class="form-control" required>
                                     <span asp-validation-for="Name" class="text-danger"></span>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Description</label>
+                                <label>Mô tả</label>
                                 <div class="form-group">
                                     <textarea asp-for="Description" class="form-control"></textarea>
                                 </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Image</label>
+                                <label>Hình ảnh</label>
                                 <div class="form-group">
                                     <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
                                            data-default-file=""
@@ -75,8 +75,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
                         </div>
                     </form>
                 </div>
@@ -88,7 +88,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateModalLabel">Update Category</h5>
+                    <h5 class="modal-title" id="updateModalLabel">Chỉnh sửa danh mục</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
@@ -97,7 +97,7 @@
                         <div class="row clearfix">
                             <div class="col-sm">
                                 <input type="hidden" asp-for="Id"/>
-                                <label>Name</label>
+                                <label>Tên</label>
                                 <div class="form-group">
                                     <input asp-for="Name" type="text" class="form-control" required>
                                     <span asp-validation-for="Name" class="text-danger"></span>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Description</label>
+                                <label>Mô tả</label>
                                 <div class="form-group">
                                     <textarea asp-for="Description" class="form-control"></textarea>
                                 </div>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm">
-                                <label>Image</label>
+                                <label>Hình ảnh</label>
                                 <div class="form-group">
                                     <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
                                            data-default-file=""
@@ -124,8 +124,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary add-item">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
                         </div>
                     </form>
                 </div>
@@ -144,7 +144,7 @@
                                     data-toggle="modal" data-target="#exampleModal"
                                     class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
                                 <i class="fa fa-cog mr-1"></i>
-                                Add
+                                Thêm
                             </button>
                         </div>
                     </div>
@@ -153,11 +153,11 @@
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                     <tr>
-                                        <th>STT</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
-                                        <th>Action</th>
+                                        <th>Mã</th>
+                                        <th>Tên</th>
+                                        <th>Mô tả</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -182,7 +182,7 @@
                                                            data-toggle="modal" 
                                                            data-target="#updateModal">
                                                             <i class="zmdi zmdi-edit"></i>
-                                                            Update
+                                                            Cập nhật
                                                         </a>
                                                     </div>
                                                 </td>
