@@ -1,7 +1,7 @@
 ﻿@using PhoneStoreWeb.Communication.ResponseResult
 @{
     var categories = (List<CategoryResponse>)ViewData["categories"];
-    var image = TempData["image"] as string;
+    string image = ViewBag.ImagePath as string;
 }
 <aside id="leftsidebar" class="sidebar">
     <div class="navbar-brand">
@@ -12,7 +12,7 @@
         <ul class="list" id="list-menu">
             <li>
                 <div class="user-info">
-                    <a class="image" href="javascript:void(0)"><img src="@ViewBag.ImagePath" alt="User"></a>
+                    <a class="image" href="javascript:void(0)"><img src="@image" alt="User"></a>
                     <div class="detail">
                         <h4>@User.Identity.Name</h4>                        
                     </div>
@@ -28,9 +28,7 @@
             <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Danh mục</span></a></li>                        
             <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Khuyến mãi</span></a></li>
             <li class="menu-order"><a asp-action="index" asp-controller="order"><i class="zmdi zmdi-chart"></i><span>Hóa đơn</span></a></li>
-            <li class="menu-product">
-                <a asp-action="index" asp-controller="product" class="menu-toggle"><i class="zmdi zmdi-hc-fw"></i><span>Sản phẩm</span></a>               
-            </li>
+            <li class="menu-product"><a asp-action="index" asp-controller="product"><i class="zmdi zmdi-hc-fw"></i><span>Sản phẩm</span></a></li>
         </ul>
     </div>
 </aside>

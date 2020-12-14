@@ -19,5 +19,6 @@ namespace PhoneStoreWeb.Service.UserService
         public Task<string> UpdateUserAsync(UserUpdateRequest request);
         public List<RoleResponse> GetAllRoles();
         public Task<string> ChangeStatusAsync(string id);
+        public Task<string> GetImageAsync(string name);
     }
 }

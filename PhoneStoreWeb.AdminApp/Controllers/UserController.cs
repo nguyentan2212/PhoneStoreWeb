@@ -24,13 +24,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await userService.GetAllUsersAsync();
-            ViewBag.ImagePath = "/assets/images/xs/avatar1.jpg";
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View(users);
         }       
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var roles = userService.GetAllRoles();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             ViewData["roles"] = roles;
             return View();
         }
@@ -60,6 +61,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             var roles = userService.GetAllRoles();
             var defaultRequest = await userService.GetUpdateRequestAsync(id);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             ViewData["roles"] = roles;
             return View(defaultRequest);
         }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhoneStoreWeb.Communication.Orders;
+using PhoneStoreWeb.Service.DiscountService;
+using PhoneStoreWeb.Service.OrderService;
+using PhoneStoreWeb.Service.ProductService;
+using PhoneStoreWeb.Service.UserService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PhoneStoreWeb.Service.OrderService;
-using PhoneStoreWeb.Service.ProductService;
-using PhoneStoreWeb.Service.DiscountService;
-using PhoneStoreWeb.Communication.ResponseResult;
-using PhoneStoreWeb.Communication.Orders;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
@@ -16,19 +16,21 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         private readonly IOrderService orderService;
         private readonly IProductService productService;
         private readonly IDiscountService discountService;
+        private readonly IUserService userService;
         public OrderController(IOrderService orderService, IProductService productService, 
-            IDiscountService discountService)
+            IDiscountService discountService, IUserService userService)
         {
             this.orderService = orderService;
             this.productService = productService;
             this.discountService = discountService;
+            this.userService = userService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var orders = await orderService.GetOrders();
             ViewData["products"] = await productService.GetAllProducts();
-            
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View(orders);
         }
         [HttpGet]
@@ -49,11 +51,13 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Create()
         {         
             ViewData["discounts"] = await discountService.GetAllDiscounts();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromQuery]bool iscreate, [FromForm] CreateOrderRequest request)
         {
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             ViewData["discounts"] = await discountService.GetAllDiscounts();
             if (!iscreate)
             {

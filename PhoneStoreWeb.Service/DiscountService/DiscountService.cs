@@ -36,6 +36,28 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
+        public async Task<string> Delete(int id)
+        {
+            try
+            {
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    var result = await uow.Discounts.GetAsync(id);
+                    if (result is null)
+                    {
+                        return "Không tìm thấy!";
+                    }
+                    uow.Discounts.Remove(result);
+                    await uow.SaveAsync();
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         public async Task<List<DiscountResponse>> GetAllDiscounts()
         {
             using (UnitOfWork uow = new UnitOfWork())

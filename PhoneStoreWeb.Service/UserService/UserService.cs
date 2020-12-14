@@ -5,6 +5,7 @@ using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Communication.Users;
 using PhoneStoreWeb.Data.Enums;
 using PhoneStoreWeb.Data.Models;
+using PhoneStoreWeb.Data.UnitOfWork;
 using PhoneStoreWeb.Service.FileService;
 using System;
 using System.Collections.Generic;
@@ -83,6 +84,26 @@ namespace PhoneStoreWeb.Service.UserService
                 usersResult[i].Role = roles.FirstOrDefault();
             }
             return usersResult;
+        }
+
+        public async Task<string> GetImageAsync(string name)
+        {
+            try
+            {
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    AppUser user = await userManager.FindByNameAsync(name); 
+                    if (user is null)
+                    {
+                        return "Không tìm thấy!";
+                    }
+                    return user.ImagePath;
+                }
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         public async Task<UserUpdateRequest> GetUpdateRequestAsync(string id)

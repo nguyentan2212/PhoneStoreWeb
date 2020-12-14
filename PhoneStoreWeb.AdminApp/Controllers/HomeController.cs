@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using PhoneStoreWeb.AdminApp.Models;
 using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Service.ProductService;
+using PhoneStoreWeb.Service.UserService;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -14,17 +15,16 @@ namespace PhoneStoreWeb.AdminApp.Controllers
     {       
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
-
-        public HomeController(IProductService productService, ICategoryService categoryService)
+        private readonly IUserService userService;
+        public HomeController(IProductService productService, ICategoryService categoryService, IUserService userService)
         {
             this.productService = productService;
             this.categoryService = categoryService;
-            
+            this.userService = userService;
         }        
         public async Task<IActionResult> Index()
-        {
-            ViewBag.ImagePath = "/assets/images/xs/avatar1.jpg";
-            ViewBag.result = "Have a nofification";
+        {           
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             var categories = await categoryService.GetAllCategories();
             var products = await productService.GetAllProducts();
             ViewData["categories"] = categories;

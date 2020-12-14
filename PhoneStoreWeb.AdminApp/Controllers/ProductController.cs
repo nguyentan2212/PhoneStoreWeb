@@ -8,6 +8,7 @@ using PhoneStoreWeb.Service.ProductService;
 using Microsoft.AspNetCore.Authorization;
 using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Communication.Products;
+using PhoneStoreWeb.Service.UserService;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
@@ -16,21 +17,25 @@ namespace PhoneStoreWeb.AdminApp.Controllers
     {
         private readonly IProductService productService;
         private readonly ICategoryService categoryService;
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        private readonly IUserService userService;
+        public ProductController(IProductService productService, ICategoryService categoryService, IUserService userService)
         {
             this.productService = productService;
             this.categoryService = categoryService;
+            this.userService = userService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {            
             var products = await productService.GetAllProducts();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View(products);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             ViewData["categories"] = await categoryService.GetAllCategories();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View();
         }
         [HttpPost]
@@ -59,12 +64,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             var result = await productService.GetUpdateDefault(id);
             ViewData["categories"] = await categoryService.GetAllCategories();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View(result);
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] UpdateProductRequest request)
         {
             var result = await productService.Update(request);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             if (result is null)
             {
                 return RedirectToAction("Index");
@@ -79,6 +86,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             ViewData["product"] = product;
             ViewData["items"] = await productService.GetAllProductItemByProductId(id);
             ViewData["category"] = await productService.GetCategory(id);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View();
         }
         public async Task<IActionResult> AddProductItem(ProductItemReceivedRequest request)

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Categories;
 using PhoneStoreWeb.Service.CategoryService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using PhoneStoreWeb.Service.UserService;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
@@ -11,14 +9,17 @@ namespace PhoneStoreWeb.AdminApp.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly IUserService userService;
+        public CategoryController(ICategoryService categoryService, IUserService userService)
         {
             this.categoryService = categoryService;
+            this.userService = userService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             ViewData["categories"] = await categoryService.GetAllCategories();
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View();
         }
         [HttpPost]

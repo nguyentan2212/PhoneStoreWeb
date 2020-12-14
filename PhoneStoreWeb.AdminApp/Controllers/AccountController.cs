@@ -35,7 +35,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             var result = await signInManager.PasswordSignInAsync(request.UserName, request.Password, request.RememberMe, false);
             if (result != Microsoft.AspNetCore.Identity.SignInResult.Success)
             {
-                TempData["message"] = "Login failed";
+                ViewData["result"] = "Login failed";
                 return RedirectToAction("Login");
             }
             if (string.IsNullOrEmpty(returnUrl))

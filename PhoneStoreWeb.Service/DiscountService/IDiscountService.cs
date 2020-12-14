@@ -14,5 +14,6 @@ namespace PhoneStoreWeb.Service.DiscountService
         public Task<DiscountResponse> GetDiscount(int id);
         public Task<string> CreateDiscount(DiscountRequest request);
         public Task<string> UpdateDiscount(DiscountRequest request);
+        public Task<string> Delete(int id);
     }
 }
