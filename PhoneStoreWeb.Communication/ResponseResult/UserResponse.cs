@@ -4,7 +4,7 @@ namespace PhoneStoreWeb.Communication.ResponseResult
 {
     public class UserResponse
     {
-        public DateTime Birthdate { set; get; }
+        public DateTime BirthDate { set; get; }
         public string FullName { set; get; }
         public string ImagePath { get; set; }
         public string PhoneNumber { set; get; }

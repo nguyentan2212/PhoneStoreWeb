@@ -51,36 +51,24 @@
                                     <tr>                                       
                                         <th>Tên đầy đủ</th>
                                         <th>Tên người dùng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Sinh nhật</th>
-                                        <th>Email</th>
+                                        <th>Số điện thoại</th>                                       
                                         <th>Chức vụ</th>
-                                        <th>Trạng thái</th>
-                                        <th>Hình ảnh</th>
+                                        <th>Trạng thái</th>                                       
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @{ if (Model != null)
-                                        {
-                                            int i = 0;
+                                        {                                            
                                             foreach (var user in Model)
                                             {
-                                                var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
-                                                i++;
+                                                var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");                                               
                                                 <tr>                                                    
                                                     <td>@user.FullName</td>
                                                     <td>@user.UserName</td>
-                                                    <td>@user.PhoneNumber</td>
-                                                    <td>@user.Birthdate.ToString("dd/MM/yyyy")</td>
-                                                    <td>
-                                                        <span class="email"><a href="javascript:void(0);" title="">@user.Email</a></span>
-                                                    </td>
+                                                    <td>@user.PhoneNumber</td>                                                   
                                                     <td>@user.Role</td>
-                                                    <td>@user.Status.ToDescriptionString()</td>
-                                                    <td class="text-center">
-                                                        <img src="@imagePath" asp-append-version="true" width="48" height="48" alt="user img">
-                                                    </td>
+                                                    <td>@user.Status.ToDescriptionString()</td>                                                   
                                                     <td width="15%" class="footable-last-visible text-center" style="display: table-cell;">
                                                         <div>
                                                             @if (user.Status == AccountStatus.Locked)
@@ -106,7 +94,16 @@
                                                                         Khóa
                                                                     </a>
                                                                 </div>
-                                                            }  
+                                                            }
+                                                            <div class="btn btn-outline-success btn-sm">
+                                                                <a class="text-white"
+                                                                   asp-action="Detail"
+                                                                   asp-controller="User"
+                                                                   asp-route-id="@user.Id">
+                                                                    <i class="zmdi zmdi-info"></i>
+                                                                    Chi tiet
+                                                                </a>
+                                                            </div>
                                                             <div class="btn btn-primary btn-sm">
                                                                 <a class="text-white"
                                                                    asp-action="update"

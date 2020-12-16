@@ -26,7 +26,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             var users = await userService.GetAllUsersAsync();
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View(users);
-        }       
+        }    
+        [HttpGet]
+        public async Task<IActionResult> Detail(string id)
+        {
+            var user = await userService.GetUserByIdAsync(id);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            return View(user);
+        }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
