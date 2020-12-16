@@ -27,7 +27,7 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public decimal TotalPrice { set; get; }
         public decimal FinalPrice { set; get; }
         public OrderStatus Status { set; get; }
-        public DateTime Created_At { set; get; }
+        public DateTime CreatedDate { set; get; }
         public List<OrderItem> Items { get; set; }
         public string Serial { set; get; }       
     }

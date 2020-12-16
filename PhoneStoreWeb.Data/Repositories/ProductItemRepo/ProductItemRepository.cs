@@ -22,7 +22,7 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
 
         public async Task<string> GetProductNameAsync(int id)
         {
-            var productItem = await GetAsync(id);
+            var productItem = await GetIncludeProductAsync(id);
             var name = productItem.Product.Name;
             return name;
         }
@@ -32,6 +32,13 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
             ProductItem item = await DbSetEntity
                 .Include(x => x.Product).FirstOrDefaultAsync(y => y.Id == id);
             return item;
+        }
+
+        public async Task<decimal> GetProductPriceAsync(int id)
+        {
+            var productItem = await GetIncludeProductAsync(id);
+            var price = productItem.Product.Price;
+            return price;
         }
     }
 }
