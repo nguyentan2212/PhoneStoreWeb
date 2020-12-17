@@ -11,5 +11,9 @@
             Title = title;
             Content = content;
         }
+        public MessageResponse()
+        {
+
+        }
     }
 }
