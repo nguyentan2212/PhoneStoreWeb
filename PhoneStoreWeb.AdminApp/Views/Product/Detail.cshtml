@@ -1,6 +1,6 @@
 ﻿@using PhoneStoreWeb.Communication.Products;
 @using PhoneStoreWeb.Communication.ResponseResult;
-@using PhoneStoreWeb.Data.Enums;
+@using PhoneStoreWeb.Communication.Extension;
 @model ProductItemReceivedRequest;
 @{
     ProductResponse product = ViewData["product"] as ProductResponse;
@@ -122,13 +122,24 @@
                             <div class="row clearfix">
                                 <div class="col-sm-6">
                                     <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input disabled type="number" asp-for="@product.Amount" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Tồn kho</label>
+                                        <input disabled type="number" asp-for="@product.Stock" class="form-control" placeholder="4000 mAh" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
                                         <label>Giá</label>
                                         <div class="input-group masked-input mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
-                                            </div>
                                             <input disabled type="number" class="form-control price"
-                                                   placeholder="Ex: 100,000,000,000 vnđ" asp-for="@product.Price" required>
+                                                   asp-for="@product.Price" required>
                                         </div>
                                     </div>
                                 </div>
@@ -136,16 +147,11 @@
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <div class="input-group masked-input mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="zmdi zmdi-star"></i></span>
-                                            </div>
-                                            <select disabled class="form-control ms" asp-for="@product.Status" asp-items="Html.GetEnumSelectList<ProductStatus>()">
-                                                <option selected="selected" value="">Please select</option>
-                                            </select>
+                                            <input disabled type="text" class="form-control ms" asp-for="@product.Status" value="@product.Status.ToDescriptionString()" />
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="row clearfix">
                                 <div class="col-lg">
                                     <div class="form-group">
@@ -184,11 +190,12 @@
                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
+                                                <th>Mã</th>
                                                 <th>Số Serial</th>
                                                 <th>Giá nhập</th>
                                                 <th>Ngày nhập</th>
                                                 <th>Trạng thái</th>
+                                                <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -202,7 +209,7 @@
                                                         <td>@item.ReceivedPrice</td>
                                                         <td>@item.ReceivedDate</td>
                                                         <td>@Html.DisplayFor(x => item.Status)</td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <div class="btn btn-danger btn-sm">
                                                                 <a class="text-white delete" 
                                                                    href="@Url.Action("DeleteProductItem","Product",new { @id = item.Id, @productId = product.Id})">

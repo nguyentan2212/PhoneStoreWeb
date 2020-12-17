@@ -31,6 +31,7 @@ namespace PhoneStoreWeb.Communication.Products
         public int BatteryCapacity { get; set; }
         public IFormFile ThumbnailImage { get; set; }
         [Required]
-        public ProductStatus Status { get; set; }
+        public bool IsSoldOut { get; set; }
+        public string Image { get; set; }
     }
 }

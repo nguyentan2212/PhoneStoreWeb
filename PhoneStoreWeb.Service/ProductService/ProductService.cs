@@ -77,7 +77,6 @@ namespace PhoneStoreWeb.Service.ProductService
                         Status = Data.Enums.ProductItemStatus.Available,
                         Product = product,                      
                     };
-                    product.Stock++;
                     uow.Products.Update(product);
                     await uow.ProductItems.AddAsync(item);
                     await uow.SaveAsync();                    
@@ -116,7 +115,6 @@ namespace PhoneStoreWeb.Service.ProductService
                     ProductItem item = await uow.ProductItems.GetIncludeProductAsync(id);
                     Product product = item.Product;
                     uow.ProductItems.Remove(id);
-                    product.Stock--;
                     uow.Products.Update(product);           
                     await uow.SaveAsync();
                     return null;
@@ -146,6 +144,22 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 var products = await uow.Products.GetAllAsync();
                 result = mapper.Map<List<Product>, List<ProductResponse>>(products.ToList());
+                for (int i = 0; i < result.Count; i++)
+                {
+                    result[i].Amount = await uow.Products.GetAmountByIdAsync(products.ElementAt(i).Id);
+                    result[i].Stock = await uow.Products.GetStockByIdAsync(products.ElementAt(i).Id);
+                    if (result[i].Status != Data.Enums.ProductStatus.SoldOut)
+                    {
+                        if (result[i].Stock == 0)
+                        {
+                            result[i].Status = Data.Enums.ProductStatus.OutOfStock;
+                        }
+                        else
+                        {
+                            result[i].Status = Data.Enums.ProductStatus.InStock;
+                        }
+                    }
+                }
             }
             return result;
         }
@@ -168,6 +182,19 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 var product = await uow.Products.GetAsync(id);
                 result = mapper.Map<Product, ProductResponse>(product);
+                result.Amount = await uow.Products.GetAmountByIdAsync(product.Id);
+                result.Stock = await uow.Products.GetStockByIdAsync(product.Id);
+                if (result.Status != Data.Enums.ProductStatus.SoldOut)
+                {
+                    if (result.Stock == 0)
+                    {
+                        result.Status = Data.Enums.ProductStatus.OutOfStock;
+                    }
+                    else
+                    {
+                        result.Status = Data.Enums.ProductStatus.InStock;
+                    }
+                }                
             }
             return result;
         }
@@ -207,6 +234,18 @@ namespace PhoneStoreWeb.Service.ProductService
             {
                 var product = await uow.Products.GetAsync(id);
                 result = mapper.Map<Product, UpdateProductRequest>(product);
+                if (result is null)
+                {
+                    return null;
+                }
+                if (product.Status == Data.Enums.ProductStatus.SoldOut)
+                {
+                    result.IsSoldOut = true;
+                }
+                else
+                {
+                    result.IsSoldOut = false;
+                }
             }
             return result;
         }
@@ -227,7 +266,11 @@ namespace PhoneStoreWeb.Service.ProductService
                     {
                         var p = await GetById(request.Id);
                         product.Image = p.ImagePath;
-                    }    
+                    }
+                    if (request.IsSoldOut)
+                    {
+                        product.Status = Data.Enums.ProductStatus.SoldOut;
+                    }
                     uow.Products.Update(product);
                     await uow.SaveAsync();
                     return null;
