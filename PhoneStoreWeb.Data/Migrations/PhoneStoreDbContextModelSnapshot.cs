@@ -384,9 +384,6 @@ namespace PhoneStoreWeb.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
                     b.Property<int>("Storage")
                         .HasColumnType("int");
 
