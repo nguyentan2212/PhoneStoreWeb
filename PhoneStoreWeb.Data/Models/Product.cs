@@ -14,9 +14,7 @@ namespace PhoneStoreWeb.Data.Models
         [Required]
         [DataType(DataType.Currency)]
         [Column(TypeName = "Money")]
-        public decimal Price { set; get; }       
-        [Required]
-        public int Stock { set; get; }        
+        public decimal Price { set; get; }                     
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
