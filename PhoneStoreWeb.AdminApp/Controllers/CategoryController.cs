@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Categories;
+using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Service.UserService;
 using System.Threading.Tasks;
@@ -19,25 +20,34 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["categories"] = await categoryService.GetAllCategories();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);            
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateCategoryRequest request)
         {
-            ViewData["result"] = await categoryService.Create(request);
+            var message = await categoryService.Create(request);
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            string r = await categoryService.Delete(id);
+            var message = await categoryService.Delete(id);
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
             return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] CreateCategoryRequest request)
         {
-            ViewData["result"] = await categoryService.Update(request);
+            var message = await categoryService.Update(request);
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
             return RedirectToAction("Index");
         }
     }

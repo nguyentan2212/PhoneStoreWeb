@@ -19,7 +19,7 @@ namespace PhoneStoreWeb.Service.CategoryService
             this.fileService = fileService;
         }
 
-        public async Task<string> Create(CreateCategoryRequest request)
+        public async Task<MessageResponse> Create(CreateCategoryRequest request)
         {
             try
             {
@@ -33,16 +33,16 @@ namespace PhoneStoreWeb.Service.CategoryService
                     };
                     await uow.Categories.AddAsync(category);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Tạo mới thành công");
                 }
             }
             catch(Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: "+e.Message);
             }
         }
 
-        public async Task<string> Delete(int id)
+        public async Task<MessageResponse> Delete(int id)
         {
             try
             {
@@ -50,12 +50,12 @@ namespace PhoneStoreWeb.Service.CategoryService
                 {
                     uow.Categories.Remove(id);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xóa thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xóa thất bại", "Lỗi: " + e.Message);
             }
         }
 
@@ -70,7 +70,7 @@ namespace PhoneStoreWeb.Service.CategoryService
             return result;
         }
 
-        public async Task<string> Update(CreateCategoryRequest request)
+        public async Task<MessageResponse> Update(CreateCategoryRequest request)
         {
             try
             {
@@ -86,12 +86,12 @@ namespace PhoneStoreWeb.Service.CategoryService
                     category.Id = request.Id;
                     uow.Categories.Update(category);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Cập nhật thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Cập nhật thất bại", "Lỗi: " + e.Message);
             }
         }
     }
