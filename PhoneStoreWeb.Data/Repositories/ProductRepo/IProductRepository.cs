@@ -8,5 +8,7 @@ namespace PhoneStoreWeb.Data.Repositories.ProductRepo
     {
         public Task AddOrUpdateImageAsync(int id, string path);
         public Task<Product> GetWithIncludeAsync(int id);
+        public Task<int> GetAmountByIdAsync(int id);
+        public Task<int> GetStockByIdAsync(int id);
     }
 }
