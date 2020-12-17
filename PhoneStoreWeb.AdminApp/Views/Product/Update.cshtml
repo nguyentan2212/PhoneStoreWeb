@@ -1,6 +1,5 @@
 ﻿@using PhoneStoreWeb.Communication.Products;
 @using PhoneStoreWeb.Communication.ResponseResult;
-@using PhoneStoreWeb.Data.Enums;
 @model UpdateProductRequest;
 @{
     var categories = ViewData["categories"] as List<CategoryResponse>;
@@ -90,7 +89,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Pin</label>
-                                        <input type="number" asp-for="BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
+                                        <input type="number" asp-for="BatteryCapacity" class="form-control" required>
                                         <span asp-validation-for="BatteryCapacity" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -104,7 +103,7 @@
                                                 <span class="input-group-text"><i class="zmdi zmdi-money"></i></span>
                                             </div>
                                             <input type="number" class="form-control price"
-                                                   placeholder="Ex: 100,000,000,000 vnđ" asp-for="Price" required>
+                                                   asp-for="Price" required>
                                         </div>
                                         <span asp-validation-for="Price" class="text-danger"></span>
                                     </div>
@@ -112,20 +111,15 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Trạng thái</label>
-                                        <div class="input-group masked-input mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="zmdi zmdi-star"></i></span>
-                                            </div>
-                                            <select class="form-control ms" asp-for="Status" asp-items="Html.GetEnumSelectList<ProductStatus>()">
-                                                <option selected="selected" value="">Please select</option>
-                                            </select>
-                                        </div>
-                                        <span asp-validation-for="Status" class="text-danger"></span>
+                                        <div class="input-group masked-input mb-3">                                           
+                                            <input type="checkbox" asp-for="IsSoldOut" class="form-check-input" />
+                                            <label class="form-check-label">Ngừng kinh doanh</label>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>                            
                             <div class="row clearfix">
-                                <div class="col-lg">
+                                <div class="col-sm">
                                     <div class="form-group">
                                         <div class="header">
                                             <strong>Mô tả</strong>
@@ -135,10 +129,24 @@
                                 </div>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-lg">
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="header">
-                                            <label>Hình ảnh</label>
+                                            <label>Ảnh cũ</label>
+                                        </div>
+                                        <div class="body">
+                                            @if (Model != null)
+                                            {
+                                                <img src="@Model.Image" height="300" class="float-left" />
+                                            }
+                                           <img height="300" class="float-left" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <label>Ảnh mới</label>
                                         </div>
                                         <div class="body">
                                             <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
