@@ -11,7 +11,8 @@ namespace PhoneStoreWeb.Communication.ResponseResult
     {
         public int Id { set; get; }
         public int CategoryId { set; get; }       
-        public decimal Price { set; get; }       
+        public decimal Price { set; get; }
+        public int Amount { get; set; }
         public int Stock { set; get; }       
         public string Name { set; get; }
         public string Description { set; get; }         
