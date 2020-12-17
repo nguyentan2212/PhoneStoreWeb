@@ -1,8 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
+@using PhoneStoreWeb.Communication.ResponseResult
 @{ var url = @Context.Request.GetDisplayUrl();
     string[] arrListUrl = url.Split('/');
     if (arrListUrl[3] == "") arrListUrl[3] = "index";
-    string error = ViewData["result"] as string;
+    string type = TempData["type"] as string;
+    string title = TempData["title"] as string;
+    string content = TempData["content"] as string;
 }
 <!doctype html>
 <html lang="en">
@@ -51,9 +54,6 @@
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
 
-    <!-- Main Search -->
-    <partial name="_MainSearch.cshtml" />
-
     <!-- Right Icon menu Sidebar -->
     <partial name="_RightIcon.cshtml" />
 
@@ -94,8 +94,8 @@
                 e.preventDefault();
                 var href = ($(this).attr('href') == undefined) ? $(this).attr('action') : $(this).attr('href');
                 const { value: success } = await Swal.fire({
-                    title: 'You want delete it?',
-                    text: "Data will be completely lost!",
+                    title: 'Bạn có chắc muốn xóa không?',
+                    text: "Dữ liệu sẽ không thể khôi phục sau khi xóa!",
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
@@ -109,19 +109,22 @@
         });
     </script>
     @*error message*@
-    @if (error != null)
+    @if (title != null && type != null)
     {
         <script>
             $(document).ready(function () {
-                var message = '@error';
-                    Swal.fire({
-                        type: 'error',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        width: '500px'
-                    })
+                var messageTitle = '@title';
+                var messageContent = '@content';
+                var messageType = '@type';
+                Swal.fire({
+                    type: messageType,
+                    title: messageTitle,
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: '500px',
+                    text: messageContent
                 });
+            });
         </script>
     }
     @*active menu*@
@@ -130,34 +133,7 @@
             var className = ".menu-@arrListUrl[3]";
             $(className).toggleClass("active open");
         });
-    </script>
-    <script type="text/javascript">
-        const pusher = new Pusher('dcba60eb11fd18857d17', {
-            cluster: 'ap1'
-        });
-        const channel = pusher.subscribe('feed');
-        channel.bind('new_feed', function (data) {
-            $("#notify-sound").append('<audio src="assets/sound/pristine.mp3" autoplay></audio>');
-            $.toast({
-                text: "<a href='/order/detail/" + data.Id + "'>#" + data.Id + "</a>",
-                heading: 'Have a new order',
-                icon: 'info',
-                showHideTransition: 'fade',
-                allowToastClose: true,
-                hideAfter: 8000,
-                stack: 5,
-                position: 'top-right',
-                textAlign: 'left',
-                loader: true,
-                loaderBg: '#9EC600',
-                beforeShow: function () { },
-                afterShown: function () { },
-                beforeHide: function () { },
-                afterHidden: function () { }
-            })
-            $('.order-table').prepend(`<tr></td>`);
-        });
-    </script>
+    </script>   
     @RenderSection("Scripts", required: false)
 
 </body>
