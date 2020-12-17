@@ -10,6 +10,6 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
         public Task<List<ProductItem>> GetAllByProductIdAsync(int id);
         public Task<string> GetProductNameAsync(int id);
         public Task<decimal> GetProductPriceAsync(int id);
-        public Task<ProductItem> GetIncludeProductAsync(int id);
+        public Task<ProductItem> GetIncludeProductAsync(int id);        
     }
 }
