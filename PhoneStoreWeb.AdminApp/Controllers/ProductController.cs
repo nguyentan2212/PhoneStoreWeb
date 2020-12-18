@@ -45,18 +45,16 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             {
                 return BadRequest();
             }
-            var result = await productService.Create(request);
-            if (result is null)
-            {
-                return RedirectToAction("Index", "Product");
-            }
-            return BadRequest();
+            MessageResponse message = await productService.Create(request);
+            ShowMessage(message);
+            return View(request);
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            string result = await productService.Delete(id);
+            MessageResponse message = await productService.Delete(id);
+            ShowMessage(message);
             return RedirectToAction("Index", "Product");
         }
         [HttpGet]
@@ -70,13 +68,9 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] UpdateProductRequest request)
         {
-            var result = await productService.Update(request);
+            MessageResponse message = await productService.Update(request);
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
-            if (result is null)
-            {
-                return RedirectToAction("Index");
-            }
-            ViewData["result"] = result;
+            ShowMessage(message);
             return View(request);
         }
         [HttpGet]
@@ -89,17 +83,26 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> AddProductItem(ProductItemReceivedRequest request)
         {
-            var result = await productService.CreateProductItem(request);
-            ViewData["result"] = result;
+            MessageResponse message = await productService.CreateProductItem(request);
+            ShowMessage(message);
             return RedirectToAction("Detail", "Product", new { id = request.Id });
         }
         [HttpGet]
         public async Task<IActionResult> DeleteProductItem(int id, int productId)
         {
-            string result = await productService.DeleteProductItem(id);
+            MessageResponse message = await productService.DeleteProductItem(id);
+            ShowMessage(message);
             return RedirectToAction("Index", "Detail", new { id = productId });
+        }
+
+        public void ShowMessage(MessageResponse message)
+        {
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
         }
     }
 }

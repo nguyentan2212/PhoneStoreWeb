@@ -27,28 +27,28 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Create([FromForm] CreateCategoryRequest request)
         {
             var message = await categoryService.Create(request);
-            TempData["type"] = message.Type;
-            TempData["title"] = message.Title;
-            TempData["content"] = message.Content;
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var message = await categoryService.Delete(id);
-            TempData["type"] = message.Type;
-            TempData["title"] = message.Title;
-            TempData["content"] = message.Content;
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] CreateCategoryRequest request)
         {
             var message = await categoryService.Update(request);
+            ShowMessage(message);
+            return RedirectToAction("Index");
+        }
+        public void ShowMessage(MessageResponse message)
+        {
             TempData["type"] = message.Type;
             TempData["title"] = message.Title;
             TempData["content"] = message.Content;
-            return RedirectToAction("Index");
         }
     }
 }

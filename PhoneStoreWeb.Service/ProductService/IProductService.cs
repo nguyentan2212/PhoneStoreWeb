@@ -15,11 +15,11 @@ namespace PhoneStoreWeb.Service.ProductService
         public Task<List<ProductItemResponse>> GetAllProductItemByProductId(int productId);
         public Task<OrderItem> GetOrderItemBySerial(string serial);
         public Task<UpdateProductRequest> GetUpdateDefault(int id);
-        public Task<string> Create(CreateProductRequest request);
-        public Task<string> Update(UpdateProductRequest request);
-        public Task<string> Delete(int id);
-        public Task<string> CreateProductItem(ProductItemReceivedRequest request);
-        public Task<string> AddImage(AddProductImageRequest request);
-        public Task<string> DeleteProductItem(int id);
+        public Task<MessageResponse> Create(CreateProductRequest request);
+        public Task<MessageResponse> Update(UpdateProductRequest request);
+        public Task<MessageResponse> Delete(int id);
+        public Task<MessageResponse> CreateProductItem(ProductItemReceivedRequest request);
+        public Task<MessageResponse> AddImage(AddProductImageRequest request);
+        public Task<MessageResponse> DeleteProductItem(int id);
     }
 }

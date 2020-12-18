@@ -103,6 +103,7 @@
                 <div class="modal-body">
                     <form asp-action="Update" asp-controller="Discount" method="post" enctype="multipart/form-data">
                         <div class="row clearfix">
+                            <input type="hidden" asp-for="Id" />
                             <div class="col-sm">
                                 <label>Mã khuyến mãi</label>
                                 <div class="form-group">

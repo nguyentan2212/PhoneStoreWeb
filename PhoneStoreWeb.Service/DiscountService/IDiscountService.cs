@@ -1,9 +1,6 @@
 ﻿using PhoneStoreWeb.Communication.Discounts;
 using PhoneStoreWeb.Communication.ResponseResult;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.Service.DiscountService
@@ -12,8 +9,8 @@ namespace PhoneStoreWeb.Service.DiscountService
     {
         public Task<List<DiscountResponse>> GetAllDiscounts();
         public Task<DiscountResponse> GetDiscount(int id);
-        public Task<string> CreateDiscount(DiscountRequest request);
-        public Task<string> UpdateDiscount(DiscountRequest request);
-        public Task<string> Delete(int id);
+        public Task<MessageResponse> CreateDiscount(DiscountRequest request);
+        public Task<MessageResponse> UpdateDiscount(DiscountRequest request);
+        public Task<MessageResponse> Delete(int id);
     }
 }

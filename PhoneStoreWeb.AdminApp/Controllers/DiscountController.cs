@@ -28,23 +28,29 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]DiscountRequest request)
         {
-            string result = await discountService.CreateDiscount(request);
-            ViewData["result"] = result;
+            MessageResponse message = await discountService.CreateDiscount(request);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm]DiscountRequest request)
         {
-            string result = await discountService.UpdateDiscount(request);
-            ViewData["result"] = result;
+            MessageResponse message = await discountService.UpdateDiscount(request);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            string result = await discountService.Delete(id);
-            ViewData["result"] = result;
+            MessageResponse message = await discountService.Delete(id);
+            ShowMessage(message);
             return RedirectToAction("Index");
+        }
+        public void ShowMessage(MessageResponse message)
+        {
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PhoneStoreWeb.Service.OrderService
             this.userManager = userManager;
         }
        
-        public async Task<string> CancelOrder(int id)
+        public async Task<MessageResponse> CancelOrder(int id)
         {
             try
             {
@@ -36,16 +36,16 @@ namespace PhoneStoreWeb.Service.OrderService
                     order.ProductItems.RemoveAll(x => true);
                     uow.Orders.Update(order);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Hủy thành công");
                 }
             }
             catch(Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Hủy thất bại", "Lỗi: " + e.Message);
             }
         }
 
-        public async Task<string> ConfirmOrder(int id)
+        public async Task<MessageResponse> ConfirmOrder(int id)
         {
             try
             {
@@ -60,16 +60,16 @@ namespace PhoneStoreWeb.Service.OrderService
                     }
                     uow.Orders.Update(order);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xác nhận thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xác nhận thất bại", "Lỗi: " + e.Message);
             }
         }
 
-        public async Task<int> CreateOrder(CreateOrderRequest request)
+        public async Task<MessageResponse> CreateOrder(CreateOrderRequest request)
         {
             try
             {
@@ -90,16 +90,16 @@ namespace PhoneStoreWeb.Service.OrderService
                     await uow.Orders.AddAsync(order);
                     order.AppUser = await userManager.FindByIdAsync(request.AppUserId);
                     await uow.SaveAsync();
-                    return order.Id;
+                    return new MessageResponse("success", "Tạo mới thành công");
                 }
             }
             catch(Exception e)
             {
-                return 0;
+                return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: " + e.Message);
             }
         }
 
-        public async Task<string> DeleteOrder(int id)
+        public async Task<MessageResponse> DeleteOrder(int id)
         {
             try
             {
@@ -115,12 +115,12 @@ namespace PhoneStoreWeb.Service.OrderService
                     }
                     uow.Orders.Remove(order);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xóa thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xóa thất bại", "Lỗi: " + e.Message);
             }
         }
 

@@ -20,7 +20,7 @@ namespace PhoneStoreWeb.Service.ProductService
             this.fileService = fileService;
         }
 
-        public async Task<string> AddImage(AddProductImageRequest request)
+        public async Task<MessageResponse> AddImage(AddProductImageRequest request)
         {
             try
             {
@@ -29,16 +29,16 @@ namespace PhoneStoreWeb.Service.ProductService
                     string imagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
                     await uow.Products.AddOrUpdateImageAsync(request.ProductId, imagePath);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success","Thêm ảnh thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Thêm ảnh thất bại", $"Lỗi: {e.Message}");
             }
         }
 
-        public async Task<string> Create(CreateProductRequest request)
+        public async Task<MessageResponse> Create(CreateProductRequest request)
         {
             try
             {
@@ -52,16 +52,16 @@ namespace PhoneStoreWeb.Service.ProductService
                     product.Image = await fileService.UploadFileAsync(request.ThumbnailImage);                   
                     await uow.Products.AddAsync(product);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Tạo mới thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: {e.Message}");
             }
         }
 
-        public async Task<string> CreateProductItem(ProductItemReceivedRequest request)
+        public async Task<MessageResponse> CreateProductItem(ProductItemReceivedRequest request)
         {
             try
             {
@@ -79,17 +79,17 @@ namespace PhoneStoreWeb.Service.ProductService
                     };
                     uow.Products.Update(product);
                     await uow.ProductItems.AddAsync(item);
-                    await uow.SaveAsync();                    
-                    return null;
+                    await uow.SaveAsync();
+                    return new MessageResponse("success", "Tạo mới thành công");
                 }
             }
             catch(Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: {e.Message}");
             }
         }
 
-        public async Task<string> Delete(int id)
+        public async Task<MessageResponse> Delete(int id)
         {
             try
             {
@@ -97,16 +97,16 @@ namespace PhoneStoreWeb.Service.ProductService
                 {
                     uow.Products.Remove(id);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xóa thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xóa thất bại", $"Lỗi: {e.Message}");
             }
         }
 
-        public async Task<string> DeleteProductItem(int id)
+        public async Task<MessageResponse> DeleteProductItem(int id)
         {
             try
             {
@@ -117,12 +117,12 @@ namespace PhoneStoreWeb.Service.ProductService
                     uow.ProductItems.Remove(id);
                     uow.Products.Update(product);           
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xóa thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xóa thất bại", $"Lỗi: {e.Message}");
             }
         }
 
@@ -223,6 +223,7 @@ namespace PhoneStoreWeb.Service.ProductService
                 item.SerialNumber = pi.SerialNumber;
                 item.SoldPrice = pi.Product.Price;
                 item.Name = pi.Product.Name;
+                item.Status = pi.Status;
                 return item;
             }
         }
@@ -250,7 +251,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<string> Update(UpdateProductRequest request)
+        public async Task<MessageResponse> Update(UpdateProductRequest request)
         {
             try
             {
@@ -273,12 +274,12 @@ namespace PhoneStoreWeb.Service.ProductService
                     }
                     uow.Products.Update(product);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Cập nhật thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Cập nhật thất bại", $"Lỗi: {e.Message}");
             }
         }       
     }

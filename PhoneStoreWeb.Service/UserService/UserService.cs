@@ -26,13 +26,9 @@ namespace PhoneStoreWeb.Service.UserService
             this.fileService = fileService;
         }
 
-        public async Task<string> ChangeStatusAsync(string id)
+        public async Task<MessageResponse> ChangeStatusAsync(string id)
         {
-            var user = await userManager.FindByIdAsync(id);
-            if (user is null)
-            {
-                return "User not found";
-            }
+            var user = await userManager.FindByIdAsync(id);            
             if (user.Status == AccountStatus.Active)
             {
                 user.Status = AccountStatus.Locked;
@@ -44,27 +40,30 @@ namespace PhoneStoreWeb.Service.UserService
             var result = await userManager.UpdateAsync(user);
             if (result != IdentityResult.Success)
             {
-                return GetErrors(result).FirstOrDefault();
+                string error = GetErrors(result).FirstOrDefault();
+                return new MessageResponse("error", "Cập nhật thất bại", $"Lỗi: {error}");
             }
-            return null;
+            return new MessageResponse("success", "Cập nhật thành công");
         }
 
-        public async Task<string> CreateUserAsync(RegisterRequest request)
+        public async Task<MessageResponse> CreateUserAsync(RegisterRequest request)
         {
             var user = mapper.Map<RegisterRequest, AppUser>(request);
             user.ImagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
             var result = await userManager.CreateAsync(user, request.Password);
             if (result != IdentityResult.Success)
             {
-                return GetErrors(result).FirstOrDefault();
+                string error = GetErrors(result).FirstOrDefault();
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: {error}");
             }
             var role = await roleManager.FindByIdAsync(request.RoleId.ToString());
             result = await userManager.AddToRoleAsync(user, role.Name);
             if (result != IdentityResult.Success)
             {
-                return GetErrors(result).FirstOrDefault();
+                string error = GetErrors(result).FirstOrDefault();
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: {error}");
             }
-            return null;
+            return new MessageResponse("success", "Tạo mới thành công");
         }
 
         public List<RoleResponse> GetAllRoles()
@@ -131,7 +130,7 @@ namespace PhoneStoreWeb.Service.UserService
             return userResult;
         }
 
-        public async Task<string> UpdateUserAsync(UserUpdateRequest request)
+        public async Task<MessageResponse> UpdateUserAsync(UserUpdateRequest request)
         {
             var user = await userManager.FindByIdAsync(request.Id);
             var roles = await userManager.GetRolesAsync(user);
@@ -146,9 +145,10 @@ namespace PhoneStoreWeb.Service.UserService
             var result = await userManager.UpdateAsync(user);
             if (result != IdentityResult.Success)
             {
-                return GetErrors(result).FirstOrDefault();
+                string error = GetErrors(result).FirstOrDefault();
+                return new MessageResponse("error", "Cập nhật thất bại", $"Lỗi: {error}");
             }
-            return null;
+            return new MessageResponse("success", "Cập nhật thành công");
         }
     }
 }

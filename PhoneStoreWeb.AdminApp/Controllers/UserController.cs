@@ -44,23 +44,19 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] RegisterRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-            string result = await userService.CreateUserAsync(request);
-            if (result is null)
-            {
-                return View();
-            }
-            return BadRequest();
+        {           
+            MessageResponse message = await userService.CreateUserAsync(request);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            var roles = userService.GetAllRoles();
+            ViewData["roles"] = roles;
+            ShowMessage(message);
+            return View(request);
         }
         [HttpGet]
         public async Task<IActionResult> ChangeStatus(string id)
         {
-            string result = await userService.ChangeStatusAsync(id);          
-            TempData["result"] = result;
+            MessageResponse message = await userService.ChangeStatusAsync(id);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -74,9 +70,20 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] UserUpdateRequest request)
-        {           
-            var result = await userService.UpdateUserAsync(request);
-            return RedirectToAction("Index");
+        {
+            MessageResponse message = await userService.UpdateUserAsync(request);
+            ShowMessage(message);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            var roles = userService.GetAllRoles();
+            ViewData["roles"] = roles;
+            return View(request);
+        }
+
+        public void ShowMessage(MessageResponse message)
+        {
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
         }
     }
 }

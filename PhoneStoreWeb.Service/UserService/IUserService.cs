@@ -15,10 +15,10 @@ namespace PhoneStoreWeb.Service.UserService
         public Task<UserResponse> GetUserByIdAsync(string id);
         public Task<UserResponse> GetUserByNameAsync(string name);
         public Task<UserUpdateRequest> GetUpdateRequestAsync(string id);
-        public Task<string> CreateUserAsync(RegisterRequest request);
-        public Task<string> UpdateUserAsync(UserUpdateRequest request);
+        public Task<MessageResponse> CreateUserAsync(RegisterRequest request);
+        public Task<MessageResponse> UpdateUserAsync(UserUpdateRequest request);
         public List<RoleResponse> GetAllRoles();
-        public Task<string> ChangeStatusAsync(string id);
+        public Task<MessageResponse> ChangeStatusAsync(string id);
         public Task<string> GetImageAsync(string name);
     }
 }

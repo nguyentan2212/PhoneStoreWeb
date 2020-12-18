@@ -9,9 +9,9 @@ namespace PhoneStoreWeb.Service.OrderService
     {
         public Task<List<OrderResponse>> GetOrders();
         public Task<OrderResponse> GetOrder(int id);
-        public Task<int> CreateOrder(CreateOrderRequest request);
-        public Task<string> ConfirmOrder(int id);
-        public Task<string> CancelOrder(int id);
-        public Task<string> DeleteOrder(int id);
+        public Task<MessageResponse> CreateOrder(CreateOrderRequest request);
+        public Task<MessageResponse> ConfirmOrder(int id);
+        public Task<MessageResponse> CancelOrder(int id);
+        public Task<MessageResponse> DeleteOrder(int id);
     }
 }

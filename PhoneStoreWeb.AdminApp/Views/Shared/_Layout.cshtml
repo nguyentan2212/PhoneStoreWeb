@@ -114,7 +114,7 @@
         <script>
             $(document).ready(function () {
                 var messageTitle = '@title';
-                var messageContent = '@content';
+                var messageContent = '@Html.Raw(content)';
                 var messageType = '@type';
                 Swal.fire({
                     type: messageType,

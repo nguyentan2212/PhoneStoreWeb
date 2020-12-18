@@ -44,22 +44,22 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            string result = await orderService.DeleteOrder(id);
-            ViewData["result"] = result;
+            MessageResponse message = await orderService.DeleteOrder(id);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Confirm(int id)
         {
-            string result = await orderService.ConfirmOrder(id);
-            ViewData["result"] = result;
+            MessageResponse message = await orderService.ConfirmOrder(id);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Cancel(int id)
         {
-            string result = await orderService.CancelOrder(id);
-            ViewData["result"] = result;
+            MessageResponse message = await orderService.CancelOrder(id);
+            ShowMessage(message);
             return RedirectToAction("Index");
         }        
         [HttpGet]
@@ -84,19 +84,28 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             decimal a;
             decimal b;
             DiscountResponse discount;
-            List<OrderItem> orderItems = new List<OrderItem>();           
+            List<OrderItem> orderItems = new List<OrderItem>();
+            MessageResponse message;
 
             if (!iscreate)
             {
                 var i = await productService.GetOrderItemBySerial(request.Serial);
                 if (i is null)
                 {
-                    ViewData["result"] = "Không tìm thấy";
+                    message = new MessageResponse("error", "Không tìm thấy sản phẩm");
+                    ShowMessage(message);
+                    return View(request);
+                }
+                if (i.Status == Data.Enums.ProductItemStatus.Sold)
+                {
+                    message = new MessageResponse("error", "Không thể thêm sản phẩm", "Sản phẩm đã bán");
+                    ShowMessage(message);
                     return View(request);
                 }
                 if (request.ItemsString != null && request.ItemsString.Contains(i.SerialNumber))
                 {
-                    ViewData["result"] = "Sản phẩm đã có. Không thể thêm.";
+                    message = new MessageResponse("error", "Không thể thêm sản phẩm", "Sản phẩm đã có trong hóa đơn");
+                    ShowMessage(message);                    
                     return View(request);
                 }
                 request.ItemsString += " " + i.SerialNumber;
@@ -122,11 +131,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
                 request.FinalPrice = price;
 
                 ViewData["orderItems"] = orderItems;
+                message = new MessageResponse("success", "Thêm sản phẩm thành công");
+                ShowMessage(message);
                 return View(request);
             }
             if (!ModelState.IsValid)
             {
-                ViewData["result"] = orderService.GetErrors(ModelState).FirstOrDefault();
+                message = new MessageResponse("error", "Không tìm thấy sản phẩm", "Lỗi: " + orderService.GetErrors(ModelState).FirstOrDefault());
+                ShowMessage(message);
                 return View(request);
             }
 
@@ -151,9 +163,17 @@ namespace PhoneStoreWeb.AdminApp.Controllers
 
             UserResponse user = await userService.GetUserByNameAsync(User.Identity.Name);
             request.AppUserId = user.Id.ToString();
-         
-            var result = await orderService.CreateOrder(request);
+
+            message = await orderService.CreateOrder(request);
+            ShowMessage(message);
             return RedirectToAction("Index");            
+        }
+
+        public void ShowMessage(MessageResponse message)
+        {
+            TempData["type"] = message.Type;
+            TempData["title"] = message.Title;
+            TempData["content"] = message.Content;
         }
     }
 }

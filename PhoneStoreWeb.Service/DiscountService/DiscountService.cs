@@ -18,7 +18,7 @@ namespace PhoneStoreWeb.Service.DiscountService
 
         }
 
-        public async Task<string> CreateDiscount(DiscountRequest request)
+        public async Task<MessageResponse> CreateDiscount(DiscountRequest request)
         {
             try
             {
@@ -27,34 +27,30 @@ namespace PhoneStoreWeb.Service.DiscountService
                     var discount = mapper.Map<DiscountRequest, Discount>(request);
                     await uow.Discounts.AddAsync(discount);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Tạo mới thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: " + e.Message);
             }
         }
 
-        public async Task<string> Delete(int id)
+        public async Task<MessageResponse> Delete(int id)
         {
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {
-                    var result = await uow.Discounts.GetAsync(id);
-                    if (result is null)
-                    {
-                        return "Không tìm thấy!";
-                    }
+                    var result = await uow.Discounts.GetAsync(id);                    
                     uow.Discounts.Remove(result);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Xóa thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Xóa thất bại", "Lỗi: " + e.Message);
             }
         }
 
@@ -78,25 +74,22 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<string> UpdateDiscount(DiscountRequest request)
+        public async Task<MessageResponse> UpdateDiscount(DiscountRequest request)
         {
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
-                {
-                    var result = await uow.Discounts.GetAsync(request.Id);
-                    if (result is null)
-                        return "Not found";
+                {                             
                     var discount = mapper.Map<DiscountRequest, Discount>(request);
                     discount.Id = request.Id;
                     uow.Discounts.Update(discount);
                     await uow.SaveAsync();
-                    return null;
+                    return new MessageResponse("success", "Cập nhật thành công");
                 }
             }
             catch (Exception e)
             {
-                return e.Message;
+                return new MessageResponse("error", "Cập nhật thất bại", "Lỗi: " + e.Message);
             }
         }
     }
