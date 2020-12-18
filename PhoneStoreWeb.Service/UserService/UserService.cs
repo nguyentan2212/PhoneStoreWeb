@@ -48,6 +48,11 @@ namespace PhoneStoreWeb.Service.UserService
 
         public async Task<MessageResponse> CreateUserAsync(RegisterRequest request)
         {
+            AppUser u = await userManager.FindByNameAsync(request.UserName);
+            if (u != null)
+            {
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: Tên người dùng đã có.");
+            }
             var user = mapper.Map<RegisterRequest, AppUser>(request);
             user.ImagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
             var result = await userManager.CreateAsync(user, request.Password);
@@ -132,6 +137,11 @@ namespace PhoneStoreWeb.Service.UserService
 
         public async Task<MessageResponse> UpdateUserAsync(UserUpdateRequest request)
         {
+            AppUser u = await userManager.FindByNameAsync(request.UserName);
+            if (u != null && u.Id.ToString() != request.Id)
+            {
+                return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: Tên người dùng đã có.");
+            }
             var user = await userManager.FindByIdAsync(request.Id);
             var roles = await userManager.GetRolesAsync(user);
             await userManager.RemoveFromRolesAsync(user, roles);

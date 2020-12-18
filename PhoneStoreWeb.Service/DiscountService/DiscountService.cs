@@ -24,6 +24,11 @@ namespace PhoneStoreWeb.Service.DiscountService
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {
+                    Discount d = await uow.Discounts.SingleOrDefaultAsync(x => x.Code == request.Code);
+                    if (d != null)
+                    {
+                        return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: Mã code đã tồn tại.");
+                    }
                     var discount = mapper.Map<DiscountRequest, Discount>(request);
                     await uow.Discounts.AddAsync(discount);
                     await uow.SaveAsync();
@@ -79,7 +84,12 @@ namespace PhoneStoreWeb.Service.DiscountService
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
-                {                             
+                {
+                    Discount d = await uow.Discounts.SingleOrDefaultAsync(x => x.Code == request.Code);
+                    if (d != null && d.Id != request.Id)
+                    {
+                        return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: Mã code đã tồn tại.");
+                    }
                     var discount = mapper.Map<DiscountRequest, Discount>(request);
                     discount.Id = request.Id;
                     uow.Discounts.Update(discount);

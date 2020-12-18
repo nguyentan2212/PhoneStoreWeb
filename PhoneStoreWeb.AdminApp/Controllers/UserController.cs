@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
-    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly IUserService userService;

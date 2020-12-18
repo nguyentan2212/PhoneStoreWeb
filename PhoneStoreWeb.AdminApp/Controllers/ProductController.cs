@@ -12,7 +12,6 @@ using PhoneStoreWeb.Service.UserService;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
-    [AllowAnonymous]
     public class ProductController : Controller
     {
         private readonly IProductService productService;

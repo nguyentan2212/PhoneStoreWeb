@@ -68,6 +68,11 @@ namespace PhoneStoreWeb.Service.ProductService
                 using(UnitOfWork uow = new UnitOfWork())
                 {
                     Product product = await uow.Products.GetAsync(request.Id);
+                    ProductItem i = await uow.ProductItems.SingleOrDefaultAsync(x => x.SerialNumber == request.SerialNumber);
+                    if (i != null)
+                    {
+                        return new MessageResponse("error", "Tạo mới thất bại", $"Lỗi: Số seri đã có.");
+                    }
                     ProductItem item = new ProductItem()
                     {
                         SerialNumber = request.SerialNumber,
