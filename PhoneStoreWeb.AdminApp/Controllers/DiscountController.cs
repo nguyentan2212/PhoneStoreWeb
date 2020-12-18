@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Discounts;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Service.DiscountService;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DiscountController : Controller
     {
         private readonly IDiscountService discountService;

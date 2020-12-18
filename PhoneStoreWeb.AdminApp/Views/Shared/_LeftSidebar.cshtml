@@ -1,6 +1,5 @@
 ﻿@using PhoneStoreWeb.Communication.ResponseResult
 @{
-    var categories = (List<CategoryResponse>)ViewData["categories"];
     string image = ViewBag.ImagePath as string;
 }
 <aside id="leftsidebar" class="sidebar">
@@ -25,8 +24,11 @@
                 </a>
             </li>
             <li class="menu-user"><a asp-action="index" asp-controller="user"><i class="zmdi zmdi-account"></i><span>Tài khoản</span></a></li>
-            <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Danh mục</span></a></li>                        
-            <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Khuyến mãi</span></a></li>
+            @if(User.IsInRole("admin"))
+            {
+                <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Danh mục</span></a></li>                        
+                <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Khuyến mãi</span></a></li>
+            }
             <li class="menu-order"><a asp-action="index" asp-controller="order"><i class="zmdi zmdi-chart"></i><span>Hóa đơn</span></a></li>
             <li class="menu-product"><a asp-action="index" asp-controller="product"><i class="zmdi zmdi-hc-fw"></i><span>Sản phẩm</span></a></li>
         </ul>

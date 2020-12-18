@@ -58,17 +58,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @{ if (Model != null)
-                                        {                                            
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        if (Model != null)
+                                        {
                                             foreach (var user in Model)
                                             {
-                                                var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");                                               
-                                                <tr>                                                    
+                                                var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
+                                                <tr>
                                                     <td>@user.FullName</td>
                                                     <td>@user.UserName</td>
-                                                    <td>@user.PhoneNumber</td>                                                   
+                                                    <td>@user.PhoneNumber</td>
                                                     <td>@user.Role</td>
-                                                    <td>@user.Status.ToDescriptionString()</td>                                                   
+                                                    <td>@user.Status.ToDescriptionString()</td>
                                                     <td width="15%" class="footable-last-visible text-center" style="display: table-cell;">
                                                         <div>
                                                             @if (user.Status == AccountStatus.Locked)
@@ -118,6 +120,40 @@
                                                 </tr>
                                             }
                                         }
+                                    }
+                                    else
+                                    {
+                                        var user = Model.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                                        var imagePath = (user.ImagePath ?? "/assets/images/profile_av.jpg");
+                                        <tr>
+                                                    <td>@user.FullName</td>
+                                                    <td>@user.UserName</td>
+                                                    <td>@user.PhoneNumber</td>
+                                                    <td>@user.Role</td>
+                                                    <td>@user.Status.ToDescriptionString()</td>
+                                                    <td width="15%" class="footable-last-visible text-center" style="display: table-cell;">
+                                                        <div>
+                                                            <div class="btn btn-success btn-sm">
+                                                                <a class="text-white"
+                                                                   asp-action="Detail"
+                                                                   asp-controller="User"
+                                                                   asp-route-id="@user.Id">
+                                                                    <i class="zmdi zmdi-info"></i>
+                                                                    Chi tiet
+                                                                </a>
+                                                            </div>
+                                                            <div class="btn btn-primary btn-sm">
+                                                                <a class="text-white"
+                                                                   asp-action="update"
+                                                                   asp-controller="user"
+                                                                   asp-route-id="@user.Id">
+                                                                    <i class="zmdi zmdi-edit"></i>
+                                                                    Cập nhật
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>        
                                     }
                                 </tbody>
                             </table>

@@ -84,8 +84,10 @@ namespace PhoneStoreWeb.Service.UserService
             var usersResult = mapper.Map<List<AppUser>, List<UserResponse>>(users); 
             for (int i = 0; i < users.Count; i++)
             {
-                var roles = await userManager.GetRolesAsync(users[i]);                
-                usersResult[i].Role = roles.FirstOrDefault();
+                var roles = await userManager.GetRolesAsync(users[i]);
+                string roleName = roles.FirstOrDefault();
+                AppRole role = await roleManager.FindByNameAsync(roleName);
+                usersResult[i].Role = role.Description;
             }
             return usersResult;
         }
@@ -122,7 +124,9 @@ namespace PhoneStoreWeb.Service.UserService
             var user = await userManager.FindByIdAsync(id);
             var userResult = mapper.Map<AppUser, UserResponse>(user);
             var roles = await userManager.GetRolesAsync(user);
-            userResult.Role = roles.FirstOrDefault();
+            string roleName = roles.FirstOrDefault();
+            AppRole role = await roleManager.FindByNameAsync(roleName);
+            userResult.Role = role.Description;
             return userResult;
         }
 
@@ -131,7 +135,9 @@ namespace PhoneStoreWeb.Service.UserService
             var user = await userManager.FindByNameAsync(name);
             var userResult = mapper.Map<AppUser, UserResponse>(user);
             var roles = await userManager.GetRolesAsync(user);
-            userResult.Role = roles.FirstOrDefault();
+            string roleName = roles.FirstOrDefault();
+            AppRole role = await roleManager.FindByNameAsync(roleName);
+            userResult.Role = role.Description;
             return userResult;
         }
 
@@ -151,7 +157,10 @@ namespace PhoneStoreWeb.Service.UserService
             user.Email = request.Email;
             user.Address = request.Address;
             user.BirthDate = request.BirthDate;
-            user.ImagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
+            if (request.ThumbnailImage != null)
+            {
+                user.ImagePath = await fileService.UploadFileAsync(request.ThumbnailImage);
+            }           
             var result = await userManager.UpdateAsync(user);
             if (result != IdentityResult.Success)
             {

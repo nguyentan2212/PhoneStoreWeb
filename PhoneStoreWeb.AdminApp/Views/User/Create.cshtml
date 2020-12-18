@@ -48,6 +48,7 @@
                                                 <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
                                             </div>
                                             <input type="text" class="form-control credit-card" asp-for="FullName"
+                                                   value=""
                                                    placeholder="Cristiano Ronaldo">
                                         </div>
                                         <span asp-validation-for="FullName" class="text-danger"></span>
@@ -61,6 +62,7 @@
                                                 <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
                                             </div>
                                             <input type="text" class="form-control credit-card" asp-for="UserName"
+                                                   value=""
                                                    placeholder="Ronaldo">
                                         </div>
                                         <span asp-validation-for="UserName" class="text-danger"></span>
@@ -103,7 +105,7 @@
                                                 {
                                                     foreach (var role in roles)
                                                     {
-                                                        <option value="@role.Name">@role.Description</option>
+                                                        <option value="@role.Id">@role.Description</option>
                                                     }
                                                 }
                                             }

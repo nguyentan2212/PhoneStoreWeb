@@ -23,11 +23,11 @@ namespace PhoneStoreWeb.AdminApp
                 var scope = host.Services.CreateScope();
                 var ctx = scope.ServiceProvider.GetRequiredService<PhoneStoreDbContext>();
                 var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+                var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();                
                 if (!ctx.Roles.Any())
                 {                
-                    roleMgr.CreateAsync(new AppRole() { Name = "admin", Description = "admin" }).GetAwaiter().GetResult();
-                    roleMgr.CreateAsync(new AppRole() { Name = "client", Description = "client" }).GetAwaiter().GetResult();
+                    roleMgr.CreateAsync(new AppRole() { Name = "admin", Description = "Quản lý" }).GetAwaiter().GetResult();
+                    roleMgr.CreateAsync(new AppRole() { Name = "client", Description = "Nhân viên" }).GetAwaiter().GetResult();
                     if (!ctx.Users.Any())
                     {
                         AppUser user = new AppUser
@@ -45,7 +45,19 @@ namespace PhoneStoreWeb.AdminApp
                         userMgr.CreateAsync(user, "12345").GetAwaiter().GetResult();
                         userMgr.AddToRoleAsync(user, "admin").GetAwaiter().GetResult();
                     }
-                }               
+                }
+                AppRole r = ctx.AppRoles.FirstOrDefault(x => x.Name == "admin");
+                if (r.Description != "Quản lý")
+                {
+                    r.Description = "Quản lý";
+                    ctx.SaveChanges();
+                }
+                r = ctx.AppRoles.FirstOrDefault(x => x.Name == "client");
+                if (r.Description != "Nhân viên")
+                {
+                    r.Description = "Nhân viên";
+                    ctx.SaveChanges();
+                }
                 if (!ctx.Discounts.Any())
                 {
                     ctx.Discounts.AddRange(new List<Discount>() {

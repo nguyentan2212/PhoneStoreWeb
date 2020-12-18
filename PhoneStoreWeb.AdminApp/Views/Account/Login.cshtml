@@ -1,8 +1,10 @@
 ﻿@using PhoneStoreWeb.Communication.Authentication;
 @model LoginRequest
-@{ var messageFaild = TempData["message"];
-
-                Layout = null; }
+@{ 
+    var messageFaild = ViewData["message"];
+    var messageTitle = ViewData["title"];
+    Layout = null;
+}
 
 <!doctype html>
 <html class="no-js " lang="en">
@@ -86,12 +88,14 @@
         <script>
                 $(document).ready(function () {
                     var message = '@messageFaild';
+                    var title = '@messageTitle';
                     Swal.fire({
-                                type: 'error',
-                                title: message,
-                                showConfirmButton: false,
-                                width: '500px'
-                            })
+                        type: 'error',
+                        title: title,
+                        showConfirmButton: false,
+                        width: '500px',
+                        text: message
+                    });
         });
         </script> } }
 

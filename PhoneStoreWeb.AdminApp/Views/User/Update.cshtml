@@ -21,7 +21,7 @@
                     <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="User">User</a></li>
                     <li class="breadcrumb-item active"></li>
                 </ul>
-                <h2>User Account</h2>
+                <h2>Cập nhật tài khoản</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -43,7 +43,7 @@
                             <input type="hidden" asp-for="Id" />
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Full Name</label>
+                                    <label>Tên đầy đủ</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>User Name</label>
+                                    <label>Tên người dùng</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Phone Number</label>
+                                    <label>Số điện thoại</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input mb-3">
                                             <div class="input-group-prepend">
@@ -98,22 +98,29 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Role</label>
+                                    <label>Chức vụ</label>
                                     <div class="form-group">
-                                        <select asp-for="Role" id="role" class="form-control">
-                                            @{ if (roles != null)
+                                        @if (User.IsInRole("admin"))
+                                        {
+                                            <select asp-for="Role" class="form-control">
+                                                @if (roles != null)
                                                 {
                                                     foreach (var role in roles)
                                                     {
                                                         <option value="@role.Name">@role.Description</option>
                                                     }
                                                 }
-                                            }
-                                        </select>
+                                            </select>
+                                        }
+                                        else
+                                        {
+                                            <input type="text" asp-for="Role" class="form-control mobile-phone-number" 
+                                                   disabled>
+                                        }
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Birth Date</label>
+                                    <label>Ngày sinh</label>
                                     <div class="form-group">
                                         <div class="input-group masked-input">
                                             <div class="input-group-prepend">
@@ -129,7 +136,7 @@
                                 <div class="col-lg">
                                     <div class="form-group">
                                         <div class="header">
-                                            <label>Image</label>
+                                            <label>Hình ảnh</label>
                                         </div>
                                         <div class="body">
                                             <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
@@ -141,8 +148,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary cancel">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary cancel">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
                         </div>
                     </div>

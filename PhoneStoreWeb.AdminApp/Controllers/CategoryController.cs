@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Categories;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Service.CategoryService;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;

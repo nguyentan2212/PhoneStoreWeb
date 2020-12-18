@@ -19,7 +19,6 @@ namespace PhoneStoreWeb.Communication.Users
         public string PhoneNumber { set; get; }
         [Required]
         public string Role { get; set; }
-        [Required]
         public IFormFile ThumbnailImage { get; set; }
         [Required]
         public string Address { set; get; }
