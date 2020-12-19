@@ -1,6 +1,7 @@
 ﻿using PhoneStoreWeb.Communication.Orders;
 using PhoneStoreWeb.Communication.Products;
 using PhoneStoreWeb.Communication.ResponseResult;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,5 +22,8 @@ namespace PhoneStoreWeb.Service.ProductService
         public Task<MessageResponse> CreateProductItem(ProductItemReceivedRequest request);
         public Task<MessageResponse> AddImage(AddProductImageRequest request);
         public Task<MessageResponse> DeleteProductItem(int id);
+        public Task<int> GetAllSoldProductItem();
+        public Task<List<Tuple<string,decimal>>> GetTopSellingCategory(int amount);
+        public Task<List<ProductResponse>> GetTopSellingProducts(int amount);
     }
 }

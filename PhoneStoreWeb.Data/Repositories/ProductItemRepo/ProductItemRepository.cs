@@ -40,5 +40,11 @@ namespace PhoneStoreWeb.Data.Repositories.ProductItemRepo
             var price = productItem.Product.Price;
             return price;
         }
+
+        public async Task<List<ProductItem>> GetAllIncludeProductAsync()
+        {
+            var items = await DbSetEntity.Include(x => x.Product).ThenInclude(y => y.Category).ToListAsync();
+            return items;
+        }
     }
 }

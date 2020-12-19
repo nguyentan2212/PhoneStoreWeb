@@ -180,6 +180,15 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
+        public async Task<int> GetAllSoldProductItem()
+        {
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                var items = await uow.ProductItems.GetAllAsync();              
+                return items.Count(x => x.Status == Data.Enums.ProductItemStatus.Sold);
+            }
+        }
+
         public async Task<ProductResponse> GetById(int id)
         {
             ProductResponse result;
@@ -230,6 +239,38 @@ namespace PhoneStoreWeb.Service.ProductService
                 item.Name = pi.Product.Name;
                 item.Status = pi.Status;
                 return item;
+            }
+        }
+
+        public async Task<List<Tuple<string, decimal>>> GetTopSellingCategory(int amount)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var items = await uow.ProductItems.GetAllIncludeProductAsync();
+                var soldItems = items.GroupBy(a => new { a.Status, a.Product.Category })
+                    .Where(c => c.Key.Status == Data.Enums.ProductItemStatus.Sold)
+                    .Select(d => new Tuple<string, decimal>(d.Key.Category.Name, d.Sum(e => e.SoldPrice))).ToList();
+                while (soldItems.Count < amount)
+                {
+                    soldItems.Add(new Tuple<string, decimal>("none", 0));
+                }
+                return soldItems.Take(amount).ToList();                            
+            }
+        }
+
+        public async Task<List<ProductResponse>> GetTopSellingProducts(int amount)
+        {
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                var items = await uow.ProductItems.GetAllIncludeProductAsync();
+                var products = items.GroupBy(a => new { a.Status, a.Product })
+                    .Select(b => new ProductResponse()
+                    {
+                        ImagePath = b.Key.Product.Image,
+                        Name = b.Key.Product.Name,
+                        Price = b.Count()
+                    }).OrderByDescending(d => d.Price);
+                return products.Take(amount).ToList();
             }
         }
 

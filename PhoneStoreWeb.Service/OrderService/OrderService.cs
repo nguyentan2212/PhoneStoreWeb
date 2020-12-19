@@ -172,5 +172,26 @@ namespace PhoneStoreWeb.Service.OrderService
                 return result;
             }
         }
+
+        public async Task<List<decimal>> GetRevenueOfYear(int year)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var orders = await uow.Orders.GetAllAsync();
+                var queryResult = orders.GroupBy(a => new { a.CreatedDate.Month, a.CreatedDate.Year })
+                    .Where(b => b.Key.Year == year)
+                    .Select(c => new { month = c.Key.Month, total = c.Sum(d => d.FinalPrice) });
+                List<decimal> result = new List<decimal>();
+                for(int i = 0; i <= 12; i++)
+                {
+                    result.Add(0);
+                }
+                foreach(var item in queryResult)
+                {
+                    result[item.month] = item.total;
+                }
+                return result;
+            }
+        }
     }
 }

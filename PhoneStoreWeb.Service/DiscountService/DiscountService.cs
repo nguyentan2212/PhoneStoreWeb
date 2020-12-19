@@ -69,6 +69,16 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
+        public async Task<List<DiscountResponse>> GetAllValidDiscounts()
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                var discounts = await uow.Discounts.FindAsync(x => x.FromDate <= DateTime.Today && DateTime.Today <= x.ToDate);
+                var result = mapper.Map<List<Discount>, List<DiscountResponse>>(discounts.ToList());
+                return result;
+            }
+        }
+
         public async Task<DiscountResponse> GetDiscount(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())

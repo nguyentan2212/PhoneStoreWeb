@@ -65,7 +65,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {         
-            ViewData["discounts"] = await discountService.GetAllDiscounts();
+            ViewData["discounts"] = await discountService.GetAllValidDiscounts();
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);                   
             CreateOrderRequest request = new CreateOrderRequest();
             request.CreatedDate = DateTime.Today;                     
@@ -75,7 +75,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Create([FromQuery]bool iscreate, [FromForm] CreateOrderRequest request)
         {
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
-            ViewData["discounts"] = await discountService.GetAllDiscounts();
+            ViewData["discounts"] = await discountService.GetAllValidDiscounts();
             decimal price;
             string[] serialList;
             price = request.TotalPrice;

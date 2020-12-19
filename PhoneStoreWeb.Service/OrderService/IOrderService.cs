@@ -13,5 +13,6 @@ namespace PhoneStoreWeb.Service.OrderService
         public Task<MessageResponse> ConfirmOrder(int id);
         public Task<MessageResponse> CancelOrder(int id);
         public Task<MessageResponse> DeleteOrder(int id);
+        public Task<List<decimal>> GetRevenueOfYear(int year);
     }
 }

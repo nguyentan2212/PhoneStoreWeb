@@ -18086,15 +18086,15 @@ section.content {
     }
 
     .big_icon.sales::before {
-        content: "\f1cb"
+        content: "\f10c"
     }
 
     .big_icon.email::before {
-        content: "\f15a"
+        content: "\f14b"
     }
 
     .big_icon.domains::before {
-        content: "\f173"
+        content: "\f207"
     }
 
 .widget_2 h2 {

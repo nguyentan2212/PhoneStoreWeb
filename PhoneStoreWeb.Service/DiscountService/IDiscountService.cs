@@ -8,6 +8,7 @@ namespace PhoneStoreWeb.Service.DiscountService
     public interface IDiscountService : IServiceBase
     {
         public Task<List<DiscountResponse>> GetAllDiscounts();
+        public Task<List<DiscountResponse>> GetAllValidDiscounts();
         public Task<DiscountResponse> GetDiscount(int id);
         public Task<MessageResponse> CreateDiscount(DiscountRequest request);
         public Task<MessageResponse> UpdateDiscount(DiscountRequest request);
