@@ -86,8 +86,8 @@
     @{ if (messageFaild != null)
                     {
         <script>
-                $(document).ready(function () {
-                    var message = '@messageFaild';
+            $(document).ready(function () {
+                var message = '@Html.Raw(messageFaild)';
                     var title = '@messageTitle';
                     Swal.fire({
                         type: 'error',
