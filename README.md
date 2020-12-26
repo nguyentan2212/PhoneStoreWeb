@@ -33,3 +33,6 @@ dotnet restore
 cd PhoneStoreWeb.AdminApp
 dotnet run
 ```
+## Admin account
+**user name:** admin
+**pass:** 12345
