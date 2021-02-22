@@ -18,11 +18,11 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
-                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Order">Order</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Order">Hóa đơn</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>New Order</h2>
+                <h2>Hóa đơn mới</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -37,22 +37,21 @@
 
     <div class="container-fluid">
         <form asp-action="Create" asp-controller="Order" method="post" enctype="multipart/form-data" id="orderForm">
-            <div class="row clearfix"> 
-                
+            <div class="row clearfix">               
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="body">
                             <input type="hidden" asp-for="ItemsString" value="@itemsString" />
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Name</label>
+                                    <label>Tên khách hàng</label>
                                     <div class="form-group">
                                         <input type="text" asp-for="Name" class="form-control" required>
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label>Phone Number</label>
+                                    <label>Số điện thoại</label>
                                     <div class="form-group">
                                         <input type="text" asp-for="PhoneNumber" class="form-control" required>
                                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
@@ -61,7 +60,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Address</label>
+                                    <label>Địa chỉ</label>
                                     <div class="form-group">
                                         <input type="text" asp-for="Address" class="form-control" required>
                                         <span asp-validation-for="Address" class="text-danger"></span>
@@ -77,7 +76,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-6">
-                                    <label>Ngay</label>
+                                    <label>Ngày lập hóa đơn</label>
                                     <div class="form-group">
                                         <input type="date" asp-for="CreatedDate" class="form-control" required />
                                         <span asp-validation-for="CreatedDate" class="text-danger"></span>
@@ -88,6 +87,11 @@
                                     <div class="form-group">
                                         <select class="form-control" id="discountSelect"
                                                 asp-for="DiscountId">
+                                            <option value="0"
+                                                    data-percent="0"
+                                                    data-amount="0">
+                                                "Không giảm giá"
+                                            </option>
                                             @if (discounts != null)
                                             {
                                                 foreach (var item in discounts)
@@ -105,7 +109,7 @@
                             </div>
                             <div class="row clearfix">
                                 <div class="col-sm-12">
-                                    <Label>Note</Label>
+                                    <Label>Ghi chú</Label>
                                     <div class="form-group">
                                         <textarea class="col-lg panel-body" asp-for="OrderNotes"></textarea>
                                     </div>
@@ -122,7 +126,7 @@
                                 <div class="col-sm-1 float-right">
                                     <button type="submit" asp-route-iscreate="false"
                                             class="float-right btn btn-primary" id="addItemButton">
-                                        Add
+                                        Thêm
                                     </button>
                                 </div>
                             </div>
@@ -174,8 +178,8 @@
                         </div>                        
                         <div class="body">
                             <div class="modal-footer">
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
-                                <button type="submit" asp-route-iscreate="true" class="btn btn-primary">Save</button>
+                                <button type="reset" class="btn btn-secondary">Hủy</button>
+                                <button type="submit" asp-route-iscreate="true" class="btn btn-primary">Lưu</button>
                             </div>
                         </div>
                     </div>

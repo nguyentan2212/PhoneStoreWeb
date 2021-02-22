@@ -1,11 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
-@using PhoneStoreWeb.Communication.ResponseResult
 @{ var url = @Context.Request.GetDisplayUrl();
     string[] arrListUrl = url.Split('/');
     if (arrListUrl[3] == "") arrListUrl[3] = "index";
     string type = TempData["type"] as string;
     string title = TempData["title"] as string;
     string content = TempData["content"] as string;
+    
 }
 <!doctype html>
 <html lang="en">
