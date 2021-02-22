@@ -1,0 +1,36 @@
+﻿@using PhoneStoreWeb.Communication.ResponseResult
+@{
+    string image = ViewBag.ImagePath as string;
+}
+<aside id="leftsidebar" class="sidebar">
+    <div class="navbar-brand">
+        <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
+        <a href="index.html"><img src="/assets/images/logo.svg" width="25" alt="Aero"><span class="m-l-10">Aphone</span></a>
+    </div>
+    <div class="menu">
+        <ul class="list" id="list-menu">
+            <li>
+                <div class="user-info">
+                    <a class="image" href="javascript:void(0)"><img src="@image" alt="User"></a>
+                    <div class="detail">
+                        <h4>@User.Identity.Name</h4>                        
+                    </div>
+                </div>
+            </li>
+            <li class="menu-index">
+                <a asp-action="index" asp-controller="home">
+                    <i class="zmdi zmdi-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-user"><a asp-action="index" asp-controller="user"><i class="zmdi zmdi-account"></i><span>Tài khoản</span></a></li>
+            @if(User.IsInRole("admin"))
+            {
+                <li class="menu-category"><a asp-action="index" asp-controller="category"><i class="zmdi zmdi-assignment"></i><span>Danh mục</span></a></li>                        
+                <li class="menu-promotion"><a asp-action="index" asp-controller="discount"><i class="zmdi zmdi-flower"></i><span>Khuyến mãi</span></a></li>
+            }
+            <li class="menu-order"><a asp-action="index" asp-controller="order"><i class="zmdi zmdi-chart"></i><span>Hóa đơn</span></a></li>
+            <li class="menu-product"><a asp-action="index" asp-controller="product"><i class="zmdi zmdi-hc-fw"></i><span>Sản phẩm</span></a></li>
+        </ul>
+    </div>
+</aside>

@@ -1,0 +1,140 @@
+﻿@using PhoneStoreWeb.Communication.Orders
+@using PhoneStoreWeb.Communication.ResponseResult
+@model List<OrderResponse>
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Hóa đơn</a></li>
+                   
+                </ul>               
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Hóa đơn</strong> </h2>
+                        <div class="float-right">
+                            <form asp-action="Create" asp-controller="Order" method="get">
+                                <button type="submit" style="margin-top: -50px;"
+                                        class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
+                                    <i class="fa fa-cog mr-1"></i>
+                                    Thêm
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Khách hàng</th>                                       
+                                        <th>Tổng tiền</th>
+                                        <th>Thành tiền</th>
+                                        <th>Nhân viên</th>
+                                        <th>Ngày lập</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.Name</td>                                                                                                
+                                                <td>@item.TotalPrice</td>
+                                                <td>@item.FinalPrice</td>
+                                                <td>@item.StaffName</td>  
+                                                <td>@item.CreatedDate.ToShortDateString()</td>
+                                                <td width="15%" class="footable-last-visible text-center"
+                                                    style="display: table-cell;">
+                                                    <div class="btn btn-success btn-sm">
+                                                        <a class="text-white"
+                                                           asp-action="Detail"
+                                                           asp-controller="Order"
+                                                           asp-route-id="@item.Id">
+                                                            <i class="zmdi zmdi-info"></i>
+                                                            Chi tiết
+                                                        </a>
+                                                    </div>
+                                                    @if (item.Status == PhoneStoreWeb.Data.Enums.OrderStatus.Unconfirm)
+                                                    {
+                                                        <div class="btn btn-primary btn-sm">
+                                                            <a class="text-white"
+                                                               asp-action="Confirm"
+                                                               asp-controller="Order"
+                                                               asp-route-id="@item.Id">
+                                                                <i class="zmdi zmdi-archive"></i>
+                                                                Xác nhận
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn btn-danger btn-sm">
+                                                            <a class="text-white"
+                                                               asp-action="Cancel"
+                                                               asp-controller="Order"
+                                                               asp-route-id="@item.Id">
+                                                                <i class="zmdi zmdi-close-circle"></i>
+                                                                Hủy
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                    <div class="btn btn-danger btn-sm">
+                                                        <a class="text-white delete"
+                                                           asp-action="Delete"
+                                                           asp-controller="Order"
+                                                           asp-route-id="@item.Id">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                            Xóa
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="/assets/js/pages/forms/dropify.js"></script>
+}
+

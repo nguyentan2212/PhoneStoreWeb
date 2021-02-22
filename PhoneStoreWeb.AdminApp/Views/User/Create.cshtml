@@ -1,0 +1,204 @@
+﻿@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Communication.Authentication;
+@model RegisterRequest;
+@{
+    List<RoleResponse> roles = ViewData["roles"] as List<RoleResponse>;
+}
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="User">Tài khoản</a></li>
+                    <li class="breadcrumb-item active"></li>
+                </ul>
+                <h2>Thêm tài khoản</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <form enctype="multipart/form-data" id="user-form" asp-controller="User" asp-action="Create" method="post">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Tên đầy đủ</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control credit-card" asp-for="FullName"
+                                                   value=""
+                                                   placeholder="Cristiano Ronaldo">
+                                        </div>
+                                        <span asp-validation-for="FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Tên người dùng</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-card"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control credit-card" asp-for="UserName"
+                                                   value=""
+                                                   placeholder="Ronaldo">
+                                        </div>
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Email</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" asp-for="Email"
+                                                   placeholder="Ex: example@example.com">
+                                        </div>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Số điện thoại</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-smartphone"></i></span>
+                                            </div>
+                                            <input type="text" asp-for="PhoneNumber" class="form-control mobile-phone-number" placeholder="Ex: +00 (000) 000-00-00">
+                                        </div>
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Chức vụ</label>
+                                    <div class="form-group">
+                                        <select asp-for="RoleId" id="role" class="form-control">
+                                            @{ if (roles != null)
+                                                {
+                                                    foreach (var role in roles)
+                                                    {
+                                                        <option value="@role.Id">@role.Description</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Ngày sinh</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-calendar"></i></span>
+                                            </div>
+                                            <input type="date" asp-for="BirthDate" class="form-control date" placeholder="Ex: 30/07/2016">
+                                        </div>
+                                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Mật khẩu</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-key"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control key" asp-for="Password"
+                                                   placeholder="Ex: XXXX-XXXX">
+                                        </div>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Nhập lại mật khẩu</label>
+                                    <div class="form-group">
+                                        <div class="input-group masked-input mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="zmdi zmdi-key"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control key" asp-for="ConfirmPassword"
+                                                   placeholder="Ex: XXXX-XXXX">
+                                        </div>
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <label>Hình ảnh</label>
+                                        </div>
+                                        <div class="body">
+                                            <input type="file" class="dropify" asp-for="ThumbnailImage" data-height="300px"
+                                                   data-default-file=""
+                                                   data-allowed-file-extensions="jpg png">
+                                            <span asp-validation-for="ThumbnailImage" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary cancel">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="/assets/plugins/dropify/js/dropify.min.js"></script>
+    <script src="/assets/js/pages/forms/dropify.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.cancel').click(function (e) {
+                $('#user-form').trigger("reset");
+            });
+        });
+    </script>
+}
+

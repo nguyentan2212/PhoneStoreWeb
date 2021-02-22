@@ -1,0 +1,147 @@
+﻿
+@using PhoneStoreWeb.Communication.Products;
+@using PhoneStoreWeb.Communication.ResponseResult;
+@model ProductItemReceivedRequest;
+@{
+    ProductResponse product = ViewData["product"] as ProductResponse;
+    int Id = product.Id;
+    List<ProductItemResponse> items = ViewData["items"] as List<ProductItemResponse>;
+    string category = ViewData["category"] as string;
+}
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">
+                </ul>
+                <h2>Danh sách điện thoại @product.Name</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@product.Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="AddProductItem" asp-controller="Product" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <input asp-for="@Id" type="hidden" />
+                                <label>Serial</label>
+                                <div class="form-group">
+                                    <input asp-for="@Model.SerialNumber" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Giá</label>
+                                <div class="form-group">
+                                    <input asp-for="@Model.ReceivedPrice" type="number" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Danh sách điện thoại</strong> </h2>
+                        <div class="float-right">
+                            <button type="submit" style="margin-top: -50px;"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    class=" insertcategory btn btn-primary waves-effect waves-light">
+                                <i class="fa fa-cog mr-1"></i>
+                                Thêm
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Số Serial</th>
+                                        <th>Giá nhập</th>
+                                        <th>Ngày nhập</th>
+                                        <th>Trạng thái</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (items != null)
+                                    {
+                                        foreach (var item in items)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.SerialNumber</td>
+                                                <td>@item.ReceivedPrice</td>
+                                                <td>@item.ReceivedDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@Html.DisplayFor(x => item.Status)</td>
+                                                <td class="text-center">
+                                                    <div class="btn btn-danger btn-sm">
+                                                        <a class="text-white delete"
+                                                           href="@Url.Action("DeleteProductItem","Product",new { @id = item.Id, @productId = product.Id})">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                            Xóa
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+}

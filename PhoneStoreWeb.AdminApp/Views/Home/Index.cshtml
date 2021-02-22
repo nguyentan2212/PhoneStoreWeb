@@ -1,0 +1,230 @@
+﻿@using PhoneStoreWeb.Communication.ResponseResult;
+
+@{
+    List<ProductResponse> products = ViewData["products"] as List<ProductResponse>;
+    int usersCount = (int)ViewData["usersCount"];
+    int ordersCount = (int)ViewData["ordersCount"];
+    decimal revenue = (decimal)ViewData["revenue"];
+    List<Tuple<string, decimal>> topSellingCategory = ViewData["topSellingCategory"] as List<Tuple<string, decimal>>;
+    List<decimal> arr = ViewData["revenueOfYear"] as List<decimal>;
+    }
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Dashboard</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-action="Index", asp-controller="Home"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
+                            class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
+                            class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon revenue">                       
+                        <div class="body">  
+                            <div class="header">
+                                <h2><strong>Doanh thu</strong></h2>
+                            </div>
+                            <h6>Tổng: @revenue VNĐ</h6>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon sales">
+                        <div class="body">
+                            <div class="header">
+                                <h2><strong>Hóa đơn</strong></h2>
+                            </div>
+                            <h6>Tổng: @ordersCount</h6>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon email">
+                        <div class="body">
+                            <div class="header">
+                                <h2><strong>Sản phẩm</strong></h2>
+                            </div>
+                            <h6>Tổng: @products.Count</h6>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card widget_2 big_icon domains">
+                        <div class="body">
+                            <div class="header">
+                                <h2><strong>Nhân viên</strong></h2>
+                            </div>
+                            <h6>Tổng: @usersCount</h6>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Biểu đồ doanh thu 12 tháng</strong></h2>
+                        </div>
+                        <div class="body">
+                            <div id="chart-area-spline-sracked" class="c3_chart d_sales"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-12" style="margin-top: 11px;">
+                        <h5 style="color:#e47297;">Bán chạy</h5>
+                    </div>
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @if (products != null && products.Count > 0)
+                            {
+                                <div class="products carousel-item active">
+                                    <div class="row clearfix ">
+                                        <div class="col-lg-12 col-md-6 col-sm-6">
+                                            <div class="card mcard_4" style="margin-bottom: 0px;">
+                                                <div class="body text-center">
+                                                    <img height="280" width="300" src="@products[0].ImagePath"
+                                                        alt="profile-image">
+                                                    <div class="user">
+                                                        <h5 class="mt-3 mb-1 text-center">@products[0].Name</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @for (int i = 1; i < products.Count; i++){ 
+                                    <div class="products carousel-item ">
+                                        <div class="row clearfix ">
+                                            <div class="col-lg-12 col-md-6 col-sm-6">
+                                                <div class="card mcard_4" style="margin-bottom: 0px;">
+                                                    <div class="body text-center">
+                                                        <img height="280" width="300" src="@products[i].ImagePath"
+                                                            alt="profile-image">
+                                                        <div class="user">
+                                                            <h5 class="mt-3 mb-1 text-center">@products[i].Name</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                    </div>
+                </div>
+            </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Doanh thu theo loại</strong></h2>
+                        </div>
+                        <div class="body text-center">
+                            <div id="chart-pie" class="c3_chart d_distribution"></div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts{        
+        <script>
+            $(document).ready(function () {
+                var values = ['Total', @arr[1], @arr[2], @arr[3], @arr[4], @arr[5], @arr[6], @arr[7], @arr[8], @arr[9], @arr[10], @arr[11], @arr[12]];
+                var d = new Date();
+                var shortMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov',
+                    'Dec'
+                ];
+                var chart = c3.generate({
+                    bindto: '#chart-area-spline-sracked', // id of chart wrapper
+                    data: {
+                        columns: [
+                            // each columns data
+                            values,
+                        ],
+                        type: 'area-spline', // default type of chart
+                        groups: [
+                            ['data']
+                        ],
+                        colors: {
+                            'data': Aero.colors["lime"],
+                        },
+                        names: {
+                            // name of each serie
+                            'data': 'Revenue',
+                        }
+                    },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            // name of each category
+                            categories: shortMonth
+                        },
+                    },
+                    legend: {
+                        show: true, //hide legend
+                    },
+                    padding: {
+                        bottom: 0,
+                        top: 0
+                    },
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var total = @revenue;
+                var d1 = @topSellingCategory[0].Item2;
+                var d2 = @topSellingCategory[1].Item2;
+                var d3 = @topSellingCategory[2].Item2;
+                var d4 = @topSellingCategory[3].Item2;
+                var chart = c3.generate({
+                    bindto: '#chart-pie', // id of chart wrapper
+                    data: {
+                        columns: [
+                            // each columns data
+                            ['data1', d1 / total * 100],
+                            ['data2', d2 / total * 100],
+                            ['data3', d3 / total * 100],
+                            ['data4', d4 / total * 100],
+
+                        ],
+                        type: 'pie', // default type of chart
+                        colors: {
+                            'data1': Aero.colors["lime"],
+                            'data2': Aero.colors["yellow"],
+                            'data3': Aero.colors["gray"],
+                            'data4': Aero.colors["red"]
+                        },
+                        names: {
+                            // name of each serie
+                            'data1': '@topSellingCategory[0].Item1',
+                            'data2': '@topSellingCategory[1].Item1',
+                            'data3': '@topSellingCategory[2].Item1',
+                            'data4': '@topSellingCategory[3].Item1',
+                        }
+                    },
+                    axis: {},
+                    legend: {
+                        show: true, //hide legend
+                    },
+                    padding: {
+                        bottom: 0,
+                        top: 0
+                    },
+                });
+            });
+        </script>
+    }

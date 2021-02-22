@@ -1,0 +1,257 @@
+﻿@using PhoneStoreWeb.Communication.ResponseResult
+@using PhoneStoreWeb.Communication.Discounts
+@model DiscountRequest
+@{
+    List<DiscountResponse> discounts = ViewData["discounts"] as List<DiscountResponse>;
+}
+
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/css/bootstrap-select.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Khuyến mãi</a></li>
+                   
+                </ul>              
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo khuyến mãi mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Create" asp-controller="Discount" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <div class="col-sm">
+                                <label>Mã khuyến mãi</label>
+                                <div class="form-group">
+                                    <input asp-for="Code" type="text" class="form-control" required>
+                                    <span asp-validation-for="Code" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>Phần trăm giảm giá</label>
+                                <div class="form-group">
+                                    <input asp-for="DiscountPercent" type="number" class="form-control" required></input>
+                                    <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Số tiền giảm giá</label>
+                                <div class="form-group">
+                                    <input asp-for="DiscountAmount" type="number" class="form-control" required></input>
+                                    <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>Từ ngày</label>
+                                <div class="form-group">
+                                    <input asp-for="FromDate" type="date" class="form-control" required></input>
+                                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Đến ngày</label>
+                                <div class="form-group">
+                                    <input asp-for="ToDate" type="date" class="form-control" required></input>
+                                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Chỉnh sửa khuyến mãi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Update" asp-controller="Discount" method="post" enctype="multipart/form-data">
+                        <div class="row clearfix">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="col-sm">
+                                <label>Mã khuyến mãi</label>
+                                <div class="form-group">
+                                    <input asp-for="Code" type="text" class="form-control" required>
+                                    <span asp-validation-for="Code" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>Phần trăm giảm giá</label>
+                                <div class="form-group">
+                                    <input asp-for="DiscountPercent" type="number" class="form-control" required></input>
+                                    <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Số tiền giảm giá</label>
+                                <div class="form-group">
+                                    <input asp-for="DiscountAmount" type="number" class="form-control" required></input>
+                                    <span asp-validation-for="DiscountAmount" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <label>Từ ngày</label>
+                                <div class="form-group">
+                                    <input asp-for="FromDate" type="date" class="form-control" required></input>
+                                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Đến ngày</label>
+                                <div class="form-group">
+                                    <input asp-for="ToDate" type="date" class="form-control" required></input>
+                                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Khuyến mãi</strong> </h2>
+                        <div class="float-right">
+                            <button type="button" style="margin-top: -50px;"
+                                    data-toggle="modal" data-target="#exampleModal"
+                                    class=" insertcategory btn btn-primary waves-effect waves-light add-form-category ">
+                                <i class="fa fa-cog mr-1"></i>
+                                Thêm
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Mã khuyến mãi</th>
+                                        <th>Phần trăm</th>
+                                        <th>Số tiền</th>
+                                        <th>Bắt đầu</th>
+                                        <th>Kết thúc</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (discounts != null)
+                                    {
+                                        foreach (var item in discounts)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.Code</td>
+                                                <td>@item.DiscountPercent</td>
+                                                <td>@item.DiscountAmount</td>
+                                                <td>@item.FromDate.ToString("dd/MM/yyyy")</td>
+                                                <td>@item.ToDate.ToString("dd/MM/yyyy")</td>
+                                                <td width="15%" class="footable-last-visible text-center"
+                                                    style="display: table-cell;">
+                                                    <div class="btn btn-primary btn-sm">
+                                                        <a class="text-white update"
+                                                           data-id="@item.Id"
+                                                           data-code="@item.Code"
+                                                           data-percent="@item.DiscountPercent"
+                                                           data-amount="@item.DiscountAmount"                       
+                                                           data-toggle="modal"
+                                                           data-target="#updateModal">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                            Cập nhật
+                                                        </a>
+                                                    </div>
+                                                    <div class="btn btn-danger btn-sm">
+                                                        <a class="text-white delete"
+                                                           asp-action="Delete"
+                                                           asp-controller="Discount"
+                                                           asp-route-id="@item.Id">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                            Xóa
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+    <script>
+    $(document).on('click', '.update',function () {
+        var id = $(this).data('id');
+        var code = $(this).data('code');
+        var percent = $(this).data('percent');
+        var amount = $(this).data('amount');
+        $('#updateModal [name=Id]').val(id);
+        $('#updateModal [name=Code]').val(code);
+        $('#updateModal [name=DiscountPercent]').val(percent);
+        $('#updateModal [name=DiscountAmount]').val(amount);          
+    });
+    </script>
+}

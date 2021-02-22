@@ -1,0 +1,154 @@
+﻿@using PhoneStoreWeb.Communication.Products;
+@using PhoneStoreWeb.Communication.ResponseResult;
+@using PhoneStoreWeb.Communication.Extension;
+@model ProductResponse
+@{ 
+    string category = ViewData["category"] as string;
+}
+@section Header{
+    <link rel="stylesheet" href="/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css" />
+}
+
+<div class="body_scroll">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Home"><i class="zmdi zmdi-home"></i> Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Sản phẩm</a></li>
+                    <li class="breadcrumb-item active">
+                </ul>
+                <h2>@Model.Name</h2>
+                <button class="btn btn-primary btn-icon mobile_menu" type="button">
+                    <i class="zmdi zmdi-sort-amount-desc"></i>
+                </button>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
+                    <i class="zmdi zmdi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="container-fluid">
+        <form enctype="multipart/form-data">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <label>Danh mục</label>
+                                    <div class="form-group">
+                                        <input disabled type="text" asp-for="@category" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Mã</label>
+                                    <div class="form-group">
+                                        <input disabled type="text" asp-for="@Model.Id" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>OS</label>
+                                        <input disabled type="text" asp-for="@Model.OS" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>RAM</label>
+                                        <input disabled type="number" asp-for="@Model.RAM" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Lưu trữ</label>
+                                        <input disabled type="number" asp-for="@Model.Storage" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Pin</label>
+                                        <input disabled type="number" asp-for="@Model.BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input disabled type="number" asp-for="@Model.Amount" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Tồn kho</label>
+                                        <input disabled type="number" asp-for="@Model.Stock" class="form-control" placeholder="4000 mAh" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Giá</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <input disabled type="number" class="form-control price"
+                                                   asp-for="@Model.Price" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Trạng thái</label>
+                                        <div class="input-group masked-input mb-3">
+                                            <input disabled type="text" class="form-control ms" asp-for="@Model.Status" value="@Model.Status.ToDescriptionString()" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <strong>Mô tả</strong>
+                                        </div>
+                                        @Html.Raw(@Model.Description)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-lg">
+                                    <div class="form-group">
+                                        <div class="header">
+                                            <label>Ảnh</label>
+                                        </div>
+                                        <div class="body">
+                                            <img src="@Model.ImagePath" class="rounded align-left" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts
+{
+    <script src="/assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="/assets/js/pages/tables/jquery-datatable.js"></script>
+}
