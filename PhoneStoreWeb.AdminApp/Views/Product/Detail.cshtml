@@ -1,11 +1,8 @@
 ﻿@using PhoneStoreWeb.Communication.Products;
 @using PhoneStoreWeb.Communication.ResponseResult;
 @using PhoneStoreWeb.Communication.Extension;
-@model ProductItemReceivedRequest;
-@{
-    ProductResponse product = ViewData["product"] as ProductResponse;
-    int Id = product.Id;
-    List<ProductItemResponse> items = ViewData["items"] as List<ProductItemResponse>;
+@model ProductResponse
+@{ 
     string category = ViewData["category"] as string;
 }
 @section Header{
@@ -21,7 +18,7 @@
                     <li class="breadcrumb-item"><a asp-action="Index" , asp-controller="Product">Sản phẩm</a></li>
                     <li class="breadcrumb-item active">
                 </ul>
-                <h2>@product.Name</h2>
+                <h2>@Model.Name</h2>
                 <button class="btn btn-primary btn-icon mobile_menu" type="button">
                     <i class="zmdi zmdi-sort-amount-desc"></i>
                 </button>
@@ -30,43 +27,6 @@
                 <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button">
                     <i class="zmdi zmdi-arrow-right"></i>
                 </button>
-            </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@product.Name</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">                        
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form asp-action="AddProductItem" asp-controller="Product" method="post" enctype="multipart/form-data">
-                        <div class="row clearfix">
-                            <div class="col-sm">
-                                <input asp-for="@Id" type="hidden" />
-                                <label>Serial</label>
-                                <div class="form-group">
-                                    <input asp-for="@Model.SerialNumber" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-sm">
-                                <label>Giá</label>
-                                <div class="form-group">
-                                    <input asp-for="@Model.ReceivedPrice" type="number" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary add-item">Lưu</button>
-                        </div>
-                    </form>
-                </div>                
             </div>
         </div>
     </div>
@@ -87,7 +47,7 @@
                                 <div class="col-sm-6">
                                     <label>Mã</label>
                                     <div class="form-group">
-                                        <input disabled type="text" asp-for="@product.Id" class="form-control" required>
+                                        <input disabled type="text" asp-for="@Model.Id" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -95,13 +55,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>OS</label>
-                                        <input disabled type="text" asp-for="@product.OS" class="form-control" required>
+                                        <input disabled type="text" asp-for="@Model.OS" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>RAM</label>
-                                        <input disabled type="number" asp-for="@product.RAM" class="form-control" required>
+                                        <input disabled type="number" asp-for="@Model.RAM" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -109,13 +69,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Lưu trữ</label>
-                                        <input disabled type="number" asp-for="@product.Storage" class="form-control" required>
+                                        <input disabled type="number" asp-for="@Model.Storage" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Pin</label>
-                                        <input disabled type="number" asp-for="@product.BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
+                                        <input disabled type="number" asp-for="@Model.BatteryCapacity" class="form-control" placeholder="4000 mAh" required>
                                     </div>
                                 </div>
                             </div>
@@ -123,13 +83,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Số lượng</label>
-                                        <input disabled type="number" asp-for="@product.Amount" class="form-control" required>
+                                        <input disabled type="number" asp-for="@Model.Amount" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Tồn kho</label>
-                                        <input disabled type="number" asp-for="@product.Stock" class="form-control" placeholder="4000 mAh" required>
+                                        <input disabled type="number" asp-for="@Model.Stock" class="form-control" placeholder="4000 mAh" required>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +99,7 @@
                                         <label>Giá</label>
                                         <div class="input-group masked-input mb-3">
                                             <input disabled type="number" class="form-control price"
-                                                   asp-for="@product.Price" required>
+                                                   asp-for="@Model.Price" required>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +107,7 @@
                                     <div class="form-group">
                                         <label>Trạng thái</label>
                                         <div class="input-group masked-input mb-3">
-                                            <input disabled type="text" class="form-control ms" asp-for="@product.Status" value="@product.Status.ToDescriptionString()" />
+                                            <input disabled type="text" class="form-control ms" asp-for="@Model.Status" value="@Model.Status.ToDescriptionString()" />
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +118,7 @@
                                         <div class="header">
                                             <strong>Mô tả</strong>
                                         </div>
-                                        @Html.Raw(@product.Description)
+                                        @Html.Raw(@Model.Description)
                                     </div>
                                 </div>
                             </div>
@@ -169,63 +129,12 @@
                                             <label>Ảnh</label>
                                         </div>
                                         <div class="body">
-                                            <img src="@product.ImagePath" class="rounded align-left" />
+                                            <img src="@Model.ImagePath" class="rounded align-left" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="body">
-                            <div class="row clearfix">
-                                <div class="col-sm">
-                                    <button type="button" class="float-right btn btn-primary"
-                                            data-toggle="modal"
-                                            data-target="#exampleModal">
-                                        Thêm sản phẩm
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã</th>
-                                                <th>Số Serial</th>
-                                                <th>Giá nhập</th>
-                                                <th>Ngày nhập</th>
-                                                <th>Trạng thái</th>
-                                                <th>Hành động</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (items != null)
-                                            {
-                                                foreach (var item in items)
-                                                {
-                                                    <tr>
-                                                        <td>@item.Id</td>
-                                                        <td>@item.SerialNumber</td>
-                                                        <td>@item.ReceivedPrice</td>
-                                                        <td>@item.ReceivedDate</td>
-                                                        <td>@Html.DisplayFor(x => item.Status)</td>
-                                                        <td class="text-center">
-                                                            <div class="btn btn-danger btn-sm">
-                                                                <a class="text-white delete" 
-                                                                   href="@Url.Action("DeleteProductItem","Product",new { @id = item.Id, @productId = product.Id})">
-                                                                    <i class="zmdi zmdi-delete"></i>
-                                                                    Xóa
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
