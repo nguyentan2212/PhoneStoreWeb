@@ -1,0 +1,14 @@
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.deps.json
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.pdb
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.pdb
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.runtimeconfig.json
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.runtimeconfig.dev.json
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.genruntimeconfig.cache
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Data.dll.config
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Data.dll.config
