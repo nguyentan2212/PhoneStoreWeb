@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using PhoneStoreWeb.Communication.ResponseResult;
-using PhoneStoreWeb.Service.ProductService;
-using Microsoft.AspNetCore.Authorization;
-using PhoneStoreWeb.Service.CategoryService;
 using PhoneStoreWeb.Communication.Products;
+using PhoneStoreWeb.Communication.ResponseResult;
+using PhoneStoreWeb.Service.CategoryService;
+using PhoneStoreWeb.Service.ProductService;
 using PhoneStoreWeb.Service.UserService;
+using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
 {
@@ -76,6 +72,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Detail(int id)
         {     
             var product = await productService.GetById(id);
+            ViewData["category"] = await productService.GetCategory(id);
+            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            return View(product);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ItemList(int id)
+        {
+            var product = await productService.GetById(id);
             ViewData["product"] = product;
             ViewData["items"] = await productService.GetAllProductItemByProductId(id);
             ViewData["category"] = await productService.GetCategory(id);
@@ -87,7 +91,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             MessageResponse message = await productService.CreateProductItem(request);
             ShowMessage(message);
-            return RedirectToAction("Detail", "Product", new { id = request.Id });
+            return RedirectToAction("ItemList", "Product", new { id = request.Id });
         }
         [HttpGet]
         public async Task<IActionResult> DeleteProductItem(int id, int productId)
