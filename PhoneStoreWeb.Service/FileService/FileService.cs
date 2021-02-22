@@ -24,8 +24,8 @@ namespace PhoneStoreWeb.Service.FileService
 
         public string GetFileUrl(string fileName)
         {
-            var AppBaseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}{_httpContextAccessor.HttpContext.Request.PathBase}";
-            return $"{AppBaseUrl}/{USER_CONTENT_FOLDER_NAME}/{fileName}";
+            //var AppBaseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}{_httpContextAccessor.HttpContext.Request.PathBase}";
+            return $"/{USER_CONTENT_FOLDER_NAME}/{fileName}";
         }
 
         public async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)
