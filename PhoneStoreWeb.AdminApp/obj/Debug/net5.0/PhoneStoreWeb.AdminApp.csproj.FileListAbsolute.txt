@@ -194,3 +194,11 @@ C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\obj\Debug\net5.0
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\obj\Debug\net5.0\Razor\Views\User\Detail.cshtml.g.cs
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\obj\Debug\net5.0\Razor\Views\Order\Detail.cshtml.g.cs
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\obj\Debug\net5.0\Razor\Views\Product\ItemList.cshtml.g.cs
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.AdminApp\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll

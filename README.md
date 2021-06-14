@@ -33,6 +33,12 @@ dotnet restore
 cd PhoneStoreWeb.AdminApp
 dotnet run
 ```
+## Docker
+```bash
+docker build -t phonestore .
+docker run -d -p 8080:80 --name abc phonestore
+```
+link: http://localhost:8080/
 ## Admin account
 **user name:** admin
 **pass:** 12345
