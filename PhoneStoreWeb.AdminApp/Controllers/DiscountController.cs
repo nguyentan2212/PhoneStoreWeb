@@ -30,6 +30,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]DiscountRequest request)
         {
+            if (request.FromDate > request.ToDate)
+            {
+                ShowMessage(new MessageResponse() { Type = "error", Title = "Tạo mới thất bại", Content = "Thời hạn không đúng" });
+                return RedirectToAction("Index");
+            }
             MessageResponse message = await discountService.CreateDiscount(request);
             ShowMessage(message);
             return RedirectToAction("Index");
@@ -37,6 +42,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromForm]DiscountRequest request)
         {
+            if(request.FromDate > request.ToDate)
+            {
+                ShowMessage(new MessageResponse() { Type = "error", Title = "Cập nhật thất bại", Content= "Thời hạn không đúng" });
+                return RedirectToAction("Index");
+            }
             MessageResponse message = await discountService.UpdateDiscount(request);
             ShowMessage(message);
             return RedirectToAction("Index");
