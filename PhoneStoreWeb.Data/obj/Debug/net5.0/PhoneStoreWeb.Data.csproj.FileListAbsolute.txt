@@ -14,3 +14,4 @@ C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\net5.0\Pho
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\net5.0\ref\PhoneStoreWeb.Data.dll
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\net5.0\PhoneStoreWeb.Data.pdb
 C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\net5.0\PhoneStoreWeb.Data.genruntimeconfig.cache
+C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Data\obj\Debug\net5.0\PhoneStoreWeb.Data.csprojAssemblyReference.cache

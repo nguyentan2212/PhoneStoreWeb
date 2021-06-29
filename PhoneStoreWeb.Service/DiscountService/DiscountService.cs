@@ -100,9 +100,12 @@ namespace PhoneStoreWeb.Service.DiscountService
                     {
                         return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: Mã code đã tồn tại.");
                     }
-                    var discount = mapper.Map<DiscountRequest, Discount>(request);
-                    discount.Id = request.Id;
-                    uow.Discounts.Update(discount);
+                    d.Code = request.Code;
+                    d.DiscountAmount = request.DiscountAmount;
+                    d.DiscountPercent = request.DiscountPercent;
+                    d.FromDate = request.FromDate;
+                    d.ToDate = request.ToDate;
+                    uow.Discounts.Update(d);
                     await uow.SaveAsync();
                     return new MessageResponse("success", "Cập nhật thành công");
                 }
