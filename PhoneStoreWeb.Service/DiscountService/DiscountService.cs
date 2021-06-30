@@ -20,6 +20,10 @@ namespace PhoneStoreWeb.Service.DiscountService
 
         public async Task<MessageResponse> CreateDiscount(DiscountRequest request)
         {
+            if (request.FromDate > request.ToDate)
+            {
+                return new MessageResponse() { Type = "error", Title = "Tạo mới thất bại", Content = "Thời hạn không đúng" };
+            }
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
@@ -91,6 +95,10 @@ namespace PhoneStoreWeb.Service.DiscountService
 
         public async Task<MessageResponse> UpdateDiscount(DiscountRequest request)
         {
+            if (request.FromDate > request.ToDate)
+            {
+                return new MessageResponse() { Type = "error", Title = "Cập nhật thất bại", Content = "Thời hạn không đúng" };
+            }
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())

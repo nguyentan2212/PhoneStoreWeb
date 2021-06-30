@@ -23,6 +23,12 @@ namespace PhoneStoreWeb.Communication.Mapping
                 .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id.ToString()));
             CreateMap<Product, UpdateProductRequest>();
             CreateMap<Discount, DiscountResponse>();
+            CreateMap<Order, OrderResponse>()
+                .ForMember(des => des.AppUserId, opt => opt.MapFrom(src => src.AppUser.Id))
+                .ForMember(des => des.StaffName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ForMember(des => des.DiscountCode, opt => opt.MapFrom(src => src.Discount.Code))
+                .ForMember(des => des.DiscountId, opt => opt.MapFrom(src => src.Discount.Id));
+
         }
     }
 }
