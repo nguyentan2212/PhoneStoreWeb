@@ -12,8 +12,6 @@ namespace PhoneStoreWeb.Communication.Mapping
             CreateMap<Product, ProductResponse>()
                 .ForMember(des => des.ImagePath, opt => opt.MapFrom(src => src.Image));
             CreateMap<Category, CategoryResponse>();
-            CreateMap<Order, OrderResponse>()
-                .ForMember(des => des.StaffName, opt => opt.MapFrom(src => src.AppUser.FullName));
             CreateMap<AppUser, UserResponse>();              
             CreateMap<AppRole, RoleResponse>();
             CreateMap<ProductItem, ProductItemResponse>()
