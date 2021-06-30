@@ -34,9 +34,9 @@ namespace PhoneStoreWeb.AdminApp
         {
             services.AddDbContext<PhoneStoreDbContext>(options =>
             {
-                //options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
+                options.UseSqlServer(Configuration.GetConnectionString("PhoneStoreContext"));
                 //options.UseSqlite(Configuration.GetConnectionString("PhoneStoreContextSQLite"));  
-                options.UseInMemoryDatabase("data-context");
+                //options.UseInMemoryDatabase("data-context");
             });
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<PhoneStoreDbContext>();
             // configure identity options

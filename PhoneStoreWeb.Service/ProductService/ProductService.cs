@@ -227,6 +227,10 @@ namespace PhoneStoreWeb.Service.ProductService
             using(UnitOfWork uow = new UnitOfWork())
             {
                 ProductItem p = await uow.ProductItems.SingleOrDefaultAsync(x => x.SerialNumber == serial);
+                if (p is null)
+                {
+                    return null;
+                }
                 ProductItem pi = await uow.ProductItems.GetIncludeProductAsync(p.Id);
                 if (pi is null)
                 {

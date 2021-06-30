@@ -20,8 +20,8 @@ namespace PhoneStoreWeb.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(AppConstant.DbConnectionString);   
-            optionsBuilder.UseInMemoryDatabase("data-context");
+            optionsBuilder.UseSqlServer(AppConstant.DbConnectionString);   
+            //optionsBuilder.UseInMemoryDatabase("data-context");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
