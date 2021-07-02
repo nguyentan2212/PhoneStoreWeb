@@ -11,6 +11,7 @@ namespace PhoneStoreWeb.Communication.Categories
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
         public IFormFile ThumbnailImage { get; set; }
     }
 }

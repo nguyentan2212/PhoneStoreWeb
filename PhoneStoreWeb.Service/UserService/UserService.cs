@@ -157,6 +157,7 @@ namespace PhoneStoreWeb.Service.UserService
             user.Email = request.Email;
             user.Address = request.Address;
             user.BirthDate = request.BirthDate;
+            user.PhoneNumber = request.PhoneNumber;
             if (request.ThumbnailImage != null)
             {
                 user.ImagePath = await fileService.UploadFileAsync(request.ThumbnailImage);

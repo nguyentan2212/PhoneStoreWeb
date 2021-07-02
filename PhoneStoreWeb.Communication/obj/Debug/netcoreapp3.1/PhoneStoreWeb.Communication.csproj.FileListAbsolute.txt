@@ -1,9 +1,0 @@
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.deps.json
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.dll
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\bin\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.pdb
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.csprojAssemblyReference.cache
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.AssemblyInfoInputs.cache
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.AssemblyInfo.cs
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.csproj.CoreCompileInputs.cache
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.dll
-C:\Users\ASUS\source\repos\PhoneStoreWeb\PhoneStoreWeb.Communication\obj\Debug\netcoreapp3.1\PhoneStoreWeb.Communication.pdb

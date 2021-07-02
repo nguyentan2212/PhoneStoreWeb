@@ -13,9 +13,11 @@ namespace PhoneStoreWeb.Communication.Users
         [Required]
         public string Id { set; get; }
         [Required]
-        [EmailAddress]
+        [RegularExpression(@"^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$", ErrorMessage = "Email format is incorrect")]
         public string Email { set; get; }
-        [DataType(DataType.PhoneNumber)]
+
+        [Required]
+        [RegularExpression(@"/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/", ErrorMessage = "Phone number format is incorrect")]
         public string PhoneNumber { set; get; }
         [Required]
         public string Role { get; set; }

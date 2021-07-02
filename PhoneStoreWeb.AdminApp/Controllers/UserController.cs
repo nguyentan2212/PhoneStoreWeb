@@ -44,6 +44,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] RegisterRequest request)
         {           
+            if (ModelState.IsValid)
+            {
+                ShowMessage(new MessageResponse("error", "Tạo mới thất bại", ""));
+                return View(request);
+            }    
             MessageResponse message = await userService.CreateUserAsync(request);
             ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
             var roles = userService.GetAllRoles();

@@ -77,7 +77,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-email"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" asp-for="Email"
+                                            <input type="email" class="form-control" asp-for="Email" value=""
                                                    placeholder="Ex: example@example.com">
                                         </div>
                                         <span asp-validation-for="Email" class="text-danger"></span>
@@ -90,7 +90,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="zmdi zmdi-smartphone"></i></span>
                                             </div>
-                                            <input type="text" asp-for="PhoneNumber" class="form-control mobile-phone-number" placeholder="Ex: +00 (000) 000-00-00">
+                                            <input type="text" asp-for="PhoneNumber" value="" class="form-control mobile-phone-number" placeholder="Ex: +00 (000) 000-00-00">
                                         </div>
                                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                     </div>
