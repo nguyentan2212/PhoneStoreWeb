@@ -18,7 +18,7 @@ namespace PhoneStoreWeb.Service.DiscountService
 
         }
 
-        public async Task<MessageResponse> CreateDiscount(DiscountRequest request)
+        public virtual async Task<MessageResponse> CreateDiscount(DiscountRequest request)
         {
             if (request.FromDate > request.ToDate)
             {
@@ -45,7 +45,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<MessageResponse> Delete(int id)
+        public virtual async Task<MessageResponse> Delete(int id)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<List<DiscountResponse>> GetAllDiscounts()
+        public virtual async Task<List<DiscountResponse>> GetAllDiscounts()
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -73,7 +73,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<List<DiscountResponse>> GetAllValidDiscounts()
+        public virtual async Task<List<DiscountResponse>> GetAllValidDiscounts()
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -83,7 +83,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<DiscountResponse> GetDiscount(int id)
+        public virtual async Task<DiscountResponse> GetDiscount(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -93,7 +93,7 @@ namespace PhoneStoreWeb.Service.DiscountService
             }
         }
 
-        public async Task<MessageResponse> UpdateDiscount(DiscountRequest request)
+        public virtual async Task<MessageResponse> UpdateDiscount(DiscountRequest request)
         {
             if (request.FromDate > request.ToDate)
             {

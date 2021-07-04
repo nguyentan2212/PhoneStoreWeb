@@ -14,15 +14,10 @@ namespace PhoneStoreWeb.AdminApp.Controllers
     {
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
-        private readonly RoleManager<AppRole> roleManager;
-        private readonly IUserService userService;
-        public AccountController(SignInManager<AppUser> signInManager, IUserService userService,
-            UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
-            this.roleManager = roleManager;
-            this.userService = userService;
         }
         [HttpGet]
         public IActionResult Login()
@@ -47,10 +42,8 @@ namespace PhoneStoreWeb.AdminApp.Controllers
                 ViewData["message"] = "Tài khoản của bạn không tồn tại.";
                 return View();
             }
-            PasswordHasher<AppUser> passwordHasher = new PasswordHasher<AppUser>();
-            string passHash = passwordHasher.HashPassword(user, request.Password);
 
-            if (user.PasswordHash == passHash && user.Status == Data.Enums.AccountStatus.Locked)
+            if (user.Status == Data.Enums.AccountStatus.Locked)
             {
                 ViewData["title"] = "Đăng nhập thất bại!";
                 ViewData["message"] = "Tài khoản của bạn đã bị khóa.";
@@ -60,7 +53,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             if (result != Microsoft.AspNetCore.Identity.SignInResult.Success)
             {
                 ViewData["title"] = "Đăng nhập thất bại!";
-                ViewData["message"] = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                ViewData["message"] = "Tên đăng nhập hoặc mật khẩu không đúng."; 
                 return View();
             }
             if (string.IsNullOrEmpty(returnUrl))

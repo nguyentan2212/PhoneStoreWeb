@@ -26,7 +26,7 @@ namespace PhoneStoreWeb.Service.UserService
             this.fileService = fileService;
         }
 
-        public async Task<MessageResponse> ChangeStatusAsync(string id)
+        public virtual async Task<MessageResponse> ChangeStatusAsync(string id)
         {
             var user = await userManager.FindByIdAsync(id);            
             if (user.Status == AccountStatus.Active)
@@ -46,7 +46,7 @@ namespace PhoneStoreWeb.Service.UserService
             return new MessageResponse("success", "Cập nhật thành công");
         }
 
-        public async Task<MessageResponse> CreateUserAsync(RegisterRequest request)
+        public virtual async Task<MessageResponse> CreateUserAsync(RegisterRequest request)
         {
             AppUser u = await userManager.FindByNameAsync(request.UserName);
             if (u != null)
@@ -71,14 +71,14 @@ namespace PhoneStoreWeb.Service.UserService
             return new MessageResponse("success", "Tạo mới thành công");
         }
 
-        public List<RoleResponse> GetAllRoles()
+        public virtual List<RoleResponse> GetAllRoles()
         {
             var roles = roleManager.Roles.ToList();
             var rolesResult = mapper.Map<List<AppRole>, List<RoleResponse>> (roles);
             return rolesResult;
         }
 
-        public async Task<List<UserResponse>> GetAllUsersAsync()
+        public virtual async Task<List<UserResponse>> GetAllUsersAsync()
         {
             var users = userManager.Users.ToList();
             var usersResult = mapper.Map<List<AppUser>, List<UserResponse>>(users); 
@@ -92,7 +92,7 @@ namespace PhoneStoreWeb.Service.UserService
             return usersResult;
         }
 
-        public async Task<string> GetImageAsync(string name)
+        public virtual async Task<string> GetImageAsync(string name)
         {
             try
             {
@@ -112,16 +112,20 @@ namespace PhoneStoreWeb.Service.UserService
             }
         }
 
-        public async Task<UserUpdateRequest> GetUpdateRequestAsync(string id)
+        public virtual async Task<UserUpdateRequest> GetUpdateRequestAsync(string id)
         {
             var user = await GetUserByIdAsync(id);
             var result = mapper.Map<UserResponse, UserUpdateRequest>(user);
             return result;
         }
 
-        public async Task<UserResponse> GetUserByIdAsync(string id)
+        public virtual async Task<UserResponse> GetUserByIdAsync(string id)
         {
             var user = await userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+                return null;
+            }
             var userResult = mapper.Map<AppUser, UserResponse>(user);
             var roles = await userManager.GetRolesAsync(user);
             string roleName = roles.FirstOrDefault();
@@ -130,9 +134,13 @@ namespace PhoneStoreWeb.Service.UserService
             return userResult;
         }
 
-        public async Task<UserResponse> GetUserByNameAsync(string name)
+        public virtual async Task<UserResponse> GetUserByNameAsync(string name)
         {
             var user = await userManager.FindByNameAsync(name);
+            if (user is null)
+            {
+                return null;
+            }
             var userResult = mapper.Map<AppUser, UserResponse>(user);
             var roles = await userManager.GetRolesAsync(user);
             string roleName = roles.FirstOrDefault();
@@ -141,7 +149,7 @@ namespace PhoneStoreWeb.Service.UserService
             return userResult;
         }
 
-        public async Task<MessageResponse> UpdateUserAsync(UserUpdateRequest request)
+        public virtual async Task<MessageResponse> UpdateUserAsync(UserUpdateRequest request)
         {
             AppUser u = await userManager.FindByNameAsync(request.UserName);
             if (u != null && u.Id.ToString() != request.Id)

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -95,5 +96,11 @@ namespace PhoneStoreWeb.AdminApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        public void ConfigureHost(IHostBuilder hostBuilder) =>
+        hostBuilder.ConfigureWebHost(webHostBuilder => webHostBuilder
+            .UseTestServer()
+            .ConfigureServices(services => services.AddRouting()));
+
     }
 }

@@ -18,24 +18,27 @@ namespace PhoneStoreWeb.Service.FileService
 
         public FileService(IHostingEnvironment hostEnvironment, IHttpContextAccessor httpContextAccessor)
         {
-            this.userContentFolder = Path.Combine(hostEnvironment.WebRootPath, USER_CONTENT_FOLDER_NAME);
-            _httpContextAccessor = httpContextAccessor;
+            if (hostEnvironment.WebRootPath != null)
+            {
+                this.userContentFolder = Path.Combine(hostEnvironment.WebRootPath, USER_CONTENT_FOLDER_NAME);
+                _httpContextAccessor = httpContextAccessor;
+            }
         }
 
-        public string GetFileUrl(string fileName)
+        public virtual string GetFileUrl(string fileName)
         {
             //var AppBaseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}{_httpContextAccessor.HttpContext.Request.PathBase}";
             return $"/{USER_CONTENT_FOLDER_NAME}/{fileName}";
         }
 
-        public async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)
+        public virtual async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)
         {
             var filePath = Path.Combine(userContentFolder, fileName);
             using var output = new FileStream(filePath, FileMode.Create);
             await mediaBinaryStream.CopyToAsync(output);
         }
 
-        public async Task DeleteFileAsync(string fileName)
+        public virtual async Task DeleteFileAsync(string fileName)
         {
             var filePath = Path.Combine(userContentFolder, fileName);
             if (File.Exists(filePath))
@@ -43,7 +46,7 @@ namespace PhoneStoreWeb.Service.FileService
                 await Task.Run(() => File.Delete(filePath));
             }
         }
-        public async Task<string> UploadFileAsync(IFormFile file)
+        public virtual async Task<string> UploadFileAsync(IFormFile file)
         {
             var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";

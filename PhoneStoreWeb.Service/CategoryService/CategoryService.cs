@@ -19,7 +19,7 @@ namespace PhoneStoreWeb.Service.CategoryService
             this.fileService = fileService;
         }
 
-        public async Task<MessageResponse> Create(CreateCategoryRequest request)
+        public virtual async Task<MessageResponse> Create(CreateCategoryRequest request)
         {
             try
             {
@@ -38,11 +38,11 @@ namespace PhoneStoreWeb.Service.CategoryService
             }
             catch(Exception e)
             {
-                return new MessageResponse("error", "Tạo mới thất bại", "Lỗi: "+e.Message);
+                return new MessageResponse("error", "Tạo mới thất bại");
             }
         }
 
-        public async Task<MessageResponse> Delete(int id)
+        public virtual async Task<MessageResponse> Delete(int id)
         {
             try
             {
@@ -55,11 +55,11 @@ namespace PhoneStoreWeb.Service.CategoryService
             }
             catch (Exception e)
             {
-                return new MessageResponse("error", "Xóa thất bại", "Lỗi: " + e.Message);
+                return new MessageResponse("error", "Xóa thất bại");
             }
         }
 
-        public async Task<List<CategoryResponse>> GetAllCategories()
+        public virtual async Task<List<CategoryResponse>> GetAllCategories()
         {
             List<CategoryResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -70,7 +70,7 @@ namespace PhoneStoreWeb.Service.CategoryService
             return result;
         }
 
-        public async Task<MessageResponse> Update(CreateCategoryRequest request)
+        public virtual async Task<MessageResponse> Update(CreateCategoryRequest request)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace PhoneStoreWeb.Service.CategoryService
             }
             catch (Exception e)
             {
-                return new MessageResponse("error", "Cập nhật thất bại", "Lỗi: " + e.Message);
+                return new MessageResponse("error", "Cập nhật thất bại");
             }
         }
     }

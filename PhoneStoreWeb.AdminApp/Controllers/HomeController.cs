@@ -30,8 +30,8 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             this.orderService = orderService;
         }        
         public async Task<IActionResult> Index()
-        {           
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+        {
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             List<CategoryResponse> categories = await categoryService.GetAllCategories();
             List<ProductResponse> products = await productService.GetTopSellingProducts(3);
             List<Tuple<string,decimal>> topSelling = await productService.GetTopSellingCategory(4);

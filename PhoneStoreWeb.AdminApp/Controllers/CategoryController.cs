@@ -22,12 +22,17 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["categories"] = await categoryService.GetAllCategories();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);            
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateCategoryRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                ShowMessage(new MessageResponse("error", "Tạo mới thất bại", "Dữ liệu nhập không đúng"));
+                return View();
+            }
             var message = await categoryService.Create(request);
             ShowMessage(message);
             return RedirectToAction("Index");
@@ -42,6 +47,11 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] CreateCategoryRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                ShowMessage(new MessageResponse("error", "Cập thất bại", "Dữ liệu nhập không đúng"));
+                return View();
+            }
             var message = await categoryService.Update(request);
             ShowMessage(message);
             return RedirectToAction("Index");

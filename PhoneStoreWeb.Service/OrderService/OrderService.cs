@@ -20,7 +20,7 @@ namespace PhoneStoreWeb.Service.OrderService
             this.userManager = userManager;
         }
        
-        public async Task<MessageResponse> CancelOrder(int id)
+        public virtual async Task<MessageResponse> CancelOrder(int id)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<MessageResponse> ConfirmOrder(int id)
+        public virtual async Task<MessageResponse> ConfirmOrder(int id)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<MessageResponse> CreateOrder(CreateOrderRequest request)
+        public virtual async Task<MessageResponse> CreateOrder(CreateOrderRequest request)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<MessageResponse> DeleteOrder(int id)
+        public virtual async Task<MessageResponse> DeleteOrder(int id)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<OrderResponse> GetOrder(int id)
+        public virtual async Task<OrderResponse> GetOrder(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -146,7 +146,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<List<OrderResponse>> GetOrders()
+        public virtual async Task<List<OrderResponse>> GetOrders()
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -173,7 +173,7 @@ namespace PhoneStoreWeb.Service.OrderService
             }
         }
 
-        public async Task<List<decimal>> GetRevenueOfYear(int year)
+        public virtual async Task<List<decimal>> GetRevenueOfYear(int year)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {

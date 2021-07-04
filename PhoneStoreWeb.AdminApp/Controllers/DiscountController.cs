@@ -23,13 +23,18 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {
             List<DiscountResponse> discounts = await discountService.GetAllDiscounts();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             ViewData["discounts"] = discounts;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]DiscountRequest request)
         {
+            if (request.FromDate > request.ToDate)
+            {
+                ShowMessage(new MessageResponse() { Type = "error", Title = "Tạo mới thất bại", Content = "Thời hạn không đúng" });
+                return RedirectToAction("Index");
+            }
             MessageResponse message = await discountService.CreateDiscount(request);
             ShowMessage(message);
             return RedirectToAction("Index");

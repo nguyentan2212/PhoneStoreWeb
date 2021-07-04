@@ -31,14 +31,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             var orders = await orderService.GetOrders();
             ViewData["products"] = await productService.GetAllProducts();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(orders);
         }
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var order = await orderService.GetOrder(id);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(order);
         }
         [HttpGet]
@@ -66,7 +66,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Create()
         {         
             ViewData["discounts"] = await discountService.GetAllValidDiscounts();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);                   
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             CreateOrderRequest request = new CreateOrderRequest();
             request.CreatedDate = DateTime.Today;                     
             return View(request);
@@ -74,7 +74,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromQuery]bool iscreate, [FromForm] CreateOrderRequest request)
         {
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             ViewData["discounts"] = await discountService.GetAllValidDiscounts();
             decimal price;
             string[] serialList;

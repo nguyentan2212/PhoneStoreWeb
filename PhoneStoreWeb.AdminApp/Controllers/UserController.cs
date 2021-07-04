@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PhoneStoreWeb.Communication.Authentication;
 using PhoneStoreWeb.Communication.ResponseResult;
 using PhoneStoreWeb.Communication.Users;
-using PhoneStoreWeb.Data.Models;
 using PhoneStoreWeb.Service.UserService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PhoneStoreWeb.AdminApp.Controllers
@@ -23,21 +17,25 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await userService.GetAllUsersAsync();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(users);
         }    
         [HttpGet]
         public async Task<IActionResult> Detail(string id)
         {
             var user = await userService.GetUserByIdAsync(id);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            if (user is null)
+            {
+                return RedirectToAction("Index");
+            }
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(user);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var roles = userService.GetAllRoles();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             ViewData["roles"] = roles;
             return View();
         }
@@ -50,7 +48,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
                 return View(request);
             }    
             MessageResponse message = await userService.CreateUserAsync(request);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             var roles = userService.GetAllRoles();
             ViewData["roles"] = roles;
             ShowMessage(message);
@@ -68,7 +66,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             var roles = userService.GetAllRoles();
             var defaultRequest = await userService.GetUpdateRequestAsync(id);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             ViewData["roles"] = roles;
             return View(defaultRequest);
         }
@@ -77,7 +75,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             MessageResponse message = await userService.UpdateUserAsync(request);
             ShowMessage(message);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             var roles = userService.GetAllRoles();
             ViewData["roles"] = roles;
             return View(request);

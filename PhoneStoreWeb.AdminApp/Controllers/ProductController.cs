@@ -23,14 +23,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         public async Task<IActionResult> Index()
         {            
             var products = await productService.GetAllProducts();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["products"] = await productService.GetAllProducts();
             return View(products);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             ViewData["categories"] = await categoryService.GetAllCategories();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View();
         }
         [HttpPost]
@@ -41,6 +41,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
                 return BadRequest();
             }
             MessageResponse message = await productService.Create(request);
+            ViewData["categories"] = await categoryService.GetAllCategories();
             ShowMessage(message);
             return View(request);
         }
@@ -57,14 +58,14 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             var result = await productService.GetUpdateDefault(id);
             ViewData["categories"] = await categoryService.GetAllCategories();
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(result);
         }
         [HttpPost]
         public async Task<IActionResult> Update([FromForm] UpdateProductRequest request)
         {
             MessageResponse message = await productService.Update(request);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             ShowMessage(message);
             return View(request);
         }
@@ -73,7 +74,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {     
             var product = await productService.GetById(id);
             ViewData["category"] = await productService.GetCategory(id);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View(product);
         }
         [HttpGet]
@@ -83,7 +84,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
             ViewData["product"] = product;
             ViewData["items"] = await productService.GetAllProductItemByProductId(id);
             ViewData["category"] = await productService.GetCategory(id);
-            ViewBag.ImagePath = await userService.GetImageAsync(User.Identity.Name);
+            ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
             return View();
         }
         [HttpPost]

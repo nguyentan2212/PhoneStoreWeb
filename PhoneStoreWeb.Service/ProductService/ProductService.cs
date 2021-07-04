@@ -20,7 +20,7 @@ namespace PhoneStoreWeb.Service.ProductService
             this.fileService = fileService;
         }
 
-        public async Task<MessageResponse> AddImage(AddProductImageRequest request)
+        public virtual async Task<MessageResponse> AddImage(AddProductImageRequest request)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<MessageResponse> Create(CreateProductRequest request)
+        public virtual async Task<MessageResponse> Create(CreateProductRequest request)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<MessageResponse> CreateProductItem(ProductItemReceivedRequest request)
+        public virtual async Task<MessageResponse> CreateProductItem(ProductItemReceivedRequest request)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<MessageResponse> Delete(int id)
+        public virtual async Task<MessageResponse> Delete(int id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<MessageResponse> DeleteProductItem(int id)
+        public virtual async Task<MessageResponse> DeleteProductItem(int id)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<List<ProductItemResponse>> GetAllProductItemByProductId(int productId)
+        public virtual async Task<List<ProductItemResponse>> GetAllProductItemByProductId(int productId)
         {
             List<ProductItemResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -142,7 +142,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<List<ProductResponse>> GetAllProducts()
+        public virtual async Task<List<ProductResponse>> GetAllProducts()
         {
             List<ProductResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -169,7 +169,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<List<ProductResponse>> GetAllProductsByCategory(int categoryId)
+        public virtual async Task<List<ProductResponse>> GetAllProductsByCategory(int categoryId)
         {
             List<ProductResponse> result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -180,7 +180,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<int> GetAllSoldProductItem()
+        public virtual async Task<int> GetAllSoldProductItem()
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
@@ -189,7 +189,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<ProductResponse> GetById(int id)
+        public virtual async Task<ProductResponse> GetById(int id)
         {
             ProductResponse result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -213,7 +213,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<string> GetCategory(int productId)
+        public virtual async Task<string> GetCategory(int productId)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -222,7 +222,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<OrderItem> GetOrderItemBySerial(string serial)
+        public virtual async Task<OrderItem> GetOrderItemBySerial(string serial)
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
@@ -246,7 +246,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<List<Tuple<string, decimal>>> GetTopSellingCategory(int amount)
+        public virtual async Task<List<Tuple<string, decimal>>> GetTopSellingCategory(int amount)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
@@ -262,7 +262,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<List<ProductResponse>> GetTopSellingProducts(int amount)
+        public virtual async Task<List<ProductResponse>> GetTopSellingProducts(int amount)
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
@@ -278,7 +278,7 @@ namespace PhoneStoreWeb.Service.ProductService
             }
         }
 
-        public async Task<UpdateProductRequest> GetUpdateDefault(int id)
+        public virtual async Task<UpdateProductRequest> GetUpdateDefault(int id)
         {
             UpdateProductRequest result;
             using (UnitOfWork uow = new UnitOfWork())
@@ -301,7 +301,7 @@ namespace PhoneStoreWeb.Service.ProductService
             return result;
         }
 
-        public async Task<MessageResponse> Update(UpdateProductRequest request)
+        public virtual async Task<MessageResponse> Update(UpdateProductRequest request)
         {
             try
             {
