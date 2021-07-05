@@ -66,6 +66,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             MessageResponse message = await productService.Update(request);
             ViewData["ImagePath"] = await userService.GetImageAsync(User?.Identity?.Name);
+            ViewData["categories"] = await categoryService.GetAllCategories();
             ShowMessage(message);
             return View(request);
         }
@@ -99,7 +100,7 @@ namespace PhoneStoreWeb.AdminApp.Controllers
         {
             MessageResponse message = await productService.DeleteProductItem(id);
             ShowMessage(message);
-            return RedirectToAction("Index", "Detail", new { id = productId });
+            return RedirectToAction("ItemList", "Product", new { id = productId });
         }
 
         public void ShowMessage(MessageResponse message)

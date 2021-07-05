@@ -7,6 +7,7 @@ namespace PhoneStoreWeb.Communication.Users
     public class UserUpdateRequest
     {
         [Required]
+        [RegularExpression(@"^(?=[^A-Za-z]*[A-Za-z])[ -~]*$", ErrorMessage = "User name format is incorrect")]
         public string UserName { set; get; }
         [Required]
         public string FullName { set; get; }
@@ -17,7 +18,7 @@ namespace PhoneStoreWeb.Communication.Users
         public string Email { set; get; }
 
         [Required]
-        [RegularExpression(@"/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/", ErrorMessage = "Phone number format is incorrect")]
+        [RegularExpression(@"^[0-9]{10,12}$", ErrorMessage = "Phone number format is incorrect")]
         public string PhoneNumber { set; get; }
         [Required]
         public string Role { get; set; }

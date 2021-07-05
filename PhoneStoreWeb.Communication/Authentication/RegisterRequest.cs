@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace PhoneStoreWeb.Communication.Authentication
 {
@@ -29,7 +27,7 @@ namespace PhoneStoreWeb.Communication.Authentication
         public string Email { set; get; }
 
         [Required]
-        [RegularExpression(@"/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/", ErrorMessage = "Phone number format is incorrect")]
+        [RegularExpression(@"^[0-9]{10,12}$", ErrorMessage = "Phone number format is incorrect")]
         public string PhoneNumber { set; get; }
 
         [Required]
