@@ -49,7 +49,7 @@ namespace PhoneStoreWeb.Test.Controllers
         }
 
         [Fact]
-        public async Task UpdateWithValidRequest()
+        public async Task UpdateWithNullName()
         {
             // setup
             categoryService = new Mock<FakeCategoryService>();
@@ -63,7 +63,7 @@ namespace PhoneStoreWeb.Test.Controllers
             // input 
             CreateCategoryRequest request = new CreateCategoryRequest()
             {
-                Name = "abc",
+                Name = null,
                 Description = "abcdef",
                 ThumbnailImage = new FormFile(null, 0, 0, "null", "null"),
                 Id = 1

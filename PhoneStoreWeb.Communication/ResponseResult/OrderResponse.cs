@@ -14,7 +14,7 @@ namespace PhoneStoreWeb.Communication.ResponseResult
         public int Id { set; get; }
         public string AppUserId { get; set; }
         public string StaffName { set; get; }        
-        public int DiscountCode { set; get; }
+        public string DiscountCode { set; get; }
         public int DiscountId { get; set; }
         [Required]
         public string Name { set; get; }
