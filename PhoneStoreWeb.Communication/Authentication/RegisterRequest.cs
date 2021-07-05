@@ -9,6 +9,7 @@ namespace PhoneStoreWeb.Communication.Authentication
     public class RegisterRequest
     {
         [Required]
+        [RegularExpression(@"^(?=[^A-Za-z]*[A-Za-z])[ -~]*$", ErrorMessage = "User name format is incorrect")]
         public string UserName { set; get; }
 
         [Required]
